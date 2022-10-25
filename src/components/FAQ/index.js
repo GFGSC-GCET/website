@@ -62,7 +62,7 @@ const Faq = () => {
 
   const FAQs = [
     {
-      "question":"How to join?",
+      "question":"How to join ?",
       "answer": "Click the join button"
     },
     {
