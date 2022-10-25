@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-import { Button, Nav, Slides, ThemeChanger } from "../src/components";
+import { Button, Nav, Slides, ThemeChanger, ContactForm, Footer, Faq } from "../src/components";
 
 export default function Home() {
   const router = useRouter();
@@ -13,6 +13,7 @@ export default function Home() {
         <title>Home</title>
       </Head>
       <main className="min-h-screen mx-auto">
+      <ThemeChanger />
         <header className="bg-white dark:bg-gray-900">
           <Nav />
 
@@ -73,7 +74,11 @@ export default function Home() {
         </section>
 
         <Slides />
-        <ThemeChanger />
+
+        <Faq/>
+
+        <ContactForm />
+        <Footer/>
       </main>
     </>
   );
