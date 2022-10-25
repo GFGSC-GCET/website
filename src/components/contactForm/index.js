@@ -15,7 +15,7 @@ const ContactForm = () => {
                 <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
             </svg>
 
-            <span className="mt-2">121 Street, NY</span>
+            <span className="mt-2">GCET,Knowledge Park 2</span>
         </a>
 
         <a href="#" className="flex flex-col items-center px-4 py-3 text-gray-700 transition-colors duration-300 transform rounded-md dark:text-gray-200 hover:bg-green-200 dark:hover:bg-green-600">
