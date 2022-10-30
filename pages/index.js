@@ -13,11 +13,11 @@ export default function Home() {
         <title>Home</title>
       </Head>
       <main className="min-h-screen mx-auto">
+      <Nav />
       <ThemeChanger />
         <header className="bg-white dark:bg-gray-900">
-          <Nav />
 
-          <div className="container px-6 py-16 w-md mx-auto ">
+          <div className="container px-6 py-16 w-11/12 mx-auto ">
             <div className="items-center flex justify-between flex-col-reverse lg:flex-row">
               <div className="w-full lg:w-2/5">
                 <div className="lg:max-w-lg">

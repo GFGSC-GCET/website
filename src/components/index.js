@@ -5,3 +5,5 @@ export { default as ThemeChanger } from "./themeToggle";
 export { default as ContactForm } from "./contactForm";
 export { default as Footer } from "./footer"
 export { default as Faq } from "./FAQ"
+export { default as Breadcrumbs } from "./breadcrumbs"
+export { default as TeamCard } from "./teamCard"
