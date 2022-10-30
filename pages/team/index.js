@@ -52,7 +52,9 @@ const TeamHome = () => {
     });
     //merge the filtered arrays without duplicates
     const filteredTeam = [...new Set([...filteredTeamName, ...filteredTeamRole, ...filteredTeamTags])];
-    setTeam(filteredTeam);
+    //sort on the basis of priorty
+    const Sorted = filteredTeam.sort((a, b) => b.priority - a.priority);
+    setTeam(Sorted);
   }, [searchBar]);
   
 
