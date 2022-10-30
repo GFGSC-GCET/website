@@ -3,7 +3,11 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import Button from "../miscs/button";
 
+import { useUserContext } from '../../firebase/authContext'
+
 const Nav = (props) => {
+  const { user,loginWithGoogle,logout, loggingIn } = useUserContext();
+  
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => {
     setIsOpen(!isOpen);
@@ -13,6 +17,7 @@ const Nav = (props) => {
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
     { href: "/team", label: "Team" },
+    { href: "/events", label: "Events" },
   ];
 
   const router = useRouter();
@@ -129,19 +134,42 @@ ${hideNavbar ? " translate-y-[-100px] " : "top-0 translate-y-0  "}`}
             </div>
 
             <div className="flex justify-center md:block">
+            {
+              user == null ? 
               <a
                 className="relative text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-300"
                 href="#"
               >
                 <Button
-                  click={() => {
-                    alert("Wait for Now");
-                  }}
+                  className="flex flex-row items-center justify-between"
+                  click={() => {loginWithGoogle();}}
                 >
-                  Login
+                  Sign in
+                  {
+                    loggingIn &&
+                    <svg class="animate-spin -mr-1 ml-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                  }
                 </Button>
               </a>
+              :
+              <a
+                className="relative text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-300"
+                href="#"
+              >
+                <Button
+                  click={() => {logout();}}
+                >
+                  Log Out
+                </Button>
+              </a>
+
+            }
+            
             </div>
+
           </div>
         </div>
       </nav>

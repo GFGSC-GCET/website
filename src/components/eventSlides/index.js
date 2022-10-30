@@ -1,8 +1,11 @@
 import React from "react";
 import Button from "../miscs/button";
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useSwipeable } from "react-swipeable";
 
 const Slides = () => {
+
+  
 
   const [current, setCurrent] = useState(0);
 
@@ -30,19 +33,58 @@ const Slides = () => {
       tldr: "Join the free session to know some LinkedIn Tricks",
     },
   ];
-
-  const increment = () => {
-    setCurrent(current == Events.length-1 ? 0 : current + 1);
-  };
+const increment = () => {
+  // access the current state value
+  setCurrent((oldCount) => {
+    if (oldCount < Events.length - 1) {
+      return oldCount + 1;
+    }
+    return 0;
+  });
+};
 
   const decrement = () => {
     setCurrent(current == 0 ? Events.length-1 : current - 1);
   };
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      increment();
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
+
+  const config = {
+    delta: 10, // min distance(px) before a swipe starts. *See Notes*
+    preventDefaultTouchmoveEvent: false, // call e.preventDefault *See Details*
+    trackTouch: true, // track touch input
+    trackMouse: false, // track mouse input
+    rotationAngle: 0, // set a rotation angle
+  };
+  const handlers = useSwipeable({
+    onSwiped: (eventData) => {
+      console.log(eventData);
+      if (eventData.dir === "Left") {
+        if (current < Events.length - 1) {
+          setCurrent(current + 1);
+        } else {
+          setCurrent(0);
+        }
+      }
+      if (eventData.dir === "Right") {
+        if (current > 0) {
+          setCurrent(current - 1);
+        } else {
+          setCurrent(Events.length - 1);
+        }
+      }
+    },
+    ...config,
+  });
 
   return (
-    <section className="bg-white dark:bg-gray-900 mx-auto">
+    <section className="bg-white dark:bg-gray-900 mx-auto" {...handlers}>
       <div className="container px-6 py-10 mx-auto">
         <div className="lg:-mx-6 lg:flex lg:items-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -70,7 +112,7 @@ const Slides = () => {
               {Events[current].tldr}
             </p>
 
-            <Button className="mt-5">Register Now</Button>
+            <Button className="mt-5">Know More</Button>
 
             <div className="flex items-center justify-between mt-12 lg:justify-start">
               <button
