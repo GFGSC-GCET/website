@@ -15,10 +15,9 @@ export default function Home() {
         <title>Home</title>
       </Head>
       <main className="min-h-screen mx-auto">
-      <Nav />
-      <ThemeChanger />
+        <Nav />
+        <ThemeChanger />
         <header className="bg-white dark:bg-gray-900">
-
           <div className="container px-6 py-16 w-11/12 mx-auto ">
             <div className="items-center flex justify-between flex-col-reverse lg:flex-row">
               <div className="w-full lg:w-2/5">
@@ -65,22 +64,24 @@ export default function Home() {
             <h2 className="text-3xl font-semibold tracking-tight dark:text-gray-700 sm:text-4xl text-white">
               Become the part of Geeks for Geeks Community <br />
               <span className="text-green-700 dark:text-green-600 font-bold uppercase">
-                GFG&nbsp;Student&nbsp;Chapter&nbsp;of&nbsp;GCET
+                GFG Student&nbsp;Chapter of&nbsp;GCET
               </span>{" "}
             </h2>
 
             <div className="mt-6 sm:-mx-2">
-              <Button>JOIN NOW</Button>
+              <Button click={()=>{router.push('/join')}}>JOIN NOW</Button>
             </div>
           </div>
         </section>
 
         <Slides />
+        <hr class="my-8 border-gray-200 dark:border-gray-700" />
 
-        <Faq/>
+        <Faq />
+        <hr class="my-8 border-gray-200 dark:border-gray-700" />
 
         <ContactForm />
-        <Footer/>
+        <Footer />
       </main>
     </>
   );
