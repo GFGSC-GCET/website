@@ -15,28 +15,25 @@ const TeamHome = () => {
       name: "Areeb ",
       role: "Technical Coordinator",
       tags: ["Coordinator", "Technical"],
-      image: "https://picsum.photos/200",
-      priority : 80
-
+      image: "https://unsplash.it/200/200",
+      priority: 80,
     },
     {
       uid: "LQ535Dq",
       name: "Umair",
       role: "Technical Lead",
-      tags: ["Core","Lead", "Technical"],
+      tags: ["Core", "Lead", "Technical"],
       image: "https://unsplash.it/200/200?random=234e",
-      priority : 90
-
+      priority: 90,
     },
     {
       uid: "LQ535Dq",
       name: "Anshika",
       role: "Technical Lead",
-      tags: ["Core","Lead", "Technical"],
+      tags: ["Core", "Lead", "Technical"],
       image: "https://unsplash.it/200/200?random=242",
-      priority : 90
-
-    }
+      priority: 90,
+    },
   ];
 
   const [team, setTeam] = useState(TeamData);
@@ -64,7 +61,7 @@ const TeamHome = () => {
       <Nav />
       <Breadcrumbs />
       <ThemeChanger />
-      <section class="min-h-screen">
+      <section class="min-h-screen bg-white dark:bg-gray-900">
         <div class="container px-6 py-10 mx-auto">
           <h1 class="text-3xl font-semibold text-center text-gray-800 capitalize lg:text-4xl dark:text-white">
             Our GFGSC-GCET Team

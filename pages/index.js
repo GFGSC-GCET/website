@@ -1,4 +1,6 @@
 import Head from "next/head";
+import Image from 'next/image';
+
 import { useRouter } from "next/router";
 
 import { Button, Nav, Slides, ThemeChanger, ContactForm, Footer, Faq } from "../src/components";
@@ -50,7 +52,7 @@ export default function Home() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   className="w-full h-full lg:max-w-2xl"
-                  src="http://unsplash.it/1080/780"
+                  src="http://unsplash.it/400/280"
                   alt="Catalogue-pana.svg"
                 />
               </div>

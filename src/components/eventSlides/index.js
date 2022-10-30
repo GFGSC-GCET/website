@@ -48,12 +48,14 @@ const Slides = () => {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             className="object-cover object-center lg:w-1/2 lg:mx-6 w-full h-96 rounded-lg lg:h-[36rem]"
-            src={`http://unsplash.it/1080/1080?random=${current}`}
+            src={`http://unsplash.it/400/280?random=${current}`}
             alt=""
           />
 
           <div className="mt-8 lg:w-1/2 lg:px-6 lg:mt-0">
-            <p className="text-5xl font-semibold text-green-600 ">{Events[current].date}</p>
+            <p className="text-5xl font-semibold text-green-600 ">
+              {Events[current].date}
+            </p>
 
             <h1 className="text-2xl font-semibold text-gray-800 dark:text-white xl:text-4xl lg:w-96">
               {Events[current].name}
@@ -71,8 +73,10 @@ const Slides = () => {
             <Button className="mt-5">Register Now</Button>
 
             <div className="flex items-center justify-between mt-12 lg:justify-start">
-              <button className="p-2 text-gray-800 transition-colors duration-300 border rounded-full rtl:-scale-x-100 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800 hover:bg-gray-100"
-              onClick={decrement}>
+              <button
+                className="p-2 text-gray-800 transition-colors duration-300 border rounded-full rtl:-scale-x-100 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800 hover:bg-gray-100"
+                onClick={decrement}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="w-6 h-6"
@@ -89,8 +93,10 @@ const Slides = () => {
                 </svg>
               </button>
 
-              <button className="p-2 text-gray-800 transition-colors duration-300 border rounded-full rtl:-scale-x-100 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800 lg:mx-6 hover:bg-gray-100"
-              onClick={increment}>
+              <button
+                className="p-2 text-gray-800 transition-colors duration-300 border rounded-full rtl:-scale-x-100 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800 lg:mx-6 hover:bg-gray-100"
+                onClick={increment}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="w-6 h-6"

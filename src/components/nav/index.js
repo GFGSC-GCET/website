@@ -44,10 +44,8 @@ ${hideNavbar ? " translate-y-[-100px] " : "top-0 translate-y-0  "}`}
         <div className="container px-6 py-4 mx-auto md:flex md:justify-between md:items-center">
           <div className="flex items-center justify-between">
             <div>
-              <Link href='/'>
-                <a
-                  className="text-2xl font-bold text-green-700 transition-colors duration-300 transform dark:text-green-600 lg:text-3xl hover:text-green-600 dark:hover:text-gray-300"
-                  >
+              <Link href="/">
+                <a className="text-2xl font-bold text-green-700 transition-colors duration-300 transform dark:text-green-600 lg:text-3xl hover:text-green-600 dark:hover:text-gray-300">
                   GFGSC-GCET
                 </a>
               </Link>
@@ -110,21 +108,22 @@ ${hideNavbar ? " translate-y-[-100px] " : "top-0 translate-y-0  "}`}
             <div className="flex flex-col md:flex-row md:mx-6">
               {links.map((link, index) => {
                 return (
-                  <button
-                    className={`my-2  transition-colors transform 
+                  <Link href={link.href} key={index}>
+                    <a
+                      className={`my-2  transition-colors transform 
                       ${
                         link.href == url
                           ? "text-green-700 dark:text-green-600"
                           : "text-gray-700 dark:text-gray-200"
                       }  
                       hover:text-green-700 dark:hover:text-green-600 text-lg font-medium md:mx-4 md:my-0`}
-                    key={index}
-                    onClick={() => {
-                      router.push(link.href);
-                    }}
-                  >
-                    {link.label}
-                  </button>
+                      onClick={() => {
+                        router.push(link.href);
+                      }}
+                    >
+                      {link.label}
+                    </a>
+                  </Link>
                 );
               })}
             </div>
