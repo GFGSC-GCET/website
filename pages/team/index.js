@@ -64,7 +64,7 @@ const TeamHome = () => {
       <Nav />
       <Breadcrumbs />
       <ThemeChanger />
-      <section class="h-screen">
+      <section class="min-h-screen">
         <div class="container px-6 py-10 mx-auto">
           <h1 class="text-3xl font-semibold text-center text-gray-800 capitalize lg:text-4xl dark:text-white">
             Our GFGSC-GCET Team
