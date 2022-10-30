@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 import Button from "../miscs/button";
 
 const Nav = (props) => {
@@ -25,6 +26,7 @@ const Nav = (props) => {
       let currentScrollPos = window.pageYOffset;
 
       if (prevScrollpos > currentScrollPos) {
+        setIsOpen(false);
         setHideNavbar(false);
       } else {
         setHideNavbar(true);
@@ -36,22 +38,23 @@ const Nav = (props) => {
   return (
     <>
       <nav
-        className={`bg-white shadow dark:bg-gray-800  w-full transition duration-500 sticky z-[1000]
+        className={`bg-gray-100 shadow dark:bg-gray-800  w-full transition duration-300 sticky z-[1000]
 ${hideNavbar ? " translate-y-[-100px] " : "top-0 translate-y-0  "}`}
       >
         <div className="container px-6 py-4 mx-auto md:flex md:justify-between md:items-center">
           <div className="flex items-center justify-between">
             <div>
-              <a
-                className="text-2xl font-bold text-green-700 transition-colors duration-300 transform dark:text-green-600 lg:text-3xl hover:text-gray-700 dark:hover:text-gray-300"
-                href="#"
-              >
-                GFGSC-GCET
-              </a>
+              <Link href='/'>
+                <a
+                  className="text-2xl font-bold text-green-700 transition-colors duration-300 transform dark:text-green-600 lg:text-3xl hover:text-green-600 dark:hover:text-gray-300"
+                  >
+                  GFGSC-GCET
+                </a>
+              </Link>
             </div>
 
             {/* <!-- Mobile menu button --> */}
-            <div className="flex lg:hidden">
+            <div className="flex md:hidden">
               <button
                 onClick={() => {
                   toggle();
@@ -100,15 +103,15 @@ ${hideNavbar ? " translate-y-[-100px] " : "top-0 translate-y-0  "}`}
 
           {/* <!-- Mobile Menu open: "block", Menu closed: "hidden" --> */}
           <div
-            className={`absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-white dark:bg-gray-800 md:mt-0 md:p-0 md:top-0 md:relative md:bg-transparent md:w-auto md:opacity-100 md:translate-x-0 md:flex md:items-center ${
-              isOpen ? "opacity-100 " : "opacity-0 "
+            className={`absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-gray-100 dark:bg-gray-800 md:bg-transparent md:dark:bg-transparent md:mt-0 md:p-0 md:top-0 md:relative md:bg-transparent md:w-auto md:opacity-100 md:translate-x-0 md:flex md:items-center mt-4 ${
+              isOpen ? "opacity-100 " : "opacity-0 hidden"
             }`}
           >
             <div className="flex flex-col md:flex-row md:mx-6">
               {links.map((link, index) => {
                 return (
                   <button
-                    className={`my-2  transition-colors duration-300 transform 
+                    className={`my-2  transition-colors transform 
                       ${
                         link.href == url
                           ? "text-green-700 dark:text-green-600"
@@ -136,7 +139,7 @@ ${hideNavbar ? " translate-y-[-100px] " : "top-0 translate-y-0  "}`}
                     alert("Wait for Now");
                   }}
                 >
-                  Join Us
+                  Login
                 </Button>
               </a>
             </div>

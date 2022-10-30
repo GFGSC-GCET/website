@@ -45,12 +45,14 @@ const Single = (props) =>{
 
                   </button>
 
-                  <hr className="dark:border-gray-200 border-gray-700" />
                   {
                     isOpen &&
+                    <>
+                    <hr className="dark:border-gray-200 border-gray-700" />
                     <p className="p-8 text-sm dark:text-gray-500 text-gray-300 text-left">
                       {props.FAQ.answer}
                     </p>
+                    </>
                   }
 
                 </div>
