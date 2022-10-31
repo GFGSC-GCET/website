@@ -5,6 +5,9 @@ import { Footer, Nav, ThemeChanger, Breadcrumbs } from "../src/components";
 import { MdEvent } from "react-icons/md";
 import { FaCode } from "react-icons/fa";
 
+
+import { withPublic } from '../src/routes'
+
 const About = () => {
 
   const aboutData = [
@@ -135,4 +138,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default withPublic(About);

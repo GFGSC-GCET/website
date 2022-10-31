@@ -5,7 +5,9 @@ import { useRouter } from "next/router";
 
 import { Button, Nav, Slides, ThemeChanger, ContactForm, Footer, Faq } from "../src/components";
 
-export default function Home() {
+import { withPublic } from '../src/routes'
+
+const Home = () => {
   const router = useRouter();
 
 
@@ -18,7 +20,7 @@ export default function Home() {
         <Nav />
         <ThemeChanger />
         <header className="bg-white dark:bg-gray-900">
-          <div className="container px-6 py-16 w-11/12 mx-auto ">
+          <div className="container px-6 pb-5 w-11/12 mx-auto ">
             <div className="items-center flex justify-between flex-col-reverse lg:flex-row">
               <div className="w-full lg:w-2/5">
                 <div className="lg:max-w-lg">
@@ -48,12 +50,17 @@ export default function Home() {
               </div>
 
               <div className="flex items-center justify-center w-full my-6 lg:mt-0 lg:w-1/2">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                {/* <img
                   className="w-full h-full lg:max-w-2xl"
                   src="http://unsplash.it/400/280"
                   alt="Catalogue-pana.svg"
-                />
+                /> */}
+                <iframe
+                  className="min-w-full mt-12 h-64 md:h-[450px] rounded-xl overflow-hidden"
+                  src="https://www.youtube.com/embed/3gKvYR0P2F0"
+                  title="Complete Interview Preparation to Crack Coding Interviews | GeeksforGeeks"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                ></iframe>
               </div>
             </div>
           </div>
@@ -69,7 +76,14 @@ export default function Home() {
             </h2>
 
             <div className="mt-6 sm:-mx-2">
-              <Button click={()=>{router.push('/join')}}>JOIN NOW</Button>
+              <Button
+                className="bg-green-700 hover:bg-green-600"
+                click={() => {
+                  router.push("/join");
+                }}
+              >
+                JOIN NOW
+              </Button>
             </div>
           </div>
         </section>
@@ -86,3 +100,5 @@ export default function Home() {
     </>
   );
 }
+
+export default withPublic(Home)

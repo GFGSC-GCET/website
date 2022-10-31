@@ -4,6 +4,8 @@ import { useState } from 'react'
 import {Nav, Breadcrumbs, Footer, ThemeChanger, Slides, Button} from '../../src/components'
 
 
+import { withPublic } from '../../src/routes'
+
 const Events = () => {
 
   const [searchBar, setSearchBar] = useState('');
@@ -43,7 +45,7 @@ const Events = () => {
 
           <input
             type="text"
-            class="w-full py-3 pl-10 pr-4 text-gray-700 bg-gray-100 border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
+            class="w-full py-3 pl-10 pr-4 text-gray-700 bg-gray-100 border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none"
             placeholder="Search Events, Topics...."
             value = {searchBar}
             onChange = {(e)=>{setSearchBar(e.target.value)}}
@@ -85,7 +87,7 @@ const Events = () => {
                       February 1, 2022
                     </p>
                   </div>
-                  <Button class="inline-block text-green-500 underline hover:text-green-400">Know More</Button>
+                  <Button class="inline-block text-green-500 underline hover:text-green-400 bg-green-700 hover:bg-green-600">Know More</Button>
                 </div>
               </div>
             </div>
@@ -97,4 +99,4 @@ const Events = () => {
   );
 }
 
-export default Events
+export default withPublic(Events)

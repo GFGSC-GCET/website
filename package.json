@@ -11,12 +11,14 @@
   "dependencies": {
     "@badrap/bar-of-progress": "^0.2.2",
     "firebase": "^9.13.0",
+    "formik": "^2.2.9",
     "next": "12.3.1",
     "next-themes": "^0.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.6.0",
-    "react-swipeable": "^7.0.0"
+    "react-swipeable": "^7.0.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.12",

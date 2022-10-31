@@ -1,5 +1,5 @@
 import '../styles/globals.css'
-import { ThemeProvider } from "next-themes";
+import { ThemeProvider, useTheme } from "next-themes";
 import Router from "next/router";
 import ProgressBar from "@badrap/bar-of-progress";
 

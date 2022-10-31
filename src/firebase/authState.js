@@ -3,20 +3,18 @@ import { auth, db } from "./index";
 import { doc, getDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { useUserContext } from "./authContext";
-import {Loading} from "../components";
-
+import { Loading } from "../components";
 
 export default function AuthStateChanged({ children }) {
-  const { setUser, user } = useUserContext();
+  const { setUser, user, member } = useUserContext();
 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log(user);
     onAuthStateChanged(auth, async (user) => {
       if (user) {
-        user.photoURL = user.photoURL.replace('s96-c', 's400-c');
-        setUser(user);
+        const memberRes = await member.get(user);
+        setUser(memberRes);
         setLoading(false);
       } else {
         setUser(null);
@@ -25,16 +23,8 @@ export default function AuthStateChanged({ children }) {
     });
   }, []);
 
-  
-
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
-
-
-
   if (loading) {
-    return <Loading/>;
+    return <Loading />;
   }
   return children;
 }
