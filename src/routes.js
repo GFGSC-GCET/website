@@ -7,7 +7,6 @@ export function withPublic(Component) {
   return function WithPublic(props) {
     const useauth = useUserContext();
     useauth.checkAccount(useauth.user);
-    console.log(useauth.user);
     return <Component useauth={useauth} {...props} />;
   };
 }

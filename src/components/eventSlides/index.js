@@ -64,7 +64,6 @@ const increment = () => {
   };
   const handlers = useSwipeable({
     onSwiped: (eventData) => {
-      console.log(eventData);
       if (eventData.dir === "Left") {
         if (current < Events.length - 1) {
           setCurrent(current + 1);

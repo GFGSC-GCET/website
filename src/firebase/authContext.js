@@ -22,6 +22,7 @@ export const UserContextProvider = (props) => {
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
+        docSnap.data().regComplete ? router.push("/") : router.push("/register");
         setUser(docSnap.data());
       } else {
         const userObj = {

@@ -7,9 +7,7 @@ export const uploadIMG = async (file, path) => {
     return;
   }
   const storageRef = ref(storage, path);
-  console.log(storageRef)
   const snapshot = await uploadBytes(storageRef, file);
-  console.log(snapshot)
   const url = await getDownloadURL(snapshot.ref);
   return url;
 };
