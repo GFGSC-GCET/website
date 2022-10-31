@@ -1,12 +1,12 @@
-import React from 'react'
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
+import React from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 const Breadcrumbs = () => {
   const router = useRouter();
   const url = router.pathname;
-  
+
   const [breadcrumbs, setBreadcrumbs] = useState([]);
   const [breadcrumbsPath, setBreadcrumbsPath] = useState([]);
 
@@ -21,10 +21,6 @@ const Breadcrumbs = () => {
     });
     setBreadcrumbsPath(crumbsPath);
   }, [url]);
-
-  useEffect(() => {
-    console.log(breadcrumbs);
-  }, [breadcrumbs]);
 
   return (
     <div className="bg-white dark:bg-gray-900">
@@ -55,7 +51,7 @@ const Breadcrumbs = () => {
                   <path
                     fill-rule="evenodd"
                     d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                   />
                 </svg>
               </span>
@@ -71,6 +67,6 @@ const Breadcrumbs = () => {
       </div>
     </div>
   );
-}
+};
 
-export default Breadcrumbs
+export default Breadcrumbs;

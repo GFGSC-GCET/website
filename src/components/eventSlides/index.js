@@ -112,7 +112,7 @@ const increment = () => {
               {Events[current].tldr}
             </p>
 
-            <Button className="mt-5">Know More</Button>
+            <Button className="mt-5 bg-green-700 hover:bg-green-600">Know More</Button>
 
             <div className="flex items-center justify-between mt-12 lg:justify-start">
               <button
