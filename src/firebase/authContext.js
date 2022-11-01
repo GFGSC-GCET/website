@@ -69,7 +69,8 @@ export const UserContextProvider = (props) => {
       if (user != null) {
         const userRef = ref(db, `users/${user.uid}`);
         const snapshot = await get(userRef);
-        return snapshot.val();
+        const userObj = await snapshot.val();
+        return userObj;
         // const docRef = doc(db, "users", user.uid);
         // const docSnap = await getDoc(docRef);
         // return docSnap.data();
