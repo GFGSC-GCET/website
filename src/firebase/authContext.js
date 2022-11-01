@@ -38,6 +38,7 @@ export const UserContextProvider = (props) => {
         };
         await set(userRef, userObj);
         setUser(userObj);
+        router.push("/join");
       }
 
       // const docRef = doc(db, "users", user.uid);
