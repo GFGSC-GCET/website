@@ -22,8 +22,8 @@ export const UserContextProvider = (props) => {
       const userRef = ref(db, `users/${user.uid}`);
       const snapshot = await get(userRef);
       if (snapshot.exists()) {
-        snapshot.val().regComplete ? router.push("/") : router.push("/join/complete");
         const userObj = await snapshot.val();
+        userObj.regComplete ? router.push("/") : router.push("/join/complete");
         setUser(userObj);
       } else {
         const userObj = {
