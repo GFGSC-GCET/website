@@ -21,14 +21,11 @@ export const UserContextProvider = (props) => {
     if (user != null) {
       const userRef = ref(db, `users/${user.uid}`);
       const snapshot = await get(userRef);
-      console.log(snapshot);
       if (snapshot.exists()) {
         snapshot.val().regComplete ? router.push("/") : router.push("/join/complete");
-        console.log("User data already exists");
         const userObj = await snapshot.val();
         setUser(userObj);
       } else {
-        console.log("User data does not exist");
         const userObj = {
           displayName: user.displayName,
           uid: user.uid,
@@ -40,6 +37,7 @@ export const UserContextProvider = (props) => {
           admin: false,
         };
         await set(userRef, userObj);
+        setUser(userObj);
       }
 
       // const docRef = doc(db, "users", user.uid);
