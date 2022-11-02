@@ -24,6 +24,7 @@ export const UserContextProvider = (props) => {
       if (snapshot.exists()) {
         const userObj = await snapshot.val();
         setUser(userObj);
+        userObj.regComplete ? router.push("/") : router.push("/join/complete");
       } else {
         const userObj = {
           displayName: user.displayName,
@@ -37,6 +38,7 @@ export const UserContextProvider = (props) => {
         };
         setUser(userObj);
         await set(userRef, userObj);
+        router.push("/join");
       }
       return
 

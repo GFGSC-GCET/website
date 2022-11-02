@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 export function withPublic(Component) {
   return function WithPublic(props) {
     const useauth = useUserContext();
-    useauth.checkAccount(useauth.user);
+    const check = useauth.checkAccount(useauth.user);
     return <Component useauth={useauth} {...props} />;
   };
 }
