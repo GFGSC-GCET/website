@@ -40,6 +40,7 @@ export const UserContextProvider = (props) => {
         await set(userRef, userObj);
         router.push("/join");
       }
+      return
 
       // const docRef = doc(db, "users", user.uid);
       // const docSnap = await getDoc(docRef);
@@ -67,7 +68,7 @@ export const UserContextProvider = (props) => {
   const member = {
     get: async (user) => {
       if (user != null) {
-        const userRef = ref(db, `users/${user.uid}`);
+        const userRef =  ref(db, `users/${user.uid}`);
         const snapshot = await get(userRef);
         const userObj = await snapshot.val();
         return userObj;
