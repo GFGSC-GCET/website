@@ -21,26 +21,30 @@ export const UserContextProvider = (props) => {
   const checkAccount = async (user) => {
     if (user != null) {
 
-      const userRef = ref(database, `users/${user.uid}`);
-      const snapshot = await get(userRef);
-      if (snapshot.exists()) {
-        const userObj = await snapshot.val();
-        setUser(userObj);
-        userObj.regComplete ? router.push("/") : router.push("/join/complete");
-      } else {
-        const userObj = {
-          displayName: user.displayName,
-          uid: user.uid,
-          email: user.email,
-          photoURL: user.photoURL,
-          createdAt: new Date().toISOString(),
-          regComplete: false,
-          priority: 10,
-          admin: false,
-        };
-        setUser(userObj);
-        await set(userRef, userObj);
-        router.push("/join");
+      try{
+        const userRef = ref(database, `users/${user.uid}`);
+        const snapshot = await get(userRef);
+        if (snapshot.exists()) {
+          const userObj = await snapshot.val();
+          setUser(userObj);
+          userObj.regComplete ? router.push("/") : router.push("/join/complete");
+        } else {
+          const userObj = {
+            displayName: user.displayName,
+            uid: user.uid,
+            email: user.email,
+            photoURL: user.photoURL,
+            createdAt: new Date().toISOString(),
+            regComplete: false,
+            priority: 10,
+            admin: false,
+          };
+          setUser(userObj);
+          await set(userRef, userObj);
+          router.push("/join");
+        }
+      }catch(e){
+        console.log(e)
       }
 
       // const docRef = doc(db, "users", user.uid);
