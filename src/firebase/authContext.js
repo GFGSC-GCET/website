@@ -63,6 +63,7 @@ export const UserContextProvider = (props) => {
       //   router.push("/join");
       // }
     }
+    return
   };
 
   const member = {
@@ -76,6 +77,9 @@ export const UserContextProvider = (props) => {
         // const docSnap = await getDoc(docRef);
         // return docSnap.data();
       }
+      else{
+        return user
+      }
     },
 
     set: async (user) => {
@@ -84,7 +88,6 @@ export const UserContextProvider = (props) => {
         const snapshot = await get(userRef);
         if (snapshot.exists()) {
           const response = await set(userRef, user);
-          setUser(user);
           return response;
         }
         return null
@@ -96,6 +99,9 @@ export const UserContextProvider = (props) => {
         //   return response;
         // }
         // return null;
+      }
+      else{
+        return user
       }
     },
   };
