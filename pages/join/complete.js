@@ -82,8 +82,8 @@ const Complete = () => {
             <section className="p-6 dark:bg-gray-800 dark:text-gray-50">
               <Formik
                 initialValues={{
-                  displayName: memberData.displayName,
-                  email: memberData.email,
+                  displayName: memberData?.displayName,
+                  email: memberData?.email,
                   year: "",
                 }}
                 enableReinitialize={true}

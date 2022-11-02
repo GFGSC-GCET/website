@@ -36,8 +36,8 @@ export const UserContextProvider = (props) => {
           priority: 10,
           admin: false,
         };
-        await set(userRef, userObj);
         setUser(userObj);
+        await set(userRef, userObj);
         router.push("/join");
       }
 
@@ -130,7 +130,6 @@ export const UserContextProvider = (props) => {
     const { error, user } = await AuthService.loginWithGoogle();
     setError(error ?? "");
     checkAccount(user);
-    setUser(user ?? null);
   };
 
   const logout = async () => {
