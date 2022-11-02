@@ -21,13 +21,16 @@ export const UserContextProvider = (props) => {
   const checkAccount = async (user) => {
     if (user != null) {
 
-      try{
-        const userRef = ref(database, `users/${user.uid}`);
-        const snapshot = await get(userRef);
-        if (snapshot.exists()) {
+      const userRef = ref(database, `users/${user.uid}`);
+      const snapshot = await get(userRef);
+      if (snapshot.exists()) {
+          try {
           const userObj = await snapshot.val();
           setUser(userObj);
           userObj.regComplete ? router.push("/") : router.push("/join/complete");
+          } catch (e) {
+            console.log(e);
+          }
         } else {
           const userObj = {
             displayName: user.displayName,
@@ -43,9 +46,6 @@ export const UserContextProvider = (props) => {
           await set(userRef, userObj);
           router.push("/join");
         }
-      }catch(e){
-        console.log(e)
-      }
 
       // const docRef = doc(db, "users", user.uid);
       // const docSnap = await getDoc(docRef);

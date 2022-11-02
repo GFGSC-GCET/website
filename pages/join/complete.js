@@ -20,7 +20,7 @@ import { formSchema } from "../../src/schema/formSchema";
 const Complete = () => {
   const { TextField, SelectField } = FormComponents; //Form Components
 
-  const { user, member } = useUserContext();
+  const { user, member, setUser } = useUserContext();
 
   const [memberData, setMemberData] = useState({});
 
@@ -45,6 +45,7 @@ const Complete = () => {
     uploadIMG(file, `profile/${user.uid}`).then((url) => {
       setMemberData({ ...memberData, photoURL: url });
       member.set({ ...memberData, photoURL: url });
+      setUser({ ...user, photoURL: url });
       setUploading(false);
     });
   };
