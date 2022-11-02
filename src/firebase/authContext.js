@@ -23,7 +23,6 @@ export const UserContextProvider = (props) => {
       const snapshot = await get(userRef);
       if (snapshot.exists()) {
         const userObj = await snapshot.val();
-        userObj.regComplete ? router.push("/") : router.push("/join/complete");
         setUser(userObj);
       } else {
         const userObj = {
@@ -38,7 +37,6 @@ export const UserContextProvider = (props) => {
         };
         setUser(userObj);
         await set(userRef, userObj);
-        router.push("/join");
       }
       return
 
@@ -137,11 +135,11 @@ export const UserContextProvider = (props) => {
     const { error, user } = await AuthService.loginWithGoogle();
     setError(error ?? "");
     checkAccount(user);
+
   };
 
   const logout = async () => {
     await AuthService.logout();
-
     setUser(null);
   };
 
