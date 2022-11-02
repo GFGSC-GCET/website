@@ -18,7 +18,7 @@ import { Formik, Form } from "formik";
 import { formSchema } from "../../src/schema/formSchema";
 
 const Complete = () => {
-  const { TextField } = FormComponents; //Form Components
+  const { TextField, SelectField } = FormComponents; //Form Components
 
   const { user, member } = useUserContext();
 
@@ -49,6 +49,19 @@ const Complete = () => {
     });
   };
 
+  const yearOptionList = [
+    { value: 1, label: "First Year" },
+    { value: 2, label: "Second Year" },
+    { value: 3, label: "Third Year" },
+  ];
+
+  const batchOptionList = [
+    { value: "ECE-A", label: "ECE A" },
+    { value: "ECE-B", label: "ECE B" },
+    { value: "CSE-A", label: "CSE A" },
+    { value: "CSE-B", label: "CSE B" }
+  ];
+
   return (
     <>
       <Nav />
@@ -69,8 +82,9 @@ const Complete = () => {
             <section className="p-6 dark:bg-gray-800 dark:text-gray-50">
               <Formik
                 initialValues={{
-                  displayName: memberData.displayName,
-                  email: memberData.email,
+                  displayName: memberData?.displayName,
+                  email: memberData?.email,
+                  year: "",
                 }}
                 enableReinitialize={true}
                 onSubmit={(values) => {
@@ -140,10 +154,43 @@ const Complete = () => {
                           </button>
                         </div>
                       </div>
-
-                      <TextField label="Name" name="displayName" type="text" />
-                      <TextField label="Email" name="email" type="text" disabled={true} />
-                      
+                      <TextField
+                        spanClass="col-span-full"
+                        label="Name"
+                        name="displayName"
+                        type="text"
+                      />
+                      <TextField
+                        spanClass="col-span-full"
+                        label="Email"
+                        name="email"
+                        type="email"
+                        disabled={true}
+                      />
+                      <TextField
+                        spanClass="col-span-full"
+                        label="College Email"
+                        name="collegeEmail"
+                        type="text"
+                      />
+                      <TextField
+                        spanClass="col-span-full"
+                        label="WhatsApp Number"
+                        name="whatsappNumber"
+                        type="tel"
+                      />
+                      <SelectField
+                        spanClass="col-span-3"
+                        options={yearOptionList}
+                        label="Year"
+                        name="year"
+                      />
+                      <SelectField
+                        spanClass="col-span-3"
+                        options={batchOptionList}
+                        label="Batch"
+                        name="batch"
+                      />
                     </div>
                   </fieldset>
 

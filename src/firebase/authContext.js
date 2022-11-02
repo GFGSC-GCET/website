@@ -3,7 +3,8 @@ import { useRouter } from "next/router";
 
 import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 import { auth, db } from ".";
-import { doc, setDoc, getDoc } from "firebase/firestore";
+
+import { get, ref, set } from "firebase/database";
 
 export const UserContext = createContext({});
 
@@ -18,12 +19,12 @@ export const UserContextProvider = (props) => {
 
   const checkAccount = async (user) => {
     if (user != null) {
-      const docRef = doc(db, "users", user.uid);
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        docSnap.data().regComplete ? router.push("/") : router.push("/join/complete");
-        setUser(docSnap.data());
+      const userRef = ref(db, `users/${user.uid}`);
+      const snapshot = await get(userRef);
+      if (snapshot.exists()) {
+        const userObj = await snapshot.val();
+        setUser(userObj);
+        userObj.regComplete ? router.push("/") : router.push("/join/complete");
       } else {
         const userObj = {
           displayName: user.displayName,
@@ -35,35 +36,75 @@ export const UserContextProvider = (props) => {
           priority: 10,
           admin: false,
         };
-        setDoc(doc(db, "users", user.uid), userObj);
         setUser(userObj);
+        await set(userRef, userObj);
         router.push("/join");
       }
+      return
+
+      // const docRef = doc(db, "users", user.uid);
+      // const docSnap = await getDoc(docRef);
+      // if (docSnap.exists()) {
+      //   docSnap.data().regComplete ? router.push("/") : router.push("/join/complete");
+      //   setUser(docSnap.data());
+      // } else {
+      //   const userObj = {
+      //     displayName: user.displayName,
+      //     uid: user.uid,
+      //     email: user.email,
+      //     photoURL: user.photoURL,
+      //     createdAt: new Date().toISOString(),
+      //     regComplete: false,
+      //     priority: 10,
+      //     admin: false,
+      //   };
+      //   setDoc(doc(db, "users", user.uid), userObj);
+      //   setUser(userObj);
+      //   router.push("/join");
+      // }
     }
+    return
   };
 
   const member = {
     get: async (user) => {
       if (user != null) {
-        const docRef = doc(db, "users", user.uid);
-        const docSnap = await getDoc(docRef);
-        return docSnap.data();
+        const userRef =  ref(db, `users/${user.uid}`);
+        const snapshot = await get(userRef);
+        const userObj = await snapshot.val();
+        return userObj;
+        // const docRef = doc(db, "users", user.uid);
+        // const docSnap = await getDoc(docRef);
+        // return docSnap.data();
+      }
+      else{
+        return user
       }
     },
 
     set: async (user) => {
       if (user != null) {
-        const docRef = doc(db, "users", user.uid);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          const response = await setDoc(docRef, user);
+        const userRef = ref(db, `users/${user.uid}`);
+        const snapshot = await get(userRef);
+        if (snapshot.exists()) {
+          const response = await set(userRef, user);
           return response;
         }
-        return null;
+        return null
+
+        // const docRef = doc(db, "users", user.uid);
+        // const docSnap = await getDoc(docRef);
+        // if (docSnap.exists()) {
+        //   const response = await setDoc(docRef, user);
+        //   return response;
+        // }
+        // return null;
+      }
+      else{
+        return user
       }
     },
   };
-
 
   const AuthService = {
     loginWithGoogle: async () => {
@@ -96,12 +137,11 @@ export const UserContextProvider = (props) => {
     const { error, user } = await AuthService.loginWithGoogle();
     setError(error ?? "");
     checkAccount(user);
-    setUser(user ?? null);
+
   };
 
   const logout = async () => {
     await AuthService.logout();
-
     setUser(null);
   };
 
