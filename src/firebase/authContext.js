@@ -21,33 +21,12 @@ export const UserContextProvider = (props) => {
   const checkAccount = async (user) => {
     if (user != null) {
 
-      // const userRef = ref(database, `users/${user.uid}`);
-      // const snapshot = await get(userRef);
-      // if (snapshot.exists()) {
-      //   const userObj = await snapshot.val();
-      //   setUser(userObj);
-      //   userObj.regComplete ? router.push("/") : router.push("/join/complete");
-      // } else {
-      //   const userObj = {
-      //     displayName: user.displayName,
-      //     uid: user.uid,
-      //     email: user.email,
-      //     photoURL: user.photoURL,
-      //     createdAt: new Date().toISOString(),
-      //     regComplete: false,
-      //     priority: 10,
-      //     admin: false,
-      //   };
-      //   setUser(userObj);
-      //   await set(userRef, userObj);
-      //   router.push("/join");
-      // }
-
-      const docRef = doc(db, "users", user.uid);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        docSnap.data().regComplete ? router.push("/") : router.push("/join/complete");
-        setUser(docSnap.data());
+      const userRef = ref(database, `users/${user.uid}`);
+      const snapshot = await get(userRef);
+      if (snapshot.exists()) {
+        const userObj = await snapshot.val();
+        setUser(userObj);
+        userObj.regComplete ? router.push("/") : router.push("/join/complete");
       } else {
         const userObj = {
           displayName: user.displayName,
@@ -59,10 +38,31 @@ export const UserContextProvider = (props) => {
           priority: 10,
           admin: false,
         };
-        setDoc(doc(db, "users", user.uid), userObj);
         setUser(userObj);
+        await set(userRef, userObj);
         router.push("/join");
       }
+
+      // const docRef = doc(db, "users", user.uid);
+      // const docSnap = await getDoc(docRef);
+      // if (docSnap.exists()) {
+      //   docSnap.data().regComplete ? router.push("/") : router.push("/join/complete");
+      //   setUser(docSnap.data());
+      // } else {
+      //   const userObj = {
+      //     displayName: user.displayName,
+      //     uid: user.uid,
+      //     email: user.email,
+      //     photoURL: user.photoURL,
+      //     createdAt: new Date().toISOString(),
+      //     regComplete: false,
+      //     priority: 10,
+      //     admin: false,
+      //   };
+      //   setDoc(doc(db, "users", user.uid), userObj);
+      //   setUser(userObj);
+      //   router.push("/join");
+      // }
     }
     return
   };
@@ -70,13 +70,13 @@ export const UserContextProvider = (props) => {
   const member = {
     get: async (user) => {
       if (user != null) {
-        // const userRef =  ref(database, `users/${user.uid}`);
-        // const snapshot = await get(userRef);
-        // const userObj = await snapshot.val();
-        // return userObj;
-        const docRef = doc(db, "users", user.uid);
-        const docSnap = await getDoc(docRef);
-        return docSnap.data();
+        const userRef =  ref(database, `users/${user.uid}`);
+        const snapshot = await get(userRef);
+        const userObj = await snapshot.val();
+        return userObj;
+        // const docRef = doc(db, "users", user.uid);
+        // const docSnap = await getDoc(docRef);
+        // return docSnap.data();
       }
       else{
         return user
@@ -85,21 +85,21 @@ export const UserContextProvider = (props) => {
 
     set: async (user) => {
       if (user != null) {
-        // const userRef = ref(database, `users/${user.uid}`);
-        // const snapshot = await get(userRef);
-        // if (snapshot.exists()) {
-        //   const response = await set(userRef, user);
-        //   return response;
-        // }
-        // return null
-
-        const docRef = doc(db, "users", user.uid);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          const response = await setDoc(docRef, user);
+        const userRef = ref(database, `users/${user.uid}`);
+        const snapshot = await get(userRef);
+        if (snapshot.exists()) {
+          const response = await set(userRef, user);
           return response;
         }
-        return null;
+        return null
+
+        // const docRef = doc(db, "users", user.uid);
+        // const docSnap = await getDoc(docRef);
+        // if (docSnap.exists()) {
+        //   const response = await setDoc(docRef, user);
+        //   return response;
+        // }
+        // return null;
       }
       else{
         return user
