@@ -11,6 +11,7 @@ export default function AuthStateChanged({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    console.log("AuthStateChanged useEffect");
     onAuthStateChanged(auth, async (user) => {
       if (user) {
         const memberRes = await member.get(user);
