@@ -14,7 +14,6 @@ export default function AuthStateChanged({ children }) {
     onAuthStateChanged(auth, async (user) => {
       if (user) {
         const memberRes = await member.get(user);
-        console.log(memberRes);
         setUser(memberRes);
         setLoading(false);
       } else {

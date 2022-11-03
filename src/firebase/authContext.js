@@ -19,6 +19,7 @@ export const UserContextProvider = (props) => {
   const [loggingIn, setLoggingIn] = useState(false);
 
   const checkAccount = async (user) => {
+
     if (user != null) {
 
       const userRef = ref(database, `users/${user.uid}`);
@@ -26,8 +27,8 @@ export const UserContextProvider = (props) => {
       if (snapshot.exists()) {
           try {
           const userObj = await snapshot.val();
-          setUser(userObj);
           userObj.regComplete ? router.push("/") : router.push("/join/complete");
+          setUser(userObj);
           return;
           } catch (e) {
             console.log(e);
@@ -37,6 +38,17 @@ export const UserContextProvider = (props) => {
             displayName: user.displayName,
             uid: user.uid,
             email: user.email,
+            collegeEmail:'',
+            whatsappNumber:'',
+            year:'',
+            batch:'',
+            bio:'',
+            learning:'',
+            skills:'',
+            github:'',
+            linkedin:'',
+            website:'',
+            instagram:'',
             photoURL: user.photoURL,
             createdAt: new Date().toISOString(),
             regComplete: false,
@@ -45,6 +57,7 @@ export const UserContextProvider = (props) => {
           };
           setUser(userObj);
           await set(userRef, userObj);
+          console.log("running")
           router.push("/join");
           return;
         }

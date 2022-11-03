@@ -17,17 +17,13 @@ import { withProtected } from "../../src/routes";
 import { Formik, Form } from "formik";
 import { formSchema } from "../../src/schema/formSchema";
 
-
 const Complete = () => {
-  const { TextField, SelectField, TextareaField } = FormComponents; //Form Components
-
   const { user, member, setUser } = useUserContext();
 
   const [memberData, setMemberData] = useState({});
 
   const getMember = async () => {
     const memberRes = await member.get(user);
-    console.log(memberRes);
     setMemberData(memberRes);
   };
 
@@ -53,21 +49,49 @@ const Complete = () => {
   };
 
   const yearOptionList = [
-    { value: 1, label: "First Year" },
-    { value: 2, label: "Second Year" },
-    { value: 3, label: "Third Year" },
+    { value: "first",   label: "First Year" },
+    { value: "second",  label: "Second Year" },
+    { value: "third",   label: "Third Year" },
+    { value: "fourth",  label: "Third Year" },
   ];
+
 
   const batchOptionList = [
-    { value: "ECE-A", label: "ECE A" },
-    { value: "ECE-B", label: "ECE B" },
-    { value: "CSE-A", label: "CSE A" },
-    { value: "CSE-B", label: "CSE B" },
+    { value:  "CSE A",  label:  "CSE A" },
+    { value:  "CSE B",  label:  "CSE B" },
+    { value:  "CSE AI", label:  "CSE AI" },
+    { value:  "CSE DS", label:  "CSE DS" },
+    { value:  "CSE D",  label:  "CSE Design" },
+    { value:  "AI DS",  label:  "AI DS" },
+    { value:  "AI ML",  label:  "AI ML" },
+    { value:  "IT A",   label:  "IT A" },
+    { value:  "IT B",   label:  "IT B" },
+    { value:  "IT C",   label:  "IT C" },
+    { value:  "ECE A",  label:  "ECE A" },
+    { value:  "ECE B",  label:  "ECE B" },
+    { value:  "ECE C",  label:  "ECE C" },
+    { value:  "EEE A",  label:  "EEE A" },
+    { value:  "EEE B",  label:  "EEE B" },
+    { value:  "EEE C",  label:  "EEE C" },
+    { value:  "EE A",   label:  "EE A" },
+    { value:  "EE B",   label:  "EE B" },
+    { value:  "EE C",   label:  "EE C" },
+    { value:  "EIE A",  label:  "EIE A" },
+    { value:  "EIE B",  label:  "EIE B" },
+    { value:  "EIE C",  label:  "EIE C" },
+    { value:  "ME A",   label:  "ME A" },
+    { value:  "ME B",   label:  "ME B" },
+    { value:  "ME C",   label:  "ME C" },
+    { value:  "CE A",   label:  "CE A" },
+    { value:  "CE B",   label:  "CE B" },
+    { value:  "CE C",   label:  "CE C" },
   ];
 
-  const onFormSubmit=(values)=>{
-    member.set({...memberData,...values})
-  }
+  const { TextField, SelectField, TextareaField, TagField } = FormComponents; //Form Components
+
+  const onFormSubmit = (values) => {
+    member.set({ ...memberData, ...values });
+  };
 
   return (
     <>
@@ -88,7 +112,7 @@ const Complete = () => {
           <div className="flex flex-col justify-center items-center w-full max-w-xl m-auto m-5 p-2 border-2 border-gray-100 dark:border-gray-800 border rounded-lg">
             <section className="p-6 dark:bg-gray-800 dark:text-gray-50">
               <Formik
-                initialValues={{...memberData }}
+                initialValues={{ ...memberData }}
                 enableReinitialize={true}
                 onSubmit={(values) => {
                   console.log(values);
@@ -164,13 +188,12 @@ const Complete = () => {
                         name="displayName"
                         type="text"
                       />
-                      <TextField
-                        spanClass="col-span-full"
-                        label="Email"
-                        name="email"
-                        type="email"
-                        disabled={true}
-                      />
+                      <div className="col-span-full">
+                        <label className="text-sm font-bold">Email</label>
+                        <div className="h-fit w-full cursor-not-allowed bg-gray-200 dark:bg-gray-700 px-3 py-2 rounded-md focus:ring focus:ring-opacity-75 focus:ring-green-400 dark:border-gray-700 dark:text-gray-100 outline-0 disabled:cursor-not-allowed h-20">
+                          {memberData.email}
+                        </div>
+                      </div>
                       <TextField
                         spanClass="col-span-full"
                         label="College Email"
@@ -207,26 +230,22 @@ const Complete = () => {
                       <TextareaField
                         spanClass="col-span-full"
                         label="Bio"
-                        description=""
+                        description="Write a short introduction about yourself"
                         name="bio"
                       />
-                      <TextareaField
+                      <TagField
                         spanClass="col-span-full"
-                        label="Currently learning"
-                        description="What are you learning right now? What are the new tools and languages you're picking up right now?"
+                        label="Currently Learning"
+                        description="What projects are currently occupying most of your time?"
                         name="learning"
+                        placeholder="Android, Machine Learning..."
                       />
-                      <TextareaField
+                      <TagField
                         spanClass="col-span-full"
                         label="Skills/Languages"
                         description="What projects are currently occupying most of your time?"
                         name="skills"
-                      />
-                      <TextareaField
-                        spanClass="col-span-full"
-                        label="Currently hacking on"
-                        description="What tools and languages are you most experienced with? Are you specialized or more of a generalist?"
-                        name="skills"
+                        placeholder="C, Python, Javascript..."
                       />
                     </div>
                   </fieldset>
@@ -240,29 +259,36 @@ const Complete = () => {
                         spanClass="col-span-full"
                         label="Github Profile URL"
                         name="github"
+                        placeholder="https://github.com/...."
                         type="text"
                       />
                       <TextField
                         spanClass="col-span-full"
                         label="Linked In Profile URL"
                         name="linkedin"
+                        placeholder="https://linkedin.com/in/...."
                         type="text"
                       />
                       <TextField
                         spanClass="col-span-full"
                         label="Personal Website URL (if any)"
                         name="website"
+                        placeholder="https://myportfolio.com/...."
                         type="text"
                       />
                       <TextField
                         spanClass="col-span-full"
                         label="Instagram Profile URL"
-                        name="website"
+                        name="instagram"
+                        placeholder="https://instagram.com/...."
                         type="text"
                       />
                     </div>
                   </fieldset>
-                  <Button type="submit" className="bg-green-700 w-full">
+                  <Button
+                    type="submit"
+                    className="bg-green-700 w-full focus:outline-green-600"
+                  >
                     submit
                   </Button>
                 </Form>

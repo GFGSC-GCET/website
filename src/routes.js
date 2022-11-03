@@ -3,14 +3,12 @@ import { useUserContext } from "./firebase/authContext";
 import { Loading } from "./components";
 import { useRouter } from "next/router";
 
-export function withPublic(Component) {
+export const withPublic = (Component) => {
   return function WithPublic(props) {
-    const useauth = useUserContext();
-    try{
+    useEffect(()=>{
       useauth.checkAccount(useauth.user);
-    }catch(e){
-      console.log(e);
-    }
+    },[])
+    const useauth = useUserContext();
     return <Component useauth={useauth} {...props} />;
   };
 }
