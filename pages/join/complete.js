@@ -17,8 +17,9 @@ import { withProtected } from "../../src/routes";
 import { Formik, Form } from "formik";
 import { formSchema } from "../../src/schema/formSchema";
 
+
 const Complete = () => {
-  const { TextField, SelectField } = FormComponents; //Form Components
+  const { TextField, SelectField, TextareaField } = FormComponents; //Form Components
 
   const { user, member, setUser } = useUserContext();
 
@@ -26,6 +27,7 @@ const Complete = () => {
 
   const getMember = async () => {
     const memberRes = await member.get(user);
+    console.log(memberRes);
     setMemberData(memberRes);
   };
 
@@ -60,8 +62,12 @@ const Complete = () => {
     { value: "ECE-A", label: "ECE A" },
     { value: "ECE-B", label: "ECE B" },
     { value: "CSE-A", label: "CSE A" },
-    { value: "CSE-B", label: "CSE B" }
+    { value: "CSE-B", label: "CSE B" },
   ];
+
+  const onFormSubmit=(values)=>{
+    member.set({...memberData,...values})
+  }
 
   return (
     <>
@@ -69,27 +75,24 @@ const Complete = () => {
       <Breadcrumbs />
       <ThemeChanger />
       <div className="container min-h-screen px-6 py-10 mx-auto">
-        <h1 class="text-3xl font-semibold text-center text-gray-800 capitalize lg:text-4xl dark:text-white">
+        <h1 className="text-3xl font-semibold text-center text-gray-800 capitalize lg:text-4xl dark:text-white">
           Complete your{" "}
           <span
-            class="text-green-500"
+            className="text-green-500"
             title="Geeks for Geeks Student Club of Galgotas College of Engineering & Technology"
           >
             Profile
           </span>
         </h1>
-        <div class="flex flex-col items-center justify-center">
-          <div class="flex flex-col justify-center items-center w-full max-w-xl m-auto m-5 p-2 border-2 border-gray-100 dark:border-gray-800 border rounded-lg">
+        <div className="flex flex-col items-center justify-center">
+          <div className="flex flex-col justify-center items-center w-full max-w-xl m-auto m-5 p-2 border-2 border-gray-100 dark:border-gray-800 border rounded-lg">
             <section className="p-6 dark:bg-gray-800 dark:text-gray-50">
               <Formik
-                initialValues={{
-                  displayName: memberData?.displayName,
-                  email: memberData?.email,
-                  year: "",
-                }}
+                initialValues={{...memberData }}
                 enableReinitialize={true}
                 onSubmit={(values) => {
                   console.log(values);
+                  onFormSubmit(values);
                 }}
                 isSubmitting={true}
                 validationSchema={formSchema}
@@ -104,7 +107,7 @@ const Complete = () => {
                     </div>
                     <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
                       <div className="col-span-full">
-                        <label for="bio" className="text-sm">
+                        <label htmlFor="bio" className="text-sm">
                           Photo
                         </label>
                         <div className="flex items-center space-x-2">
@@ -132,21 +135,21 @@ const Complete = () => {
                             Change
                             {uploading && (
                               <svg
-                                class="animate-spin ml-2 mr-1 h-5 w-5 text-white"
+                                className="animate-spin ml-2 mr-1 h-5 w-5 text-white"
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
                                 viewBox="0 0 24 24"
                               >
                                 <circle
-                                  class="opacity-25"
+                                  className="opacity-25"
                                   cx="12"
                                   cy="12"
                                   r="10"
                                   stroke="currentColor"
-                                  stroke-width="4"
+                                  strokeWidth="4"
                                 ></circle>
                                 <path
-                                  class="opacity-75"
+                                  className="opacity-75"
                                   fill="currentColor"
                                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                                 ></path>
@@ -197,42 +200,66 @@ const Complete = () => {
 
                   <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm dark:bg-gray-900 bg-gray-100">
                     <div className="space-y-2 col-span-full lg:col-span-1">
-                      <p className="font-medium">Profile</p>
+                      <p className="font-medium">About You</p>
                       <p className="text-xs">Adipisci fuga autem eum!</p>
                     </div>
                     <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
-                      <div className="col-span-full sm:col-span-3">
-                        <label for="username" className="text-sm">
-                          Github
-                        </label>
-                        <input
-                          id="username"
-                          type="text"
-                          placeholder="Github"
-                          className="w-full bg-gray-200 dark:bg-gray-700 px-3 py-2 rounded-md focus:ring focus:ring-opacity-75 focus:ring-green-400 dark:border-gray-700 dark:text-gray-100 outline-0"
-                        />
-                      </div>
-                      <div className="col-span-full sm:col-span-3">
-                        <label for="website" className="text-sm">
-                          Linked In
-                        </label>
-                        <input
-                          id="website"
-                          type="text"
-                          placeholder="Linked In"
-                          className="w-full bg-gray-200 dark:bg-gray-700 px-3 py-2 rounded-md focus:ring focus:ring-opacity-75 focus:ring-green-400 dark:border-gray-700 dark:text-gray-100 outline-0"
-                        />
-                      </div>
-                      <div className="col-span-full">
-                        <label for="bio" className="text-sm">
-                          Bio
-                        </label>
-                        <textarea
-                          id="bio"
-                          placeholder=""
-                          className="w-full bg-gray-200 dark:bg-gray-700 px-3 py-2 rounded-md focus:ring focus:ring-opacity-75 focus:ring-green-400 dark:border-gray-700 dark:text-gray-100 outline-0"
-                        ></textarea>
-                      </div>
+                      <TextareaField
+                        spanClass="col-span-full"
+                        label="Bio"
+                        description=""
+                        name="bio"
+                      />
+                      <TextareaField
+                        spanClass="col-span-full"
+                        label="Currently learning"
+                        description="What are you learning right now? What are the new tools and languages you're picking up right now?"
+                        name="learning"
+                      />
+                      <TextareaField
+                        spanClass="col-span-full"
+                        label="Skills/Languages"
+                        description="What projects are currently occupying most of your time?"
+                        name="skills"
+                      />
+                      <TextareaField
+                        spanClass="col-span-full"
+                        label="Currently hacking on"
+                        description="What tools and languages are you most experienced with? Are you specialized or more of a generalist?"
+                        name="skills"
+                      />
+                    </div>
+                  </fieldset>
+                  <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm dark:bg-gray-900 bg-gray-100">
+                    <div className="space-y-2 col-span-full lg:col-span-1">
+                      <p className="font-medium">Profiles</p>
+                      <p className="text-xs">Adipisci fuga autem eum!</p>
+                    </div>
+                    <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
+                      <TextField
+                        spanClass="col-span-full"
+                        label="Github Profile URL"
+                        name="github"
+                        type="text"
+                      />
+                      <TextField
+                        spanClass="col-span-full"
+                        label="Linked In Profile URL"
+                        name="linkedin"
+                        type="text"
+                      />
+                      <TextField
+                        spanClass="col-span-full"
+                        label="Personal Website URL (if any)"
+                        name="website"
+                        type="text"
+                      />
+                      <TextField
+                        spanClass="col-span-full"
+                        label="Instagram Profile URL"
+                        name="website"
+                        type="text"
+                      />
                     </div>
                   </fieldset>
                   <Button type="submit" className="bg-green-700 w-full">

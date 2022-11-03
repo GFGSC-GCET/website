@@ -18,16 +18,16 @@ const GoogleLogin = () => {
 
   return (
     <>
-      <div class="w-full max-w-xs m-5">
+      <div className="w-full max-w-xs m-5">
         <button
           href="#"
-          class="flex items-center justify-center w-full text-gray-600 transition-colors duration-300 transform border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
+          className="flex items-center justify-center w-full text-gray-600 transition-colors duration-300 transform border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
           onClick={() => {
             loginWithGoogle();
           }}
         >
-          <div class="px-4 py-2">
-            <svg class="w-6 h-6" viewBox="0 0 40 40">
+          <div className="px-4 py-2">
+            <svg className="w-6 h-6" viewBox="0 0 40 40">
               <path
                 d="M36.3425 16.7358H35V16.6667H20V23.3333H29.4192C28.045 27.2142 24.3525 30 20 30C14.4775 30 10 25.5225 10 20C10 14.4775 14.4775 9.99999 20 9.99999C22.5492 9.99999 24.8683 10.9617 26.6342 12.5325L31.3483 7.81833C28.3717 5.04416 24.39 3.33333 20 3.33333C10.7958 3.33333 3.33335 10.7958 3.33335 20C3.33335 29.2042 10.7958 36.6667 20 36.6667C29.2042 36.6667 36.6667 29.2042 36.6667 20C36.6667 18.8825 36.5517 17.7917 36.3425 16.7358Z"
                 fill="#FFC107"
@@ -47,27 +47,27 @@ const GoogleLogin = () => {
             </svg>
           </div>
 
-          <span class="w-5/6 px-4 py-3 font-bold text-center">
+          <span className="w-5/6 px-4 py-3 font-bold text-center">
             Sign in with Google
           </span>
 
           {loggingIn && (
             <svg
-              class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+              className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
             >
               <circle
-                class="opacity-25"
+                className="opacity-25"
                 cx="12"
                 cy="12"
                 r="10"
                 stroke="currentColor"
-                stroke-width="4"
+                strokeWidth="4"
               ></circle>
               <path
-                class="opacity-75"
+                className="opacity-75"
                 fill="currentColor"
                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
               ></path>
@@ -77,19 +77,21 @@ const GoogleLogin = () => {
       </div>
 
       {error != "" && (
-        <div class="flex w-full max-w-xs overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 m-5">
-          <div class="flex items-center justify-center w-12 bg-red-500">
+        <div className="flex w-full max-w-xs overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 m-5">
+          <div className="flex items-center justify-center w-12 bg-red-500">
             <div className="w-6 h-6 text-2xl text-white">
               <BiError />
             </div>
           </div>
 
-          <div class="px-4 py-2 -mx-3">
-            <div class="mx-3">
-              <span class="font-semibold text-red-500 dark:text-red-400">
+          <div className="px-4 py-2 -mx-3">
+            <div className="mx-3">
+              <span className="font-semibold text-red-500 dark:text-red-400">
                 Error
               </span>
-              <p class="text-sm text-gray-600 dark:text-gray-200">{error}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-200">
+                {error}
+              </p>
             </div>
           </div>
         </div>
@@ -109,55 +111,55 @@ const Join = () => {
       <Breadcrumbs />
       <ThemeChanger />
       <div className="container min-h-screen px-6 py-10 mx-auto">
-        <h1 class="text-3xl font-semibold text-center text-gray-800 capitalize lg:text-4xl dark:text-white">
+        <h1 className="text-3xl font-semibold text-center text-gray-800 capitalize lg:text-4xl dark:text-white">
           Join{" "}
           <span
-            class="text-green-600"
+            className="text-green-600"
             title="Geeks for Geeks Student Club of Galgotas College of Engineering & Technology"
           >
             GFGSC-GCET
           </span>{" "}
           Team
         </h1>
-        <p class="max-w-2xl mx-auto my-6 text-center text-gray-500 dark:text-gray-300">
+        <p className="max-w-2xl mx-auto my-6 text-center text-gray-500 dark:text-gray-300">
           Use your Google Account to continue registration
           <br />
           which is free of cost
         </p>
-        <div class="flex flex-col items-center justify-center">
-          <div class="flex flex-col justify-center items-center w-full max-w-xl m-auto m-5 p-2 border-2 dark:border-gray-800  border-gray-100 rounded-lg">
+        <div className="flex flex-col items-center justify-center">
+          <div className="flex flex-col justify-center items-center w-full max-w-xl m-auto m-5 p-2 border-2 dark:border-gray-800  border-gray-100 rounded-lg">
             {user == null ? (
               <GoogleLogin />
             ) : (
               <>
-                <div class="w-full max-w-xs overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 m-2">
+                <div className="w-full max-w-xs overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 m-2">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    class="object-cover w-full h-56"
+                    className="object-cover w-full h-56"
                     src={user.photoURL}
                     alt="avatar"
                   />
 
-                  <div class="py-5 text-center">
+                  <div className="py-5 text-center">
                     <a
                       href="#"
-                      class="block text-2xl font-bold text-gray-800 dark:text-white"
+                      className="block text-2xl font-bold text-gray-800 dark:text-white"
                       tabindex="0"
                       role="link"
                     >
                       {user.displayName}
                     </a>
-                    <span class="text-sm text-gray-700 dark:text-gray-200">
+                    <span className="text-sm text-gray-700 dark:text-gray-200">
                       {user.email}
                     </span>
                   </div>
                 </div>
-                <p class="text-sm font-light text-center text-gray-400 m-3">
+                <p className="text-sm font-light text-center text-gray-400 m-3">
                   {" "}
                   This is not me.{" "}
                   <button
                     href="#"
-                    class="font-medium text-gray-700 dark:text-gray-200 hover:underline"
+                    className="font-medium text-gray-700 dark:text-gray-200 hover:underline"
                     onClick={() => {
                       logout();
                       loginWithGoogle();

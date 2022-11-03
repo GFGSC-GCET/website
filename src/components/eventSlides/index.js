@@ -1,15 +1,11 @@
 import React from "react";
 import Button from "../miscs/button";
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from "react";
 import { useSwipeable } from "react-swipeable";
 
 const Slides = () => {
-
-  
-
   const [current, setCurrent] = useState(0);
 
-  
   const Events = [
     {
       name: "Guide to Hacktober",
@@ -33,18 +29,18 @@ const Slides = () => {
       tldr: "Join the free session to know some LinkedIn Tricks",
     },
   ];
-const increment = () => {
-  // access the current state value
-  setCurrent((oldCount) => {
-    if (oldCount < Events.length - 1) {
-      return oldCount + 1;
-    }
-    return 0;
-  });
-};
+  const increment = () => {
+    // access the current state value
+    setCurrent((oldCount) => {
+      if (oldCount < Events.length - 1) {
+        return oldCount + 1;
+      }
+      return 0;
+    });
+  };
 
   const decrement = () => {
-    setCurrent(current == 0 ? Events.length-1 : current - 1);
+    setCurrent(current == 0 ? Events.length - 1 : current - 1);
   };
 
   useEffect(() => {
@@ -53,7 +49,6 @@ const increment = () => {
     }, 5000);
     return () => clearInterval(interval);
   }, []);
-
 
   const config = {
     delta: 10, // min distance(px) before a swipe starts. *See Notes*
@@ -111,7 +106,9 @@ const increment = () => {
               {Events[current].tldr}
             </p>
 
-            <Button className="mt-5 bg-green-700 hover:bg-green-600">Know More</Button>
+            <Button className="mt-5 bg-green-700 hover:bg-green-600">
+              Know More
+            </Button>
 
             <div className="flex items-center justify-between mt-12 lg:justify-start">
               <button
@@ -127,7 +124,7 @@ const increment = () => {
                   strokeWidth="2"
                 >
                   <path
-                    stroke-linecap="round"
+                    strokeLinecap="round"
                     strokeLinejoin="round"
                     d="M15 19l-7-7 7-7"
                   />
@@ -147,7 +144,7 @@ const increment = () => {
                   strokeWidth="2"
                 >
                   <path
-                    stroke-linecap="round"
+                    strokeLinecap="round"
                     strokeLinejoin="round"
                     d="M9 5l7 7-7 7"
                   />

@@ -17,23 +17,23 @@ const UserDropdown = (props) => {
   }, [props.isNavClose]);
 
   return (
-    <div class="relative inline-block">
-      <div class="w-full flex flex-col md:hidden items-center justify-center my-5">
+    <div className="relative inline-block">
+      <div className="w-full flex flex-col md:hidden items-center justify-center my-5">
         <a
           href="#"
-          class="flex items-center p-3 w-fullpx-5 -mt-2 text-sm text-gray-600 transition-colors duration-300 transform dark:text-gray-300 bg-gray-200 = dark:bg-gray-700 dark:hover:text-white rounded-xl drop-shadow-lg"
+          className="flex items-center p-3 w-fullpx-5 -mt-2 text-sm text-gray-600 transition-colors duration-300 transform dark:text-gray-300 bg-gray-200 = dark:bg-gray-700 dark:hover:text-white rounded-xl drop-shadow-lg"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            class="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9"
+            className="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9"
             src={user.photoURL}
             alt="jane avatar"
           />
-          <div class="mx-1">
-            <h1 class="text-sm font-semibold text-gray-700 dark:text-gray-200">
+          <div className="mx-1">
+            <h1 className="text-sm font-semibold text-gray-700 dark:text-gray-200">
               My Account
             </h1>
-            <p class="text-sm text-gray-500 dark:text-gray-400">
+            <p className="text-sm text-gray-500 dark:text-gray-400">
               {user.displayName}
             </p>
           </div>
@@ -49,16 +49,16 @@ const UserDropdown = (props) => {
         </Button>
       </div>
 
-      <div class="relative hidden md:flex flex-col m-auto">
+      <div className="relative hidden md:flex flex-col m-auto">
         <button
-          class="relative z-10 flex items-center justify-center text-sm text-gray-600 bg-white border border-transparent rounded-md  dark:text-white dark:bg-gray-800  w-fit outline outline-offset-2 outline-green-600 hover:outline-dashed rounded-full"
+          className="relative z-10 flex items-center justify-center text-sm text-gray-600 bg-white border border-transparent rounded-md  dark:text-white dark:bg-gray-800  w-fit outline outline-offset-2 outline-green-600 hover:outline-dashed rounded-full"
           onClick={() => {
             setIsOpen(!isOpen);
           }}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            class="w-10 h-10 m-auto rounded-full"
+            className="w-10 h-10 m-auto rounded-full"
             src={user.photoURL}
             alt={user.displayName}
           />
@@ -71,32 +71,32 @@ const UserDropdown = (props) => {
         >
           <div
             href="#"
-            class="flex items-center p-3 w-full-mt-2 text-sm text-gray-600 transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:bg-gray-600 dark:hover:text-white"
+            className="flex items-center p-3 w-full-mt-2 text-sm text-gray-600 transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:bg-gray-600 dark:hover:text-white"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              class="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9"
+              className="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9"
               src={user.photoURL}
               alt={user.displayName}
             />
-            <div class="mx-1">
-              <h1 class="text-sm font-semibold text-gray-700 dark:text-gray-200">
+            <div className="mx-1">
+              <h1 className="text-sm font-semibold text-gray-700 dark:text-gray-200">
                 {user.displayName}
               </h1>
-              <p class="text-xs text-gray-500 dark:text-gray-400">
+              <p className="text-xs text-gray-500 dark:text-gray-400">
                 {user.email}
               </p>
             </div>
           </div>
 
-          <hr class="border-gray-200 dark:border-gray-700 " />
+          <hr className="border-gray-200 dark:border-gray-700 " />
 
           <a
             href="#"
-            class="flex items-center p-3 w-fulltext-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+            className="flex items-center p-3 w-fulltext-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
           >
             <svg
-              class="w-5 h-5 mx-1"
+              className="w-5 h-5 mx-1"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -111,15 +111,15 @@ const UserDropdown = (props) => {
               ></path>
             </svg>
 
-            <span class="mx-1">view profile</span>
+            <span className="mx-1">view profile</span>
           </a>
 
           <a
             href="#"
-            class="flex items-center p-3 w-fulltext-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+            className="flex items-center p-3 w-fulltext-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
           >
             <svg
-              class="w-5 h-5 mx-1"
+              className="w-5 h-5 mx-1"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -130,19 +130,19 @@ const UserDropdown = (props) => {
               ></path>
             </svg>
 
-            <span class="mx-1">Settings</span>
+            <span className="mx-1">Settings</span>
           </a>
 
-          <hr class="border-gray-200 dark:border-gray-700 " />
+          <hr className="border-gray-200 dark:border-gray-700 " />
 
           <button
             onClick={() => {
               logout();
             }}
-            class="flex items-center p-3 w-full text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-red-600 dark:hover:text-white"
+            className="flex items-center p-3 w-full text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-red-600 dark:hover:text-white"
           >
             <svg
-              class="w-5 h-5 mx-1"
+              className="w-5 h-5 mx-1"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -153,7 +153,7 @@ const UserDropdown = (props) => {
               ></path>
             </svg>
 
-            <span class="mx-1">Sign Out</span>
+            <span className="mx-1">Sign Out</span>
           </button>
         </div>
       </div>

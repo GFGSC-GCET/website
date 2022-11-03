@@ -1,18 +1,16 @@
 import React from "react";
 import { useState } from "react";
 
-const Single = (props) =>{
-
+const Single = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleFAQ = () => {
     setIsOpen(!isOpen);
-  }
+  };
 
   return (
     <div
       className="cursor-pointer transition border-2 border-gray-100 rounded-lg dark:border-gray-700"
-      key={props.key}
     >
       <button
         className="flex items-center justify-between w-full p-8"
@@ -34,26 +32,26 @@ const Single = (props) =>{
               stroke="currentColor"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M18 12H6"
               />
             </svg>
           </span>
         ) : (
-          <span class="text-white bg-green-600 rounded-full">
+          <span className="text-white bg-green-600 rounded-full">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="w-6 h-6"
+              className="w-6 h-6"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M12 6v6m0 0v6m0-6h6m-6 0H6"
               />
             </svg>
@@ -71,22 +69,19 @@ const Single = (props) =>{
       )}
     </div>
   );
-
-}
+};
 
 const Faq = () => {
-
   const FAQs = [
     {
-      "question":"How to join ?",
-      "answer": "Click the join button"
+      question: "How to join ?",
+      answer: "Click the join button",
     },
     {
-      "question":"What to do after joining?",
-      "answer": "Do fun stuffs"
+      question: "What to do after joining?",
+      answer: "Do fun stuffs",
     },
-  ]
-
+  ];
 
   return (
     <section className="bg-white dark:bg-gray-900">

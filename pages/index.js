@@ -1,15 +1,22 @@
 import Head from "next/head";
-import Image from 'next/image';
+import Image from "next/image";
 
 import { useRouter } from "next/router";
 
-import { Button, Nav, Slides, ThemeChanger, ContactForm, Footer, Faq } from "../src/components";
+import {
+  Button,
+  Nav,
+  Slides,
+  ThemeChanger,
+  ContactForm,
+  Footer,
+  Faq,
+} from "../src/components";
 
-import { withPublic } from '../src/routes'
+import { withPublic } from "../src/routes";
 
 const Home = () => {
   const router = useRouter();
-
 
   return (
     <>
@@ -89,16 +96,16 @@ const Home = () => {
         </section>
 
         <Slides />
-        <hr class="my-8 border-gray-200 dark:border-gray-700" />
+        <hr className="my-8 border-gray-200 dark:border-gray-700" />
 
         <Faq />
-        <hr class="my-8 border-gray-200 dark:border-gray-700" />
+        <hr className="my-8 border-gray-200 dark:border-gray-700" />
 
         <ContactForm />
         <Footer />
       </main>
     </>
   );
-}
+};
 
-export default withPublic(Home)
+export default withPublic(Home);

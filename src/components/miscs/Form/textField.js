@@ -5,7 +5,7 @@ const TextField = ({label, disabled, spanClass , ...props}) => {
   const [field, meta] = useField(props);
   return (
     <div className={spanClass}>
-      <label className="text-sm">{label}</label>
+      <label className="text-sm font-bold">{label}</label>
       <div className='flex flex-row'>
 
         {

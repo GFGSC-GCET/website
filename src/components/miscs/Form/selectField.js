@@ -5,7 +5,7 @@ const SelectField = ({ label, disabled, spanClass,options, ...props }) => {
   const [field, meta] = useField(props);
   return (
     <div className={spanClass}>
-      <label className="text-sm">{label}</label>
+      <label className="text-sm font-bold">{label}</label>
       {/* create a select dropdown*/}
       <Field
         as='select'
