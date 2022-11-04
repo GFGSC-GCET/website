@@ -75,7 +75,7 @@ const Join = () => {
           </div>
         </div>
 
-        <div class="grid grid-cols-1 gap-8 mx-4 mt-5 md:mt-0 xl:gap-12 md:grid-cols-2 h-fit">
+        <div class="grid grid-cols-1 gap-5 mx-5 mt-5 md:mt-0 xl:gap-5 md:grid-cols-2 h-fit">
           <div class="p-6 border rounded-xl border-r-gray-200 dark:border-gray-700">
             <div class="md:flex md:items-start md:-mx-4 ">
               <span class="inline-block p-2 text-green-500 bg-green-100 rounded-xl md:mx-4 dark:text-white dark:bg-green-500">
