@@ -61,7 +61,7 @@ const Complete = () => {
 
 
   const batchOptionList = [
-    { value:  "CSE A",  label:  "CSE A" },
+    { value:  "Co",  label:  "CSE A" },
     { value:  "CSE B",  label:  "CSE B" },
     { value:  "CSE AI", label:  "CSE AI" },
     { value:  "CSE DS", label:  "CSE DS" },
@@ -96,7 +96,7 @@ const Complete = () => {
   const router = useRouter();
 
   const onFormSubmit = async (values) => {
-    router.push("/join/welcome");
+    router.push("/profile");
     await member.set({ ...memberData, ...values, regComplete: true });
     setUser({ ...memberData, ...values, regComplete: true });
   };

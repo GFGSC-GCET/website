@@ -5,7 +5,7 @@ import { GiBrain } from "react-icons/gi";
 
 const Footer = () => {
   return (
-    <footer className="flex flex-col items-center justify-between p-6 bg-gray-100 dark:bg-gray-800 sm:flex-row">
+    <footer className="flex flex-col items-center justify-between p-6 bg-gray-100 dark:bg-gray-800 sm:flex-row z-[900] mt-10">
       <a
         href="#"
         className="text-xl font-bold text-gray-600 transition-colors duration-300 dark:text-white hover:text-gray-700 dark:hover:text-gray-300"

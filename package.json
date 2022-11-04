@@ -17,6 +17,7 @@
     "next-themes": "^0.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-github-calendar": "^3.3.4",
     "react-icons": "^4.6.0",
     "react-swipeable": "^7.0.0",
     "yup": "^0.32.11"

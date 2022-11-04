@@ -157,7 +157,8 @@ export const UserContextProvider = (props) => {
   const loginWithGoogle = async () => {
     const { error, user } = await AuthService.loginWithGoogle();
     setError(error ?? "");
-    checkAccount(user);
+    await checkAccount(user);
+    router.push('/profile')
 
   };
 
