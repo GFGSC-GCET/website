@@ -27,7 +27,7 @@ export const UserContextProvider = (props) => {
       if (snapshot.exists()) {
           try {
           const userObj = await snapshot.val();
-          userObj.regComplete ? router.push("/") : router.push("/join/complete");
+          userObj.regComplete ? null : router.push("/join/complete");
           setUser(userObj);
           return;
           } catch (e) {
@@ -41,7 +41,7 @@ export const UserContextProvider = (props) => {
             collegeEmail:'',
             whatsappNumber:'',
             year:'',
-            batch:'',
+            branch:'',
             bio:'',
             learning:'',
             skills:'',
@@ -54,6 +54,7 @@ export const UserContextProvider = (props) => {
             regComplete: false,
             priority: 10,
             admin: false,
+            role:'Member'
           };
           setUser(userObj);
           await set(userRef, userObj);

@@ -14,8 +14,11 @@ import { uploadIMG } from "../../src/firebase/uploadIMG";
 
 import { withProtected } from "../../src/routes";
 
-import { Formik, Form } from "formik";
+import { Formik, Form, FormikErrors } from "formik";
 import { formSchema } from "../../src/schema/formSchema";
+
+import { useRouter } from "next/router";
+import { set } from "firebase/database";
 
 const Complete = () => {
   const { user, member, setUser } = useUserContext();
@@ -24,6 +27,7 @@ const Complete = () => {
 
   const getMember = async () => {
     const memberRes = await member.get(user);
+    memberRes.regComplete ? router.push("/") : null;
     setMemberData(memberRes);
   };
 
@@ -49,10 +53,10 @@ const Complete = () => {
   };
 
   const yearOptionList = [
-    { value: "first",   label: "First Year" },
-    { value: "second",  label: "Second Year" },
-    { value: "third",   label: "Third Year" },
-    { value: "fourth",  label: "Third Year" },
+    { value: "first",  label: "First Year" },
+    { value: "second", label: "Second Year" },
+    { value: "third",  label: "Third Year" },
+    { value: "fourth", label: "Fourth Year" },
   ];
 
 
@@ -89,8 +93,35 @@ const Complete = () => {
 
   const { TextField, SelectField, TextareaField, TagField } = FormComponents; //Form Components
 
-  const onFormSubmit = (values) => {
-    member.set({ ...memberData, ...values });
+  const router = useRouter();
+
+  const onFormSubmit = async (values) => {
+    router.push("/join/welcome");
+    await member.set({ ...memberData, ...values, regComplete: true });
+    setUser({ ...memberData, ...values, regComplete: true });
+  };
+
+  const warnForm = (errors) => {
+    //change error from object to array
+    const errorArray = Object.keys(errors);
+    if (errorArray.length > 0) {
+      console.log(errorArray);
+      //use element as id and goto first element
+      const firstError = document.getElementById(errorArray[0]);
+      firstError.focus();
+      
+      // const headerOffset = 200;
+      // var elementPosition = firstError.getBoundingClientRect().top;
+      // var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      // //focus in the element
+      
+      // window.scrollTo({
+      //   top: offsetPosition,
+      //   behavior: "smooth"
+      // });
+      // firstError.scrollTo({ top: 0, behavior: "smooth" });
+
+    }
   };
 
   return (
@@ -115,12 +146,14 @@ const Complete = () => {
                 initialValues={{ ...memberData }}
                 enableReinitialize={true}
                 onSubmit={(values) => {
-                  console.log(values);
                   onFormSubmit(values);
                 }}
                 isSubmitting={true}
                 validationSchema={formSchema}
+                
               >
+                {({ errors, touched, isSubmitting }) => (
+                  
                 <Form className="container flex flex-col mx-auto space-y-12 ng-untouched ng-pristine ng-valid">
                   <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm dark:bg-gray-900 bg-gray-100">
                     <div className="space-y-2 col-span-full lg:col-span-1">
@@ -186,6 +219,7 @@ const Complete = () => {
                         spanClass="col-span-full"
                         label="Name"
                         name="displayName"
+                        id="displayName"
                         type="text"
                       />
                       <div className="col-span-full">
@@ -198,12 +232,14 @@ const Complete = () => {
                         spanClass="col-span-full"
                         label="College Email"
                         name="collegeEmail"
+                        id="collegeEmail"
                         type="text"
                       />
                       <TextField
                         spanClass="col-span-full"
                         label="WhatsApp Number"
                         name="whatsappNumber"
+                        id="whatsappNumber"
                         type="tel"
                       />
                       <SelectField
@@ -211,12 +247,14 @@ const Complete = () => {
                         options={yearOptionList}
                         label="Year"
                         name="year"
+                        id="year"
                       />
                       <SelectField
                         spanClass="col-span-3"
                         options={batchOptionList}
                         label="Batch"
                         name="batch"
+                        id="batch"
                       />
                     </div>
                   </fieldset>
@@ -232,12 +270,14 @@ const Complete = () => {
                         label="Bio"
                         description="Write a short introduction about yourself"
                         name="bio"
+                        id="bio"
                       />
                       <TagField
                         spanClass="col-span-full"
                         label="Currently Learning"
                         description="What projects are currently occupying most of your time?"
                         name="learning"
+                        id="learning"
                         placeholder="Android, Machine Learning..."
                       />
                       <TagField
@@ -245,6 +285,7 @@ const Complete = () => {
                         label="Skills/Languages"
                         description="What projects are currently occupying most of your time?"
                         name="skills"
+                        id="skills"
                         placeholder="C, Python, Javascript..."
                       />
                     </div>
@@ -259,6 +300,7 @@ const Complete = () => {
                         spanClass="col-span-full"
                         label="Github Profile URL"
                         name="github"
+                        id="github"
                         placeholder="https://github.com/...."
                         type="text"
                       />
@@ -266,6 +308,7 @@ const Complete = () => {
                         spanClass="col-span-full"
                         label="Linked In Profile URL"
                         name="linkedin"
+                        id="linkedin"
                         placeholder="https://linkedin.com/in/...."
                         type="text"
                       />
@@ -273,6 +316,7 @@ const Complete = () => {
                         spanClass="col-span-full"
                         label="Personal Website URL (if any)"
                         name="website"
+                        id="website"
                         placeholder="https://myportfolio.com/...."
                         type="text"
                       />
@@ -280,6 +324,7 @@ const Complete = () => {
                         spanClass="col-span-full"
                         label="Instagram Profile URL"
                         name="instagram"
+                        id="instagram"
                         placeholder="https://instagram.com/...."
                         type="text"
                       />
@@ -288,10 +333,12 @@ const Complete = () => {
                   <Button
                     type="submit"
                     className="bg-green-700 w-full focus:outline-green-600"
+                    click={() => {warnForm(errors);}}
                   >
                     submit
                   </Button>
                 </Form>
+                )}
               </Formik>
             </section>
           </div>

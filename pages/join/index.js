@@ -6,12 +6,11 @@ import {
   Nav,
   ThemeChanger,
 } from "../../src/components";
+import { useEffect } from "react";
 import { useUserContext } from "../../src/firebase/authContext";
 import { useRouter } from "next/router";
 
 import { BiError } from "react-icons/bi";
-
-import { WithPublic } from "../../src/routes";
 
 const GoogleLogin = () => {
   const { loginWithGoogle, loggingIn, error } = useUserContext();
@@ -102,6 +101,17 @@ const GoogleLogin = () => {
 
 const Join = () => {
   const router = useRouter();
+
+  const { member } = useUserContext();
+
+  const getMember = async () => {
+    const memberRes = await member.get(user);
+    memberRes.regComplete ? router.push("/") : null;
+  };
+
+  useEffect(() => {
+    getMember();
+  }, []);
 
   const { user, logout, loginWithGoogle } = useUserContext();
 

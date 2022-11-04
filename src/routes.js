@@ -15,6 +15,9 @@ export const withPublic = (Component) => {
 
 export function withProtected(Component) {
   return function WithProtected(props) {
+    useEffect(()=>{
+      useauth.checkAccount(useauth.user);
+    },[])
     const useauth = useUserContext();
     const router = useRouter();
     if (!useauth.user) {
