@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/router';
 import { useUserContext } from "../../firebase/authContext";
@@ -20,6 +21,7 @@ const UserDropdown = (props) => {
   return (
     <div className="relative inline-block">
       <div className="w-full flex flex-col md:hidden items-center justify-center my-5">
+        
         <a
           href="#"
           className="flex items-center p-3 w-fullpx-5 -mt-2 text-sm text-gray-600 transition-colors duration-300 transform dark:text-gray-300 bg-gray-200 = dark:bg-gray-700 dark:hover:text-white rounded-xl drop-shadow-lg"
@@ -93,7 +95,9 @@ const UserDropdown = (props) => {
           <hr className="border-gray-200 dark:border-gray-700 " />
 
           <button
-            onClick={()=>{router.push('/profile')}}
+            onClick={() => {
+              router.push("/profile");
+            }}
             className="flex items-center p-3 w-full text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
           >
             <svg
@@ -115,8 +119,10 @@ const UserDropdown = (props) => {
             <span className="mx-1">view profile</span>
           </button>
 
-          <a
-            href="#"
+          <button
+            onClick={() => {
+              router.push("/settings");
+            }}
             className="flex items-center p-3 w-full text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
           >
             <svg
@@ -132,7 +138,7 @@ const UserDropdown = (props) => {
             </svg>
 
             <span className="mx-1">Settings</span>
-          </a>
+          </button>
 
           <hr className="border-gray-200 dark:border-gray-700 " />
 

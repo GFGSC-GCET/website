@@ -24,7 +24,7 @@ function MyApp({ Component, pageProps }) {
     <UserContextProvider>
       <AuthStateChanged>
         <ThemeProvider enableSystem="false" attribute="class">
-          <div className="dark:bg-gray-900">
+          <div className="dark:bg-gray-900 min-h-screen min-w-screen">
             <Component {...pageProps} />
           </div>
         </ThemeProvider>

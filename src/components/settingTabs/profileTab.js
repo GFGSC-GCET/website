@@ -1,33 +1,22 @@
-import React from "react";
+import React from 'react'
+
 import { useState, useEffect, useRef } from "react";
-import {
-  Breadcrumbs,
-  Button,
-  Footer,
-  Nav,
-  ThemeChanger,
-  FormComponents,
-} from "../../src/components";
 
-import { useUserContext } from "../../src/firebase/authContext";
-import { uploadIMG } from "../../src/firebase/uploadIMG";
-
-import { withProtected } from "../../src/routes";
-
+import { useUserContext } from "../../firebase/authContext";
+import { uploadIMG } from "../../firebase/uploadIMG";
+import { FormComponents, Button } from '../index'
 import { Formik, Form, FormikErrors } from "formik";
-import { formSchema } from "../../src/schema/formSchema";
+import { formSchema } from "../../schema/formSchema";
 
 import { useRouter } from "next/router";
-import { set } from "firebase/database";
 
-const Complete = () => {
-  const { user, member, setUser } = useUserContext();
+const ProfileTab = () => {
+      const { user, member, setUser } = useUserContext();
 
   const [memberData, setMemberData] = useState({});
 
   const getMember = async () => {
     const memberRes = await member.get(user);
-    memberRes.regComplete ? router.push("/") : null;
     setMemberData(memberRes);
   };
 
@@ -123,26 +112,8 @@ const Complete = () => {
 
     }
   };
-
   return (
-    <>
-      <Nav />
-      <Breadcrumbs />
-      <ThemeChanger />
-      <div className="container min-h-screen px-6 py-10 mx-auto">
-        <h1 className="text-3xl font-semibold text-center text-gray-800 capitalize lg:text-4xl dark:text-white">
-          Complete your{" "}
-          <span
-            className="text-green-500"
-            title="Geeks for Geeks Student Club of Galgotas College of Engineering & Technology"
-          >
-            Profile
-          </span>
-        </h1>
-        <div className="flex flex-col items-center justify-center">
-          <div className="flex flex-col justify-center items-center w-full max-w-xl m-auto m-5 p-2 border-2 border-gray-100 dark:border-gray-800 border rounded-lg">
-            <section className="p-6 dark:bg-gray-800 dark:text-gray-50">
-              <Formik
+     <Formik
                 initialValues={{ ...memberData }}
                 enableReinitialize={true}
                 onSubmit={(values) => {
@@ -154,21 +125,15 @@ const Complete = () => {
               >
                 {({ errors, touched, isSubmitting }) => (
                   
-                <Form className="container flex flex-col mx-auto space-y-12 ng-untouched ng-pristine ng-valid">
-                  <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm dark:bg-gray-900 bg-gray-100">
-                    <div className="space-y-2 col-span-full lg:col-span-1">
-                      <p className="text-lg font-medium">Personal Inormation</p>
-                      <p className="text-sm">
-                        This will help us to contact you.
-                      </p>
-                    </div>
-                    <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
-                      <div className="col-span-full">
-                        <label htmlFor="bio" className="text-sm">
+                <Form className="container flex flex-col mx-auto space-y-5">
+                  <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm dark:bg-gray-800 bg-gray-100">
+                    <div className="grid grid-cols-6 gap-4 col-span-full ">
+                      <div className="col-span-1">
+                        <label htmlFor="bio" className="text-sm font-bold">
                           Photo
                         </label>
-                        <div className="flex items-center space-x-2">
-                          <div className="w-28 h-28 dark:bg-gray-500 dark:bg-gray-700">
+                        <div className="flex flex-col items-center space-y-2">
+                          <div className="w-40 h-40 dark:bg-gray-500 dark:bg-gray-700">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
                               src={memberData.photoURL}
@@ -187,7 +152,7 @@ const Complete = () => {
                           <button
                             type="button"
                             onClick={handleFileClick}
-                            className="px-2 py-1 border text-sm rounded-md dark:border-gray-100 flex flex-row items-center space-x-1"
+                            className="px-2 py-1 border text-sm rounded-md dark:border-gray-100 flex flex-row justify-center items-center space-x-1 w-full"
                           >
                             Change
                             {uploading && (
@@ -215,56 +180,56 @@ const Complete = () => {
                           </button>
                         </div>
                       </div>
+                    <div className="grid grid-cols-6 gap-4 col-span-5 ">
                       <TextField
-                        spanClass="col-span-full"
+                        spanClass="col-span-full md:col-span-3"
                         label="Name"
                         name="displayName"
                         id="displayName"
                         type="text"
                       />
-                      <div className="col-span-full">
+                      <div className="col-span-full md:col-span-3">
                         <label className="text-sm font-bold">Email</label>
                         <div className="h-fit w-full cursor-not-allowed bg-gray-200 dark:bg-gray-700 px-3 py-2 rounded-md focus:ring focus:ring-opacity-75 focus:ring-green-400 dark:border-gray-700 dark:text-gray-100 outline-0 disabled:cursor-not-allowed">
                           {memberData.email}
                         </div>
                       </div>
                       <TextField
-                        spanClass="col-span-full"
+                        spanClass="col-span-full md:col-span-3"
                         label="College Email"
                         name="collegeEmail"
                         id="collegeEmail"
                         type="text"
                       />
                       <TextField
-                        spanClass="col-span-full"
+                        spanClass="col-span-full md:col-span-3"
                         label="WhatsApp Number"
                         name="whatsappNumber"
                         id="whatsappNumber"
                         type="tel"
                       />
                       <SelectField
-                        spanClass="col-span-3"
+                        spanClass="col-span-3 md:col-span-3"
                         options={yearOptionList}
                         label="Year"
                         name="year"
                         id="year"
                       />
                       <SelectField
-                        spanClass="col-span-3"
+                        spanClass="col-span-3 md:col-span-3"
                         options={batchOptionList}
                         label="Batch"
                         name="batch"
                         id="batch"
                       />
                     </div>
+                    </div>
                   </fieldset>
 
-                  <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm dark:bg-gray-900 bg-gray-100">
-                    <div className="space-y-2 col-span-full lg:col-span-1">
-                      <p className="font-medium">About You</p>
-                      <p className="text-xs">Adipisci fuga autem eum!</p>
-                    </div>
-                    <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
+                  <hr class="border-gray-200 dark:border-gray-700 "/>
+
+                  <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm dark:bg-gray-800 bg-gray-100">
+                    <div className="grid grid-cols-6 gap-4 col-span-full">
                       <TextareaField
                         spanClass="col-span-full"
                         label="Bio"
@@ -273,7 +238,7 @@ const Complete = () => {
                         id="bio"
                       />
                       <TagField
-                        spanClass="col-span-full"
+                        spanClass="col-span-full lg:col-span-3"
                         label="Currently Learning"
                         description="What projects are currently occupying most of your time?"
                         name="learning"
@@ -281,7 +246,7 @@ const Complete = () => {
                         placeholder="Android, Machine Learning..."
                       />
                       <TagField
-                        spanClass="col-span-full"
+                        spanClass="col-span-full lg:col-span-3"
                         label="Skills/Languages"
                         description="What projects are currently occupying most of your time?"
                         name="skills"
@@ -290,14 +255,11 @@ const Complete = () => {
                       />
                     </div>
                   </fieldset>
-                  <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm dark:bg-gray-900 bg-gray-100">
-                    <div className="space-y-2 col-span-full lg:col-span-1">
-                      <p className="font-medium">Profiles</p>
-                      <p className="text-xs">Adipisci fuga autem eum!</p>
-                    </div>
-                    <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
+                  <hr class="border-gray-200 dark:border-gray-700 "/>
+                  <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm dark:bg-gray-800 bg-gray-100">
+                    <div className="grid grid-cols-6 gap-4 col-span-full">
                       <TextField
-                        spanClass="col-span-full"
+                        spanClass="col-span-full md:col-span-3"
                         label="Github Profile URL"
                         name="github"
                         id="github"
@@ -305,7 +267,7 @@ const Complete = () => {
                         type="text"
                       />
                       <TextField
-                        spanClass="col-span-full"
+                        spanClass="col-span-full md:col-span-3"
                         label="Linked In Profile URL"
                         name="linkedin"
                         id="linkedin"
@@ -313,7 +275,7 @@ const Complete = () => {
                         type="text"
                       />
                       <TextField
-                        spanClass="col-span-full"
+                        spanClass="col-span-full md:col-span-3"
                         label="Personal Website URL (if any)"
                         name="website"
                         id="website"
@@ -321,7 +283,7 @@ const Complete = () => {
                         type="text"
                       />
                       <TextField
-                        spanClass="col-span-full"
+                        spanClass="col-span-full md:col-span-3"
                         label="Instagram Profile URL"
                         name="instagram"
                         id="instagram"
@@ -332,21 +294,15 @@ const Complete = () => {
                   </fieldset>
                   <Button
                     type="submit"
-                    className="bg-green-700 w-full focus:outline-green-600"
+                    className="bg-green-700 w-auto focus:outline-green-600 mx-6"
                     click={() => {warnForm(errors);}}
                   >
-                    submit
+                    Save Changes
                   </Button>
                 </Form>
                 )}
               </Formik>
-            </section>
-          </div>
-        </div>
-      </div>
-      <Footer />
-    </>
-  );
-};
+  )
+}
 
-export default withProtected(Complete);
+export default ProfileTab

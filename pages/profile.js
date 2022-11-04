@@ -86,7 +86,7 @@ const Join = () => {
 
               <div class="flex items-center mt-4 text-gray-700 dark:text-gray-200">
                 <TbBooks className="text-xl" />
-                <h1 class="px-2 text-sm">{user.branch}</h1>
+                <h1 class="px-2 text-sm">{user.batch}</h1>
               </div>
 
               <div class="flex items-center mt-4 text-gray-700 dark:text-gray-200">

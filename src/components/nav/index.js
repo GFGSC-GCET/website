@@ -6,6 +6,7 @@ import Button from "../miscs/button";
 import { useUserContext } from "../../firebase/authContext";
 
 import UserDropdown from "./userDropdown";
+import settings from "../../../pages/settings";
 
 const Nav = (props) => {
   const { user, loginWithGoogle, logout, loggingIn } = useUserContext();
@@ -136,7 +137,7 @@ ${hideNavbar ? " translate-y-[-100px] " : "top-0 translate-y-0  "}`}
                     <a
                       className={`my-2  transition-colors transform 
                       ${
-                        link.href == url
+                        url == link.href
                           ? "text-green-700 dark:text-green-600"
                           : "text-gray-700 dark:text-gray-200"
                       }  
@@ -150,6 +151,21 @@ ${hideNavbar ? " translate-y-[-100px] " : "top-0 translate-y-0  "}`}
                   </Link>
                 );
               })}
+              {user != null && (
+                <Link legacyBehavior href="/settings">
+                  <a
+                    className={`my-2 md:hidden transition-colors transform hover:text-green-700
+                    ${
+                      url == settings
+                        ? "text-green-700 dark:text-green-600"
+                        : "text-gray-700 dark:text-gray-200"
+                    }  
+                    dark:hover:text-green-600 text-lg font-medium md:mx-4 md:my-0`}
+                  >
+                    Settings
+                  </a>
+                </Link>
+              )}
             </div>
 
             <div className="flex justify-center items-center">
