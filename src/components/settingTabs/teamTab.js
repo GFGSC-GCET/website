@@ -25,14 +25,14 @@ const TeamCard = (props) => {
 
 import { useState, useEffect } from "react";
 import MiniSearch from "minisearch";
-import { teamDatabase } from "../../firebase/fetchData";
+import { userDatabase } from "../../firebase/fetchData";
 
 const TeamTab = () => {
   
   const [teamData, setTeamData] = useState([]);
   useEffect(() => {
     const getTeam = async () => {
-      const teamData = await teamDatabase.get();
+      const teamData = await userDatabase.get();
       
       setTeamData(teamData);
     };
