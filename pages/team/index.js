@@ -6,61 +6,93 @@ import {
   ThemeChanger,
   TeamCard,
 } from "../../src/components";
+
 import { useState, useEffect } from "react";
+import MiniSearch from "minisearch";
+import { teamDatabase } from "../../src/firebase/fetchData";
 
 const TeamHome = () => {
-  const TeamData = [
-    {
-      uid: "xQ135Mw",
-      name: "Areeb ",
-      role: "Technical Coordinator",
-      tags: ["Coordinator", "Technical"],
-      image: "https://unsplash.it/200/200",
-      priority: 80,
-    },
-    {
-      uid: "LQ535Dq",
-      name: "Umair",
-      role: "Technical Lead",
-      tags: ["Core", "Lead", "Technical"],
-      image: "https://unsplash.it/200/200?random=234e",
-      priority: 90,
-    },
-    {
-      uid: "LQ535Dq",
-      name: "Anshika",
-      role: "Technical Lead",
-      tags: ["Core", "Lead", "Technical"],
-      image: "https://unsplash.it/200/200?random=242",
-      priority: 90,
-    },
-  ];
-
-  const [team, setTeam] = useState(TeamData);
+  const [teamData, setTeamData] = useState([]);
+  useEffect(() => {
+    const getTeam = async () => {
+      const teamData = await teamDatabase.get();
+      
+      setTeamData(teamData);
+    };
+    getTeam();
+  }, []);
+  
+  const [team, setTeam] = useState([]);
+  useEffect(() => {
+    const Sorted = teamData.sort((a, b) => b.priority - a.priority);
+    //add id to each element
+    setTeam(Sorted);
+  }, [teamData]);
 
   const [searchBar, setSearchBar] = useState("");
+  let miniSearch = new MiniSearch({
+    fields: [
+      "displayName",
+      "uid",
+      "collegeEmail",
+      "year",
+      "batch",
+      "bio",
+      "learning",
+      "skills",
+      "github",
+      "linkedin",
+      "website",
+      "instagram",
+      "photoURL",
+      "createdAt",
+      "regComplete",
+      "priority",
+      "admin",
+      "role",
+    ], // fields to index for full-text search
+    storeFields: [
+      "displayName",
+      "uid",
+      "collegeEmail",
+      "year",
+      "batch",
+      "bio",
+      "learning",
+      "skills",
+      "github",
+      "linkedin",
+      "website",
+      "instagram",
+      "photoURL",
+      "createdAt",
+      "regComplete",
+      "priority",
+      "admin",
+      "role",
+    ], // fields to return with search results
+    searchOptions: {
+      boost: { title: 2 },
+      fuzzy: 0.2,
+      prefix: true
+    },
+  });
 
   useEffect(() => {
-    const filteredTeamName = TeamData.filter((member) => {
-      return member.name.toLowerCase().includes(searchBar.toLowerCase());
-    });
-    const filteredTeamRole = TeamData.filter((member) => {
-      return member.role.toLowerCase().includes(searchBar.toLowerCase());
-    });
-    const filteredTeamTags = TeamData.filter((member) => {
-      return member.tags.join().toLowerCase().includes(searchBar.toLowerCase());
-    });
-    //merge the filtered arrays without duplicates
-    const filteredTeam = [
-      ...new Set([
-        ...filteredTeamName,
-        ...filteredTeamRole,
-        ...filteredTeamTags,
-      ]),
-    ];
-    //sort on the basis of priorty
-    const Sorted = filteredTeam.sort((a, b) => b.priority - a.priority);
-    setTeam(Sorted);
+    if (searchBar == ''){
+      const Sorted = teamData.sort((a, b) => b.priority - a.priority);
+      setTeam(Sorted);
+    }else{
+      //sort on the basis of priorty
+      const withId = teamData.map((item, index) => {
+        return { ...item, id: index+1 };
+      });
+      miniSearch.addAll(withId);
+      let filteredTeam = miniSearch.search(searchBar)
+      console.log(filteredTeam)
+      const Sorted = filteredTeam.sort((a, b) => b.priority - a.priority);
+      setTeam(Sorted); 
+    }
   }, [searchBar]);
 
   return (
@@ -71,7 +103,7 @@ const TeamHome = () => {
       <section className="min-h-screen bg-white dark:bg-gray-900">
         <div className="container px-6 py-10 mx-auto">
           <h1 className="text-3xl font-semibold text-center text-gray-800 capitalize lg:text-4xl dark:text-white">
-            Our GFGSC-GCET Team
+            Our <span className="text-green-500">GFGSC-GCET</span> Team
           </h1>
 
           <p className="max-w-2xl mx-auto my-6 text-center text-gray-500 dark:text-gray-300">
@@ -110,7 +142,7 @@ const TeamHome = () => {
             </div>
           </section>
 
-          <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-2 xl:grid-cols-4">
+          <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-2 xl:grid-cols-3">
             {team.map((member, index) => {
               return <TeamCard member={member} key={index} />;
             })}

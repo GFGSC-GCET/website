@@ -41,7 +41,7 @@ export const UserContextProvider = (props) => {
             collegeEmail:'',
             whatsappNumber:'',
             year:'',
-            branch:'',
+            batch:'',
             bio:'',
             learning:'',
             skills:'',
@@ -54,7 +54,8 @@ export const UserContextProvider = (props) => {
             regComplete: false,
             priority: 10,
             admin: false,
-            role:'Member'
+            role:'Member',
+            webRole:'member'
           };
           setUser(userObj);
           await set(userRef, userObj);
@@ -158,7 +159,8 @@ export const UserContextProvider = (props) => {
     const { error, user } = await AuthService.loginWithGoogle();
     setError(error ?? "");
     await checkAccount(user);
-    router.push('/profile')
+    const u = await member.get(user);
+    u?.regComplete == true ? router.push('/profile') : null
 
   };
 

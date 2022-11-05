@@ -27,7 +27,7 @@ const Complete = () => {
 
   const getMember = async () => {
     const memberRes = await member.get(user);
-    memberRes.regComplete ? router.push("/") : null;
+    memberRes?.regComplete ? router.push("/") : null;
     setMemberData(memberRes);
   };
 
@@ -134,7 +134,6 @@ const Complete = () => {
           Complete your{" "}
           <span
             className="text-green-500"
-            title="Geeks for Geeks Student Club of Galgotas College of Engineering & Technology"
           >
             Profile
           </span>

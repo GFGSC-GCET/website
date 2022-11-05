@@ -106,7 +106,7 @@ const Join = () => {
 
   const getMember = async () => {
     const memberRes = await member.get(user);
-    memberRes.regComplete ? router.push("/") : null;
+    memberRes?.regComplete ? router.push("/") : null;
   };
 
   useEffect(() => {
