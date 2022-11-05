@@ -3,8 +3,8 @@ import { ref, get, set } from "firebase/database";
 
 export const teamDatabase = {
   get: async () => {
-    const userRef = ref(database, "users");
-    const snapshot = await get(userRef);
+    const teamRef = ref(database, "team");
+    const snapshot = await get(teamRef);
     const team = await snapshot.val();
     //convert object to array
     const teamArray = Object.keys(team).map((key) => ({
