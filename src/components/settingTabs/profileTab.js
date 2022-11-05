@@ -128,11 +128,11 @@ const ProfileTab = () => {
                 <Form className="container flex flex-col mx-auto space-y-5">
                   <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm dark:bg-gray-800 bg-gray-100">
                     <div className="grid grid-cols-6 gap-4 col-span-full ">
-                      <div className="col-span-1">
+                      <div className="col-span-full xl:col-span-1">
                         <label htmlFor="bio" className="text-sm font-bold">
                           Photo
                         </label>
-                        <div className="flex flex-col items-center space-y-2">
+                        <div className="flex flex-row xl:flex-col items-center space-y-2 mr-5">
                           <div className="w-40 h-40 dark:bg-gray-500 dark:bg-gray-700">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
@@ -152,7 +152,7 @@ const ProfileTab = () => {
                           <button
                             type="button"
                             onClick={handleFileClick}
-                            className="px-2 py-1 border text-sm rounded-md dark:border-gray-100 flex flex-row justify-center items-center space-x-1 w-full"
+                            className="px-2 py-1 border text-sm rounded-md dark:border-gray-100 flex flex-row justify-center items-center space-y-3 ml-3 xl:ml-auto xl:space-x-1 xl:space-y-auto xl:w-full"
                           >
                             Change
                             {uploading && (
@@ -180,7 +180,7 @@ const ProfileTab = () => {
                           </button>
                         </div>
                       </div>
-                    <div className="grid grid-cols-6 gap-4 col-span-5 ">
+                    <div className="grid grid-cols-6 gap-4 col-span-6 xl:col-span-5">
                       <TextField
                         spanClass="col-span-full md:col-span-3"
                         label="Name"
@@ -292,9 +292,10 @@ const ProfileTab = () => {
                       />
                     </div>
                   </fieldset>
+                  <hr class="border-gray-200 dark:border-gray-700 "/>
                   <Button
                     type="submit"
-                    className="bg-green-700 w-auto focus:outline-green-600 mx-6"
+                    className="bg-green-700 w-auto focus:outline-green-600"
                     click={() => {warnForm(errors);}}
                   >
                     Save Changes
