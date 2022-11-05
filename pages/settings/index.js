@@ -11,7 +11,7 @@ import {
   ThemeChanger,
 } from "../../src/components";
 
-import {ProfileTab} from "../../src/components/settingTabs";
+import {ProfileTab, TeamTab} from "../../src/components/settingTabs";
 
 import {FaUserEdit} from 'react-icons/fa'
 import {RiTeamFill} from 'react-icons/ri'
@@ -36,9 +36,9 @@ const Settings = () => {
           },
           {
             id: 1,
-            name: "Edit Team",
+            name: "Manage Team",
             icon: <RiTeamFill />,
-            component: "hello",
+            component: <TeamTab />,
             allowTo: ['admin'],
           },
     ]
@@ -60,9 +60,9 @@ const Settings = () => {
           </h1>
         </div>
         <hr class="container mx-auto pb-5 border-gray-200 dark:border-gray-700 "/>
-        <div className='container grid grid-cols-1 gap-5 mx-auto px-6 mt-5 xl:mt-0 xl:gap-5 lg:grid-cols-5 h-fit'>
+        <div className='container grid grid-cols-1 mx-auto px-6 mt-5 xl:mt-0 xl:gap-5 lg:grid-cols-5 h-fit'>
 
-          <div className="col-span-1 w-full h-42">
+          <div className="col-span-1 w-full h-42 mb-2">
              <div class="z-20 w-full rounded-md ">
                 {
                     tabs.map((tab, index) => {
@@ -84,7 +84,9 @@ const Settings = () => {
                     )
                 }
             </div>
+          <hr class="my-5 border-gray-200 dark:border-gray-700 "/>
           </div>
+
           <div className="col-span-4 w-full lg:px-10">
 
             { tabs[selectedTab].allowTo.includes(user.webRole) && tabs[selectedTab].component}

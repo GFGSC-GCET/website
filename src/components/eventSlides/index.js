@@ -13,21 +13,7 @@ const Slides = () => {
       about:
         "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore quibusdam ducimus libero ad tempora dolo Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore quibusdam ducimus libero ad tempora dolo Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore quibusdam ducimus libero ad tempora dolo",
       tldr: "Want to know about Hacktoberfest? Join us for a free session",
-    },
-    {
-      name: "Guide to WebDev",
-      date: "25 Oct",
-      about:
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore quibusdam ducimus libero ad tempora dolo Lorem ipsum dolo elit. Tempore quibusdam ducimus libero ad tempora dolo Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore quibusdam ducimus libero ad tempora dolo",
-      tldr: "Wanna make some cool websites and webapps then join",
-    },
-    {
-      name: "Creating LinkedIn profile",
-      date: "29 Oct",
-      about:
-        "Lorem ipsum dolor sit amet,  quibusdam ducimus libero ad tempora dolo Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore quibusdam ducimus libero ad tempora dolo Lorem ipsum dolor sit amet, consectetue quibusdam ducimus libero ad tempora dolo",
-      tldr: "Join the free session to know some LinkedIn Tricks",
-    },
+    }
   ];
   const increment = () => {
     // access the current state value

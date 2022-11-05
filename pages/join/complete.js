@@ -18,7 +18,6 @@ import { Formik, Form, FormikErrors } from "formik";
 import { formSchema } from "../../src/schema/formSchema";
 
 import { useRouter } from "next/router";
-import { set } from "firebase/database";
 
 const Complete = () => {
   const { user, member, setUser } = useUserContext();

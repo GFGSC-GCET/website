@@ -10,13 +10,13 @@ import { formSchema } from "../../schema/formSchema";
 
 import { useRouter } from "next/router";
 
-const ProfileTab = () => {
+const ProfileTab = (props) => {
       const { user, member, setUser } = useUserContext();
 
   const [memberData, setMemberData] = useState({});
 
   const getMember = async () => {
-    const memberRes = await member.get(user);
+    const memberRes = await member.get(props?.user || user);
     setMemberData(memberRes);
   };
 
@@ -84,10 +84,20 @@ const ProfileTab = () => {
 
   const router = useRouter();
 
+  const [saving,setSaving] = useState(false)
+  const [saveMsg, setSaveMsg ] = useState('save changes')
+
   const onFormSubmit = async (values) => {
-    router.push("/profile");
-    await member.set({ ...memberData, ...values, regComplete: true });
-    setUser({ ...memberData, ...values, regComplete: true });
+    setSaving(true)
+    try{
+      await member.set({ ...memberData, ...values, regComplete: true });
+      setSaveMsg('changes saved')
+      setSaving(false)
+      setUser({ ...memberData, ...values, regComplete: true });
+    }catch(e){
+      setSaveMsg('an error occured')
+    }
+    setTimeout(()=>{setSaveMsg("Save Changes")}, 2000);
   };
 
   const warnForm = (errors) => {
@@ -95,21 +105,8 @@ const ProfileTab = () => {
     const errorArray = Object.keys(errors);
     if (errorArray.length > 0) {
       console.log(errorArray);
-      //use element as id and goto first element
       const firstError = document.getElementById(errorArray[0]);
       firstError.focus();
-      
-      // const headerOffset = 200;
-      // var elementPosition = firstError.getBoundingClientRect().top;
-      // var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-      // //focus in the element
-      
-      // window.scrollTo({
-      //   top: offsetPosition,
-      //   behavior: "smooth"
-      // });
-      // firstError.scrollTo({ top: 0, behavior: "smooth" });
-
     }
   };
   return (
@@ -119,11 +116,13 @@ const ProfileTab = () => {
                 onSubmit={(values) => {
                   onFormSubmit(values);
                 }}
+                
                 isSubmitting={true}
                 validationSchema={formSchema}
                 
               >
                 {({ errors, touched, isSubmitting }) => (
+                
                   
                 <Form className="container flex flex-col mx-auto space-y-5">
                   <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm dark:bg-gray-800 bg-gray-100">
@@ -295,10 +294,32 @@ const ProfileTab = () => {
                   <hr class="border-gray-200 dark:border-gray-700 "/>
                   <Button
                     type="submit"
-                    className="bg-green-700 w-auto focus:outline-green-600"
+                    className="flex flex-row justify-center items-center bg-green-700 w-auto focus:outline-green-600"
                     click={() => {warnForm(errors);}}
                   >
-                    Save Changes
+                    {saveMsg}
+                    {saving && (
+                        <svg
+                          className="animate-spin ml-2 mr-3 h-5 w-5 text-white"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                          ></circle>
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                          ></path>
+                        </svg>
+                      )}
                   </Button>
                 </Form>
                 )}

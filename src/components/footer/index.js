@@ -24,7 +24,7 @@ const Footer = () => {
           passHref
         >
           <a className="flex items-center -mx-2">
-            Made with <FaLaptopCode className="m-2 text-green-500 text-lg" />{" "}
+            This website is open-source,
             Contribute on <FaGithub className="m-2" />
           </a>
         </Link>

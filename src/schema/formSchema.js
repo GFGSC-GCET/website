@@ -47,28 +47,28 @@ export const formSchema = yup.object().shape({
     github: yup
     .string()
     .matches(
-      /^(http(s?):\/\/)?(www\.)?github\.([a-z])+\/([A-Za-z0-9]{1,})+\/?$/i,
+      /^(http(s?):\/\/)(www\.)?github\.([a-z])+\/([A-Za-z0-9-]{1,})+\/?$/i,
       "Invalid Github Profile URL"
     ),
 
     linkedin: yup
     .string()
     .matches(
-      /^(http(s)?:\/\/)?([\w]+\.)?linkedin\.com\/(pub|in|profile)\//gm,
+      /^(http(s)?:\/\/)([\w]+\.)?linkedin\.com\/(pub|in|profile)\//gm,
       "Invalid Linked In Profile URL"
       ),
       
     website: yup
     .string()
     .matches(
-      /^(https?\:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})(\/[\w]*)*$/,
+      /^(https?\:\/\/)([\da-z\.-]+)\.([a-z\.]{2,6})(\/[\w]*)*$/,
       "Invalid Linked In Profile URL"
     ),
 
     instagram: yup
       .string()
       .matches(
-        /^(http(s?):\/\/)?(www\.)?instagram\.([a-z])+\/([A-Za-z0-9]{1,})+\/?$/i,
+        /^(http(s?):\/\/)(www\.)?instagram\.([a-z])+\/([A-Za-z0-9._-]{1,})+\/?$/i,
         "Invalid Instagram Profile URL"
     ),
 });

@@ -34,7 +34,7 @@ export function AdminProtected(Component) {
     const useauth = useUserContext();
     const router = useRouter();
 
-    if (!useauth.user?.admin) {
+    if (!useauth.user?.webRole == 'admin') {
       router.replace("/");
       return <Loading />;
     }

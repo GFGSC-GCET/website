@@ -53,7 +53,6 @@ export const UserContextProvider = (props) => {
             createdAt: new Date().toISOString(),
             regComplete: false,
             priority: 10,
-            admin: false,
             role:'Member',
             webRole:'member'
           };

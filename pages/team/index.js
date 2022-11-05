@@ -16,7 +16,7 @@ const TeamHome = () => {
   useEffect(() => {
     const getTeam = async () => {
       const teamData = await teamDatabase.get();
-      
+      console.log(teamData);
       setTeamData(teamData);
     };
     getTeam();
@@ -32,45 +32,9 @@ const TeamHome = () => {
   const [searchBar, setSearchBar] = useState("");
   let miniSearch = new MiniSearch({
     fields: [
-      "displayName",
-      "uid",
-      "collegeEmail",
-      "year",
-      "batch",
-      "bio",
-      "learning",
-      "skills",
-      "github",
-      "linkedin",
-      "website",
-      "instagram",
-      "photoURL",
-      "createdAt",
-      "regComplete",
-      "priority",
-      "admin",
-      "role",
-    ], // fields to index for full-text search
+      "displayName","uid","collegeEmail","year","batch","bio","learning","skills","github","linkedin","website","instagram","photoURL","createdAt","regComplete","priority","admin","role",], // fields to index for full-text search
     storeFields: [
-      "displayName",
-      "uid",
-      "collegeEmail",
-      "year",
-      "batch",
-      "bio",
-      "learning",
-      "skills",
-      "github",
-      "linkedin",
-      "website",
-      "instagram",
-      "photoURL",
-      "createdAt",
-      "regComplete",
-      "priority",
-      "admin",
-      "role",
-    ], // fields to return with search results
+      "displayName","uid","collegeEmail","year","batch","bio","learning","skills","github","linkedin","website","instagram","photoURL","createdAt","regComplete","priority","admin","role",], // fields to return with search results
     searchOptions: {
       boost: { title: 2 },
       fuzzy: 0.2,
