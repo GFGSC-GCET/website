@@ -28,7 +28,7 @@ export const userDatabase = {
     //convert object to array
     const usersArray = Object.keys(users).map((key) => ({
       uid: key,
-      ...team[key],
+      ...users[key],
     }));
     //remove fields that are not required
     users.forEach(member => {
