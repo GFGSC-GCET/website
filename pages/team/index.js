@@ -16,8 +16,11 @@ const TeamHome = () => {
   useEffect(() => {
     const getTeam = async () => {
       const teamData = await teamDatabase.get();
-      console.log(teamData);
-      setTeamData(teamData);
+      //remove all data where regComplete is false
+      const teamArray = teamData.filter(
+        (team) => team.regComplete === true
+      );
+      setTeamData(teamArray);
     };
     getTeam();
   }, []);

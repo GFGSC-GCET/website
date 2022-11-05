@@ -16,7 +16,7 @@ const ProfileTab = (props) => {
   const [memberData, setMemberData] = useState({});
 
   const getMember = async () => {
-    const memberRes = await member.get(props?.user || user);
+    const memberRes = await member.get(user);
     setMemberData(memberRes);
   };
 
@@ -127,7 +127,7 @@ const ProfileTab = (props) => {
                 <Form className="container flex flex-col mx-auto space-y-5">
                   <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm dark:bg-gray-800 bg-gray-100">
                     <div className="grid grid-cols-6 gap-4 col-span-full ">
-                      <div className="col-span-full xl:col-span-1">
+                      <div className="col-span-full xl:col-span-2">
                         <label htmlFor="bio" className="text-sm font-bold">
                           Photo
                         </label>
@@ -179,7 +179,7 @@ const ProfileTab = (props) => {
                           </button>
                         </div>
                       </div>
-                    <div className="grid grid-cols-6 gap-4 col-span-6 xl:col-span-5">
+                    <div className="grid grid-cols-6 gap-4 col-span-6 xl:col-span-4">
                       <TextField
                         spanClass="col-span-full md:col-span-3"
                         label="Name"
@@ -294,7 +294,7 @@ const ProfileTab = (props) => {
                   <hr class="border-gray-200 dark:border-gray-700 "/>
                   <Button
                     type="submit"
-                    className="flex flex-row justify-center items-center bg-green-700 w-auto focus:outline-green-600"
+                    className="flex flex-row justify-center items-center bg-green-700 w-full max-w-lg focus:outline-green-600 col-span-full mx-auto"
                     click={() => {warnForm(errors);}}
                   >
                     {saveMsg}

@@ -89,7 +89,7 @@ const Complete = () => {
     const onFormSubmit = async (values) => {
         let completeUserData = {...memberData, ...values, regComplete: true}
         console.log({values})
-        let privateFields = ["createdAt", "collegeEmail", "webRole", "whatsappNumber", "regComplete"]
+        let privateFields = ["createdAt", "collegeEmail", "webRole", "whatsappNumber"]
 
 
         let privateData = {}

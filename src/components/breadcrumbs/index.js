@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const Breadcrumbs = () => {
   const router = useRouter();
-  const url = router.pathname;
+  const url = router.asPath;
 
   const [breadcrumbs, setBreadcrumbs] = useState([]);
   const [breadcrumbsPath, setBreadcrumbsPath] = useState([]);
@@ -24,12 +24,12 @@ const Breadcrumbs = () => {
 
   return (
     <div className="bg-white dark:bg-gray-900">
-      <div className="container flex items-center px-6 py-4 mx-auto overflow-y-auto whitespace-nowrap">
+      <div className="container flex items-center px-6 py-4 mx-auto whitespace-nowrap flex-wrap">
         <Link legacyBehavior href="/">
           <a className="text-gray-600 dark:text-gray-200">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="w-5 h-5"
+              className="mr-5 w-5 h-5"
               viewBox="0 0 20 20"
               fill="currentColor"
             >
@@ -41,7 +41,7 @@ const Breadcrumbs = () => {
         {breadcrumbs.map((crumb, index) => {
           return (
             <span className="flex items-center" key={index}>
-              <span className="mx-5 text-gray-500 dark:text-gray-300 rtl:-scale-x-100">
+              <span className="text-gray-500 dark:text-gray-300 rtl:-scale-x-100">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="w-5 h-5"
@@ -57,7 +57,7 @@ const Breadcrumbs = () => {
               </span>
 
               <Link legacyBehavior href={`/${breadcrumbsPath[index]}`}>
-                <a className="text-gray-600 dark:text-gray-200 hover:underline capitalize">
+                <a className="mx-5 text-gray-600 dark:text-gray-200 hover:underline capitalize">
                   {crumb}
                 </a>
               </Link>

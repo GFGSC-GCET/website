@@ -1,5 +1,5 @@
 import React from "react";
-
+import { useRouter } from "next/router";
 const Tags = (props) => {
   const tags = props.tags
     .split(",")
@@ -14,7 +14,7 @@ const Tags = (props) => {
           return (
           <span
             key={index}
-            className="m-1 flex flex-wrap justify-between items-center text-xs sm:text-sm bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 rounded px-4 py-2 font-bold leading-loose cursor-pointer dark:text-gray-300"
+            className="m-1 flex flex-wrap justify-between items-center text-xs sm:text-sm bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 rounded px-4  py-2 font-bold leading-loose cursor-pointer dark:text-gray-300"
           >
             {tag}
           </span>

@@ -15,11 +15,12 @@ const SelectField = ({ label, disabled, spanClass,options, id, ...props }) => {
         disabled={disabled}
       >
         {/* create options for the select dropdown*/}
-        {!field.value && (
-          <option value="none" selected disabled hidden>
+        {field.value == '' && 
+          <option value="" selected disabled>
             Select {label}
           </option>
-        )}
+        }
+
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}

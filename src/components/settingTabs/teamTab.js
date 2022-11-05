@@ -1,6 +1,14 @@
+import { useState, useEffect } from "react";
+import MiniSearch from "minisearch";
+import { teamDatabase } from "../../firebase/fetchData";
+import { useRouter } from "next/router";
+
+
 const TeamCard = (props) => {
+  const router = useRouter();
   return (
-    <div class="px-12 py-4 transition-colors duration-300 transform border cursor-pointer rounded-xl hover:border-green-500 group dark:border-gray-700 dark:hover:border-green-600">
+    <div class="px-12 py-4 transition-colors duration-300 transform border cursor-pointer rounded-xl hover:border-green-500 group dark:border-gray-700 dark:hover:border-green-600"
+    onClick={()=>{window.open('/settings/user/'+props.member.uid,'__blank')}}>
       <div class="flex flex-row ">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -23,16 +31,13 @@ const TeamCard = (props) => {
 };
 
 
-import { useState, useEffect } from "react";
-import MiniSearch from "minisearch";
-import { userDatabase } from "../../firebase/fetchData";
 
 const TeamTab = () => {
   
   const [teamData, setTeamData] = useState([]);
   useEffect(() => {
     const getTeam = async () => {
-      const teamData = await userDatabase.get();
+      const teamData = await teamDatabase.get();
       
       setTeamData(teamData);
     };

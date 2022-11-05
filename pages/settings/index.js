@@ -29,6 +29,7 @@ const Settings = () => {
     const tabs = [
         {
             id: 0,
+            tabId: "profile",
             name: "Edit Profile",
             icon: <FaUserEdit />,
             component: <ProfileTab />,
@@ -36,12 +37,25 @@ const Settings = () => {
           },
           {
             id: 1,
+            tabId: "team",
             name: "Manage Team",
             icon: <RiTeamFill />,
             component: <TeamTab />,
             allowTo: ['admin'],
           },
     ]
+    const [isMounted, setMounted] = useState(false);
+
+    useEffect(() => {
+      if (isMounted) {
+        const hash = window.location.hash;
+        const tabId = hash.split("#")[1];
+        const tab = tabs.find((tab) => tab.tabId === tabId);
+        tab ? setSelectedTab(tab.id) : setSelectedTab(0);
+      } else {
+        setMounted(true);
+      }
+    }, [isMounted]);
   return (
     <>
     <Nav/>
