@@ -20,8 +20,6 @@ const AdminUserSettings = () => {
 
   const getMember = async () => {
     const memberRes = await member.get({uid: uid});
-    memberRes?.regComplete ? router.push("/") : null;
-    console.log(memberRes);
     setMemberData(memberRes);
   };
 

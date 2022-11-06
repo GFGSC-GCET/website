@@ -30,7 +30,7 @@ const UserDropdown = (props) => {
           <img
             className="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9"
             src={user.photoURL}
-            alt="jane avatar"
+            alt=""
           />
           <div className="mx-1">
             <h1 className="text-sm font-semibold text-gray-700 dark:text-gray-200">
@@ -63,7 +63,7 @@ const UserDropdown = (props) => {
           <img
             className="w-10 h-10 m-auto rounded-full"
             src={user.photoURL}
-            alt={user.displayName}
+            alt=""
           />
         </button>
 

@@ -13,7 +13,7 @@ import {
 
 import {ProfileTab, TeamTab} from "../../src/components/settingTabs";
 
-import {FaUserEdit} from 'react-icons/fa'
+import {FaUserEdit, FaCalendar} from 'react-icons/fa'
 import {RiTeamFill} from 'react-icons/ri'
 
 
@@ -41,6 +41,14 @@ const Settings = () => {
             name: "Manage Team",
             icon: <RiTeamFill />,
             component: <TeamTab />,
+            allowTo: ['admin'],
+          },
+          {
+            id: 2,
+            tabId: "addEvent",
+            name: "Add Event",
+            icon: <FaCalendar />,
+            component: "Event Menu",
             allowTo: ['admin'],
           },
     ]

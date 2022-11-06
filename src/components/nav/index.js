@@ -95,7 +95,7 @@ ${hideNavbar ? " translate-y-[-100px] " : "top-0 translate-y-0  "}`}
                       </svg>
                     ) : (
                       <img
-                        className="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9 outline outline-offset-2 outline-green-600"
+                        className=" flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9 outline outline-offset-2 outline-green-600"
                         src={user.photoURL}
                         alt="jane avatar"
                       />

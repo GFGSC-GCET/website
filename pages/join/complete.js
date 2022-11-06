@@ -87,31 +87,15 @@ const Complete = () => {
     const router = useRouter();
 
     const onFormSubmit = async (values) => {
-        let completeUserData = {...memberData, ...values, regComplete: true}
-        console.log({values})
-        let privateFields = ["createdAt", "collegeEmail", "webRole", "whatsappNumber"]
+        console.log(values);
 
-
-        let privateData = {}
-        //stripping private data
-        privateFields.forEach((fieldName) => {
-            completeUserData[fieldName] = privateData[fieldName]
-            delete completeUserData[fieldName]
-        })
-        // The private data has now been stripped
-
-        let publicData = completeUserData
-        console.log({publicData})
-        await router.push("/profile");
         try {
-            //public
-            await member.setPublic(publicData);
-            //private
-            await member.set(privateData);
+            await member.set({ ...memberData, ...values, regComplete: true });
             setUser({...memberData, ...values, regComplete: true});
         } catch (e) {
-
+            console.error(e);
         }
+        await router.push("/profile");
     };
 
     const warnForm = (errors) => {
@@ -163,7 +147,6 @@ const Complete = () => {
                                 }}
                                 isSubmitting={true}
                                 validationSchema={formSchema}
-
                             >
                                 {({errors, touched, isSubmitting}) => (
 

@@ -97,9 +97,9 @@ const Home = () => {
         </section>
 
         <Slides />
-        <hr className="my-8 border-gray-200 dark:border-gray-700" />
         <LeadSection/>
         <hr className="my-8 border-gray-200 dark:border-gray-700" />
+        
         <Faq />
         <hr className="my-8 border-gray-200 dark:border-gray-700" />
 

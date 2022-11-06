@@ -5,7 +5,12 @@ const phoneRegExp = /^((\\+91-?)|0)?[0-9]{10}$/;
 export const formSchema = yup.object().shape({
   displayName: yup
     .string()
-    .required("First Name is required"),
+    .required("Name is required")
+    .min(2, "Name must be at least 2 characters")
+    .max(20, "Name must be less than 20 characters")
+    .matches(/^[aA-zZ\s]+$/, "Name must be only alphabets")
+    .trim(),
+    
 
   collegeEmail: yup
     .string()
@@ -77,7 +82,11 @@ export const formSchema = yup.object().shape({
 export const adminUsereditformSchema = yup.object().shape({
   displayName: yup
     .string()
-    .required("First Name is required"),
+    .required("Name is required")
+    .min(2, "Name must be at least 2 characters")
+    .max(20, "Name must be less than 20 characters")
+    .matches(/^[aA-zZ\s]+$/, "Name must be only alphabets")
+    .trim(),
 
   collegeEmail: yup
     .string()
@@ -90,57 +99,79 @@ export const adminUsereditformSchema = yup.object().shape({
 
   whatsappNumber: yup
     .string()
-    .matches(
-      phoneRegExp,
-      "Enter a valid Number"
-    )
+    .matches(phoneRegExp, "Enter a valid Number")
     .required("WhatsApp Number is required"),
-  
-  year: yup
-    .string()
-    .required("Year Required"),
-  
-  batch: yup
-    .string()
-    .required("Batch Required"),
 
-  bio: yup
-    .string()
-    .required("Atleast tell something "),
+  year: yup.string().required("Year Required"),
 
-  learning: yup
-    .string()
-    .required("You must be learning something, eg:DSA"),
+  batch: yup.string().required("Batch Required"),
 
-  skills: yup
-    .string()
-    .required("Any Skill, eg:Designing"),
-  
-    github: yup
+  bio: yup.string().required("Atleast tell something "),
+
+  learning: yup.string().required("You must be learning something, eg:DSA"),
+
+  skills: yup.string().required("Any Skill, eg:Designing"),
+
+  github: yup
     .string()
     .matches(
       /^(http(s?):\/\/)(www\.)?github\.([a-z])+\/([A-Za-z0-9-]{1,})+\/?$/i,
       "Invalid Github Profile URL"
     ),
 
-    linkedin: yup
+  linkedin: yup
     .string()
     .matches(
       /^(http(s)?:\/\/)([\w]+\.)?linkedin\.com\/(pub|in|profile)\//gm,
       "Invalid Linked In Profile URL"
-      ),
-      
-    website: yup
+    ),
+
+  website: yup
     .string()
     .matches(
       /^(https?\:\/\/)([\da-z\.-]+)\.([a-z\.]{2,6})(\/[\w]*)*$/,
       "Invalid Linked In Profile URL"
     ),
 
-    instagram: yup
-      .string()
-      .matches(
-        /^(http(s?):\/\/)(www\.)?instagram\.([a-z])+\/([A-Za-z0-9._-]{1,})+\/?$/i,
-        "Invalid Instagram Profile URL"
+  instagram: yup
+    .string()
+    .matches(
+      /^(http(s?):\/\/)(www\.)?instagram\.([a-z])+\/([A-Za-z0-9._-]{1,})+\/?$/i,
+      "Invalid Instagram Profile URL"
     ),
+});
+
+export const eventFormSchema = yup.object().shape({
+  photo: yup
+    .string()
+    .required("Photo is required")//matches url
+    .matches(/^(https?\:\/\/)([\da-z\.-]+)\.([a-z\.]{2,6})(\/[\w]*)*$/,"Invalid Photo URL"),
+  title: yup
+    .string()
+    .required("Title is required")
+    .min(2, "Title must be at least 2 characters")
+    .max(20, "Title must be less than 20 characters")
+    .trim(),
+  when: yup
+    .string()
+    .required("When is required")
+    .min(2, "When must be at least 2 characters")
+    .max(20, "When must be less than 20 characters")
+    .trim(),
+  where: yup
+    .string()
+    .required("Where is required")
+    .min(2, "Where must be at least 2 characters")
+    .max(20, "Where must be less than 20 characters")
+    .trim(),
+  description: yup
+    .string()
+    .required("Description is required")
+    .min(2, "Description must be at least 2 characters")
+    .max(20, "Description must be less than 20 characters")
+    .trim(),
+  link: yup
+    .string()
+    .matches(/^(https?\:\/\/)([\da-z\.-]+)\.([a-z\.]{2,6})(\/[\w]*)*$/,"Invalid Link")
+    .trim(),
 });

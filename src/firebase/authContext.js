@@ -52,7 +52,6 @@ export const UserContextProvider = (props) => {
                     createdAt: new Date().toISOString(),
                     regComplete: false,
                     priority: 10,
-                    admin: false,
                     role: 'Member',
                     webRole: 'member'
                 };
@@ -114,32 +113,37 @@ export const UserContextProvider = (props) => {
             }
         },
 
-
-        setPublic: async (user) => {
-            if (user != null) {
-                const userRef = ref(database, `team/${user.uid}`);
-                return await set(userRef, user);
-
-                // const docRef = doc(db, "users", user.uid);
-                // const docSnap = await getDoc(docRef);
-                // if (docSnap.exists()) {
-                //   const response = await setDoc(docRef, user);
-                //   return response;
-                // }
-                // return null;
-            } else {
-                return user
-            }
-        },
         set: async (user) => {
             if (user != null) {
+                
+                let completeUserData = user;
+                let privateFields = [
+                    "createdAt",
+                    "collegeEmail",
+                    "webRole",
+                    "whatsappNumber",
+                ];
+
+                let privateData = {}
+                //stripping private data
+                privateFields.forEach((fieldName) => {
+                    privateData[fieldName] = completeUserData[fieldName];
+                    delete completeUserData[fieldName];
+                });
+                
+                // The private data has now been stripped
+                let publicData = completeUserData;
+                console.log(publicData, privateData);
+
+                const teamRef = ref(database, `team/${user.uid}`);
+                const teamSnapshot = await get(teamRef);
+                await set(teamRef, publicData);
+                
+
                 const userRef = ref(database, `users/${user.uid}`);
                 const snapshot = await get(userRef);
-                if (snapshot.exists()) {
-                    return await set(userRef, user);
-                }
-                return null
-
+                await set(userRef, {...privateData,...publicData});
+                return       
                 // const docRef = doc(db, "users", user.uid);
                 // const docSnap = await getDoc(docRef);
                 // if (docSnap.exists()) {
