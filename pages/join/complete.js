@@ -95,20 +95,23 @@ const Complete = () => {
         let privateData = {}
         //stripping private data
         privateFields.forEach((fieldName) => {
-            completeUserData[fieldName] = privateData[fieldName]
+            privateData[fieldName] = completeUserData[fieldName]
             delete completeUserData[fieldName]
         })
         // The private data has now been stripped
 
         let publicData = completeUserData
+        privateData = {...publicData, ...privateData}
         console.log({publicData})
-        await router.push("/profile");
+        console.log({privateData})
+
         try {
             //public
             await member.setPublic(publicData);
             //private
             await member.set(privateData);
             setUser({...memberData, ...values, regComplete: true});
+            await router.push("/profile");
         } catch (e) {
 
         }
@@ -351,7 +354,7 @@ const Complete = () => {
                                         <Button
                                             type="submit"
                                             className="bg-green-700 w-full focus:outline-green-600"
-                                            click={() => {
+                                            click={(e) => {
                                                 warnForm(errors);
                                             }}
                                         >

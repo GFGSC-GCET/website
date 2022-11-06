@@ -23,12 +23,15 @@ export const UserContextProvider = (props) => {
 
             const userRef = ref(database, `users/${user.uid}`);
             const snapshot = await get(userRef);
+            console.log("Heyyy!")
             if (snapshot.exists()) {
+                console.log(snapshot.val().regComplete)
                 try {
                     const userObj = await snapshot.val();
-                    userObj.regComplete ? null : router.push("/join/complete");
+                    if (!userObj.regComplete) {
+                        await router.push("/join/complete");
+                    }
                     setUser(userObj);
-                    return;
                 } catch (e) {
                     console.log(e);
                 }
@@ -60,7 +63,6 @@ export const UserContextProvider = (props) => {
                 await set(userRef, userObj);
                 console.log("running")
                 router.push("/join");
-                return;
             }
 
             // const docRef = doc(db, "users", user.uid);
