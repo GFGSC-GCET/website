@@ -25,19 +25,19 @@ const Footer = () => {
                 Reach out to us
               </p>
               <div className="flex space-x-5 justify-self-center justify-center items-center md:justify-start">
-                <a target="_blank" href="https://git.andronix.app">
+                <a target="_blank" href="https://git.andronix.app" rel="noreferrer">
                   <RiGithubFill
                     class="text-current transform transition duration-200 hover:scale-125 ease-in-out"
                     size={22}
                   />
                 </a>
-                <a target="_blank" href="https://patreon.com/andronixapp">
+                <a target="_blank" href="https://patreon.com/andronixapp" rel="noreferrer">
                   <RiAtFill
                     class="text-current  transform transition duration-200 hover:scale-125 ease-in-out"
                     size={22}
                   />
                 </a>
-                <a target="_blank" href="https://forum.andronix.app">
+                <a target="_blank" href="https://forum.andronix.app" rel="noreferrer">
                   <RiWhatsappFill
                     class="text-current transform transition duration-200 hover:scale-125 ease-in-out"
                     size={22}
