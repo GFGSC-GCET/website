@@ -60,7 +60,7 @@ ${hideNavbar ? " translate-y-[-100px] " : "top-0 translate-y-0  "}`}
           <div className="flex items-center justify-between">
             <div>
               <Link legacyBehavior href="/">
-                <a className="text-2xl font-bold text-green-700 transition-colors duration-300 transform dark:text-green-600 lg:text-3xl hover:text-green-600 dark:hover:text-gray-300">
+                <a className="text-2xl font-bold text-green-700 transition-colors duration-300 transform dark:text-green-500 lg:text-3xl hover:text-green-600 dark:hover:text-gray-300">
                   GFGSC-GCET
                 </a>
               </Link>
