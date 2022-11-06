@@ -62,7 +62,7 @@ export const UserContextProvider = (props) => {
                 setUser(userObj);
                 await set(userRef, userObj);
                 console.log("running")
-                router.push("/join");
+                router.push("/join/complete");
             }
 
             // const docRef = doc(db, "users", user.uid);
@@ -132,8 +132,7 @@ export const UserContextProvider = (props) => {
             } else {
                 return user
             }
-        },
-        set: async (user) => {
+        }, set: async (user) => {
             if (user != null) {
                 const userRef = ref(database, `users/${user.uid}`);
                 const snapshot = await get(userRef);
@@ -162,10 +161,7 @@ export const UserContextProvider = (props) => {
                 setLoggingIn(true);
                 const userCred = await signInWithPopup(auth, provider);
                 setLoggingIn(false);
-                userCred.user.photoURL = userCred.user.photoURL.replace(
-                    "s96-c",
-                    "s400-c"
-                );
+                userCred.user.photoURL = userCred.user.photoURL.replace("s96-c", "s400-c");
                 return {
                     user: userCred.user,
                 };
@@ -176,8 +172,7 @@ export const UserContextProvider = (props) => {
                     error: msg,
                 };
             }
-        },
-        logout: async () => {
+        }, logout: async () => {
             await signOut(auth);
         },
     };
@@ -197,14 +192,7 @@ export const UserContextProvider = (props) => {
     };
 
     const contextValue = {
-        loginWithGoogle,
-        logout,
-        user,
-        error,
-        setUser,
-        loggingIn,
-        checkAccount,
-        member,
+        loginWithGoogle, logout, user, error, setUser, loggingIn, checkAccount, member,
     };
 
     return <UserContext.Provider value={contextValue} {...props} />;
