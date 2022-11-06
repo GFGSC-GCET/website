@@ -1,0 +1,14 @@
+{
+  "member": {
+    "text": "text-green-500",
+    "bg": "bg-green-600"
+  },
+  "admin": {
+    "text": "text-red-500",
+    "bg": "bg-red-600"
+  },
+  "head": {
+    "text": "text-blue-500",
+    "bg": "bg-blue-600"
+  }
+}

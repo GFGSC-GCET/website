@@ -87,11 +87,10 @@ const Complete = () => {
     const router = useRouter();
 
     const onFormSubmit = async (values) => {
-        console.log(values);
-
         try {
             await member.set({ ...memberData, ...values, regComplete: true });
             setUser({...memberData, ...values, regComplete: true});
+            await router.push("/profile");
         } catch (e) {
             console.error(e);
         }
@@ -334,7 +333,7 @@ const Complete = () => {
                                         <Button
                                             type="submit"
                                             className="bg-green-700 w-full focus:outline-green-600"
-                                            click={() => {
+                                            click={(e) => {
                                                 warnForm(errors);
                                             }}
                                         >

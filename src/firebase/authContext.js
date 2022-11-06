@@ -23,12 +23,15 @@ export const UserContextProvider = (props) => {
 
             const userRef = ref(database, `users/${user.uid}`);
             const snapshot = await get(userRef);
+            console.log("Heyyy!")
             if (snapshot.exists()) {
+                console.log(snapshot.val().regComplete)
                 try {
                     const userObj = await snapshot.val();
-                    userObj.regComplete ? null : router.push("/join/complete");
+                    if (!userObj.regComplete) {
+                        await router.push("/join/complete");
+                    }
                     setUser(userObj);
-                    return;
                 } catch (e) {
                     console.log(e);
                 }
@@ -58,8 +61,7 @@ export const UserContextProvider = (props) => {
                 setUser(userObj);
                 await set(userRef, userObj);
                 console.log("running")
-                router.push("/join");
-                return;
+                router.push("/join/complete");
             }
 
             // const docRef = doc(db, "users", user.uid);
@@ -164,10 +166,7 @@ export const UserContextProvider = (props) => {
                 setLoggingIn(true);
                 const userCred = await signInWithPopup(auth, provider);
                 setLoggingIn(false);
-                userCred.user.photoURL = userCred.user.photoURL.replace(
-                    "s96-c",
-                    "s400-c"
-                );
+                userCred.user.photoURL = userCred.user.photoURL.replace("s96-c", "s400-c");
                 return {
                     user: userCred.user,
                 };
@@ -178,8 +177,7 @@ export const UserContextProvider = (props) => {
                     error: msg,
                 };
             }
-        },
-        logout: async () => {
+        }, logout: async () => {
             await signOut(auth);
         },
     };
@@ -199,14 +197,7 @@ export const UserContextProvider = (props) => {
     };
 
     const contextValue = {
-        loginWithGoogle,
-        logout,
-        user,
-        error,
-        setUser,
-        loggingIn,
-        checkAccount,
-        member,
+        loginWithGoogle, logout, user, error, setUser, loggingIn, checkAccount, member,
     };
 
     return <UserContext.Provider value={contextValue} {...props} />;

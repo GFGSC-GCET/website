@@ -1,135 +1,63 @@
 import React from "react";
-import { Footer, Nav, ThemeChanger, Breadcrumbs } from "../src/components";
+import {Breadcrumbs, Footer, Nav, ThemeChanger} from "../src/components";
 
 //icons
-import { MdEvent } from "react-icons/md";
-import { FaCode } from "react-icons/fa";
+import {RiBookFill, RiGlobalFill, RiMoneyEuroBoxFill, RiUser3Fill} from "react-icons/ri";
 
-import { withPublic } from "../src/routes";
+import {withPublic} from "../src/routes";
+import InfoCard from "../src/components/infoCard";
 
 const About = () => {
-  const aboutData = [{}];
-  return (
-    <>
-      <Nav />
-      <Breadcrumbs />
-      <ThemeChanger />
-      <section className="bg-white dark:bg-gray-900">
-        <div className="container px-6 py-10 mx-auto">
-          <h1 className="text-3xl font-semibold text-gray-800 capitalize lg:text-4xl dark:text-white">
-            know more <br /> about{" "}
-            <span
-              className="text-green-500"
-              title="Geeks for Geeks Student Club of Galgotas College of Engineering & Technology"
-            >
-              GFGSC-GCET
-            </span>
-          </h1>
+    const aboutData = [{}];
+    return (
+        <>
+            <Nav/>
+            <Breadcrumbs/>
+            <ThemeChanger/>
+            <section className="bg-white dark:bg-gray-900">
+                <div className="container px-6 py-10 mx-auto">
+                    <div class="prose dark:prose-invert">
+                        <h1 className="">
+                            Know more <br/> about{" "}
+                            <span
+                                className="text-green-500"
+                            >GFGSC-GCET
+                            </span>
+                        </h1>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            Provident ab nulla quod dignissimos vel non corrupti
+                            doloribus voluptatum eveniet</p>
+                    </div>
+                    <iframe
+                        title="intro video"
+                        className="min-w-full mt-12 h-64 md:h-[450px] rounded-xl overflow-hidden"
+                        src="https://www.youtube.com/embed/yrEIbh-VKwo"
+                        frameborder="0"
+                        allow="autoplay; fullscreen"
+                        allowfullscreen=""
+                    ></iframe>
 
-          <iframe
-            title="intro video"
-            className="min-w-full mt-12 h-64 md:h-[450px] rounded-xl overflow-hidden"
-            src="https://www.youtube.com/embed/yrEIbh-VKwo"
-            frameborder="0"
-            allow="autoplay; fullscreen"
-            allowfullscreen=""
-          ></iframe>
+                    <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 md:grid-cols-2">
+                        <InfoCard title="Hello World!" description="Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                        Provident ab nulla quod dignissimos vel non corrupti
+                                        doloribus voluptatum eveniet" icon={RiGlobalFill}/>
+                        <InfoCard title="Hello World!" description="Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                        Provident ab nulla quod dignissimos vel non corrupti
+                                        doloribus voluptatum eveniet" icon={RiBookFill}/>
+                        <InfoCard title="Hello World!" description="Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                        Provident ab nulla quod dignissimos vel non corrupti
+                                        doloribus voluptatum eveniet" icon={RiUser3Fill}/>
+                        <InfoCard title="Hello World!" description="Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                        Provident ab nulla quod dignissimos vel non corrupti"
+                                  icon={RiMoneyEuroBoxFill}/>
 
-          <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 md:grid-cols-2">
-            <div className="p-6 border rounded-xl border-r-gray-200 dark:border-gray-700">
-              <div className="md:flex md:items-start md:-mx-4">
-                <span className="inline-block p-2 text-green-500 bg-green-100 rounded-xl md:mx-4 dark:text-white dark:bg-green-500">
-                  <div className="flex items-center justify-center w-6 h-6">
-                    <MdEvent className="text-2xl" />
-                  </div>
-                </span>
-
-                <div className="mt-4 md:mx-4 md:mt-0">
-                  <h1 className="text-2xl font-medium text-gray-700 capitalize dark:text-white">
-                    We Organize Cool Events
-                  </h1>
-
-                  <p className="mt-3 text-gray-500 dark:text-gray-300">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Provident ab nulla quod dignissimos vel non corrupti
-                    doloribus voluptatum eveniet
-                  </p>
+                    </div>
                 </div>
-              </div>
-            </div>
+            </section>
 
-            <div className="p-6 border rounded-xl border-r-gray-200 dark:border-gray-700">
-              <div className="md:flex md:items-start md:-mx-4">
-                <span className="inline-block p-2 text-green-500 bg-green-100 rounded-xl md:mx-4 dark:text-white dark:bg-green-500">
-                  <div className="flex items-center justify-center w-6 h-6">
-                    <FaCode className="text-2xl" />
-                  </div>
-                </span>
-
-                <div className="mt-4 md:mx-4 md:mt-0">
-                  <h1 className="text-2xl font-medium text-gray-700 capitalize dark:text-white">
-                    we promote coding culture
-                  </h1>
-
-                  <p className="mt-3 text-gray-500 dark:text-gray-300">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Provident ab nulla quod dignissimos vel non corrupti
-                    doloribus voluptatum eveniet
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="p-6 border rounded-xl border-r-gray-200 dark:border-gray-700">
-              <div className="md:flex md:items-start md:-mx-4">
-                <span className="inline-block p-2 text-green-500 bg-green-100 rounded-xl md:mx-4 dark:text-white dark:bg-green-500">
-                  <div className="flex items-center justify-center w-6 h-6">
-                    1
-                  </div>
-                </span>
-
-                <div className="mt-4 md:mx-4 md:mt-0">
-                  <h1 className="text-2xl font-medium text-gray-700 capitalize dark:text-white">
-                    Another Point
-                  </h1>
-
-                  <p className="mt-3 text-gray-500 dark:text-gray-300">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Provident ab nulla quod dignissimos vel non corrupti
-                    doloribus voluptatum eveniet
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="p-6 border rounded-xl border-r-gray-200 dark:border-gray-700">
-              <div className="md:flex md:items-start md:-mx-4">
-                <span className="inline-block p-2 text-green-500 bg-green-100 rounded-xl md:mx-4 dark:text-white dark:bg-green-500">
-                  <div className="flex items-center justify-center w-6 h-6">
-                    2
-                  </div>
-                </span>
-
-                <div className="mt-4 md:mx-4 md:mt-0">
-                  <h1 className="text-2xl font-medium text-gray-700 capitalize dark:text-white">
-                    And one more Point
-                  </h1>
-
-                  <p className="mt-3 text-gray-500 dark:text-gray-300">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Provident ab nulla quod dignissimos vel non corrupti
-                    doloribus voluptatum eveniet
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <Footer />
-    </>
-  );
+            <Footer/>
+        </>
+    );
 };
 
 export default withPublic(About);
