@@ -40,8 +40,8 @@ const Event = () => {
         <div className="w-full flex items-center justify-center p-2 bg-gray-800 rounded-xl">
           <img
             className="object-cover object-center w-fit lg:w-auto max-h-96 rounded-lg lg:h-[30rem]"
-            // src={event?.image}
-            src="http://unsplash.it/2000/2500"
+            src={event?.image}
+            // src="http://unsplash.it/2000/2500"
             alt="Event Image"
           />
         </div>
