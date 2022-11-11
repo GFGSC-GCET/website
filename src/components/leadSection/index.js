@@ -46,7 +46,7 @@ const LeadSection = () => {
 
                       <div class="mt-2">
                         <h3 class="text-lg font-medium text-gray-700 dark:text-gray-200">
-                          {member.diplayName}
+                          {member.displayName}
                         </h3>
                         <span class="mt-1 font-medium text-gray-600 dark:text-gray-300">
                           {member.role}

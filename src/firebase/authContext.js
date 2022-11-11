@@ -135,7 +135,8 @@ export const UserContextProvider = (props) => {
                 
                 // The private data has now been stripped
                 let publicData = completeUserData;
-                console.log(publicData, privateData);
+                
+                
 
                 const teamRef = ref(database, `team/${user.uid}`);
                 const teamSnapshot = await get(teamRef);

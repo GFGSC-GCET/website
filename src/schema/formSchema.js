@@ -142,36 +142,35 @@ export const adminUsereditformSchema = yup.object().shape({
 });
 
 export const eventFormSchema = yup.object().shape({
-  photo: yup
+  image: yup
     .string()
-    .required("Photo is required")//matches url
-    .matches(/^(https?\:\/\/)([\da-z\.-]+)\.([a-z\.]{2,6})(\/[\w]*)*$/,"Invalid Photo URL"),
+    .required("Image is required"),
   title: yup
     .string()
     .required("Title is required")
     .min(2, "Title must be at least 2 characters")
-    .max(20, "Title must be less than 20 characters")
+    .trim(),
+  category: yup
+    .string()
+    .required("Category is required"),
+  description: yup
+    .string()
+    .required("Description is required")
+    .min(2, "Description must be at least 2 characters")
     .trim(),
   when: yup
     .string()
     .required("When is required")
     .min(2, "When must be at least 2 characters")
-    .max(20, "When must be less than 20 characters")
     .trim(),
   where: yup
     .string()
-    .required("Where is required")
-    .min(2, "Where must be at least 2 characters")
-    .max(20, "Where must be less than 20 characters")
-    .trim(),
-  description: yup
-    .string()
-    .required("Description is required")
-    .min(2, "Description must be at least 2 characters")
-    .max(20, "Description must be less than 20 characters")
     .trim(),
   link: yup
     .string()
-    .matches(/^(https?\:\/\/)([\da-z\.-]+)\.([a-z\.]{2,6})(\/[\w]*)*$/,"Invalid Link")
+    .matches(
+      /^(https?\:\/\/)([\da-z\.-]+)\.([a-z\.]{2,6})(\/[\w]*)*$/,
+      "Invalid Link"
+    )
     .trim(),
 });

@@ -8,7 +8,8 @@ const Tags = (props) => {
         .map((tag) => tag.trim())
         .filter((tag) => tag !== "")
     //displaying the first 5 skills
-    tags.length = 5
+    const more = tags.length - 4
+    tags.length = 4
     return (
         <>
             <div class="mt-1 h-fit flex flex-wrap -m-1">
@@ -20,10 +21,17 @@ const Tags = (props) => {
                                 key={index}
                                 className="m-1 flex flex-wrap justify-between items-center text-sm bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-full px-3  py-0.5  leading-loose cursor-pointer dark:text-gray-300"
                             >
-            {tag}
-          </span>
+                            {tag}
+                        </span>
                         );
                     })
+                }
+                {
+                    more > 0 &&
+                    <span className="m-1 flex flex-wrap justify-between items-center text-sm bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-full px-3  py-0.5  leading-loose cursor-pointer dark:text-gray-300">
+                        +{more} more skills
+                    </span>
+
                 }
             </div>
         </>
@@ -38,6 +46,7 @@ const TeamCard = (props) => {
             <div class="flex flex-col sm:-mx-4 sm:flex-row">
                 <img
                     class="flex-shrink-0 object-cover w-20 h-20 rounded-full sm:mx-4 ring-2 ring-gray-300"
+                    alt="avatar"
                     src={props.member.photoURL}
                 />
 
@@ -46,7 +55,7 @@ const TeamCard = (props) => {
                         <h1 class="text-xl font-semibold text-gray-700 capitalize line-clamp-1 md:text-1xl dark:text-white">
                             {props.member.displayName}
                         </h1>
-                        <SocialPanel github="https://github.com" linkedin="sf" portfolio="sggsg" instagram="saga"/>
+                        <SocialPanel github={props.member.github} linkedin={props.member.linkedin} portfolio={props.member.website} instagram={props.member.instagram}/>
                         <MemberTag member_level={props.member.role}/>
                     </div>
                 </div>

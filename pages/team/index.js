@@ -39,7 +39,7 @@ const TeamHome = () => {
     storeFields: [
       "displayName","uid","collegeEmail","year","batch","bio","learning","skills","github","linkedin","website","instagram","photoURL","createdAt","regComplete","priority","admin","role",], // fields to return with search results
     searchOptions: {
-      boost: { title: 2 },
+      boost: { displayName: 2 },
       fuzzy: 0.2,
       prefix: true
     },

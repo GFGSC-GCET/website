@@ -10,7 +10,11 @@
   },
   "dependencies": {
     "@badrap/bar-of-progress": "^0.2.2",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/x-date-pickers": "^5.0.7",
     "@tailwindcss/line-clamp": "^0.4.2",
+    "date-fns": "^2.29.3",
     "firebase": "^9.13.0",
     "formik": "^2.2.9",
     "lottie-react": "^2.3.1",

@@ -1,7 +1,7 @@
 import { database } from "./";
-import { ref, get, set } from "firebase/database";
+import { ref, get, set, update } from "firebase/database";
 
-export const getEventData = async (eventId) => {
+export const getEvent = async (eventId) => {
   const dbRef = ref(database, `events/${eventId}`);
   const snapshot = await get(dbRef);
   if (snapshot.exists()) {
@@ -11,9 +11,14 @@ export const getEventData = async (eventId) => {
   }
 }
 
-export const setEventData = async (eventId, data) => {
+export const setEvent = async (eventId, data) => {
   const dbRef = ref(database, `events/${eventId}`);
-  await set(dbRef, data);
+  const snapshot = await get(dbRef);
+  if (snapshot.exists()) {
+    await update(dbRef, data);
+  } else {
+    await set(dbRef, data);
+  }
 }
 
 export const getEventList = async () => {

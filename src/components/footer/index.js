@@ -110,7 +110,7 @@ const Footer = () => {
               href="https://github.com/areeburrub"
               class="font-bold text-gray-600 dark:text-gray-200 underline"
             >
-              Areeb Ur
+              Areeb ur Rub
             </a>
             {" & "}
             <a

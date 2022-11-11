@@ -11,7 +11,7 @@ import {
   ThemeChanger,
 } from "../../src/components";
 
-import {ProfileTab, TeamTab} from "../../src/components/settingTabs";
+import {EventTab, ProfileTab, TeamTab} from "../../src/components/settingTabs";
 
 import {FaUserEdit, FaCalendar} from 'react-icons/fa'
 import {RiTeamFill} from 'react-icons/ri'
@@ -48,7 +48,7 @@ const Settings = () => {
             tabId: "addEvent",
             name: "Add Event",
             icon: <FaCalendar />,
-            component: "Event Menu",
+            component: <EventTab/>,
             allowTo: ['admin'],
           },
     ]
