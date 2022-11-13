@@ -121,233 +121,231 @@ const Complete = () => {
     };
 
     return (
-        <>
-            <Nav/>
-            <Breadcrumbs/>
-            <ThemeChanger/>
-            <div className="container min-h-screen px-6 py-10 mx-auto">
-                <h1 className="text-3xl font-semibold text-center text-gray-800 capitalize lg:text-4xl dark:text-white">
-                    Complete your{" "}
-                    <span
-                        className="text-green-500"
-                    >
-            Profile
-          </span>
-                </h1>
-                <div className="flex flex-col items-center justify-center">
-                    <div
-                        className="flex flex-col justify-center items-center w-full max-w-xl m-auto m-5 p-2 border-2 border-gray-100 dark:border-gray-800 border rounded-lg">
-                        <section className="p-6 dark:bg-gray-800 dark:text-gray-50">
-                            <Formik
-                                initialValues={{...memberData}}
-                                enableReinitialize={true}
-                                onSubmit={(values) => {
-                                    onFormSubmit(values);
+      <>
+        <Nav />
+        <Breadcrumbs />
+        <ThemeChanger />
+        <div className="container min-h-screen px-6 py-10 mx-auto">
+          <h1 className="text-3xl font-semibold text-center text-gray-800 capitalize lg:text-4xl dark:text-white">
+            Complete your <span className="text-green-500">Profile</span>
+          </h1>
+          <div className="flex flex-col items-center justify-center">
+            <div className="flex flex-col justify-center items-center w-full max-w-xl m-auto m-5 p-2 border-2 border-gray-100 dark:border-gray-800 border rounded-lg">
+              <section className="p-6 dark:bg-gray-800 dark:text-gray-50">
+                <Formik
+                  initialValues={{ ...memberData }}
+                  enableReinitialize={true}
+                  onSubmit={(values) => {
+                    onFormSubmit(values);
+                  }}
+                  isSubmitting={true}
+                  validationSchema={formSchema}
+                >
+                  {({ errors, touched, isSubmitting }) => (
+                    <Form className="container flex flex-col mx-auto space-y-12 ng-untouched ng-pristine ng-valid">
+                      <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm dark:bg-gray-900 bg-gray-100">
+                        <div className="space-y-2 col-span-full lg:col-span-1">
+                          <p className="text-lg font-medium">
+                            Personal Inormation
+                          </p>
+                          <p className="text-sm">
+                            This will help us to contact you.
+                          </p>
+                        </div>
+                        <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
+                          <div className="col-span-full">
+                            <label htmlFor="bio" className="text-sm">
+                              Photo
+                            </label>
+                            <div className="flex items-center space-x-2">
+                              <div className="w-28 h-28 dark:bg-gray-500 dark:bg-gray-700">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img
+                                  src={memberData.photoURL}
+                                  alt=""
+                                  className="object-cover w-full h-full"
+                                />
+                              </div>
+                              <input
+                                type="file"
+                                ref={inputRef}
+                                onChange={(e) => {
+                                  updateProfileImage(e.target.files[0]);
                                 }}
-                                isSubmitting={true}
-                                validationSchema={formSchema}
-                            >
-                                {({errors, touched, isSubmitting}) => (
-
-                                    <Form
-                                        className="container flex flex-col mx-auto space-y-12 ng-untouched ng-pristine ng-valid">
-                                        <fieldset
-                                            className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm dark:bg-gray-900 bg-gray-100">
-                                            <div className="space-y-2 col-span-full lg:col-span-1">
-                                                <p className="text-lg font-medium">Personal Inormation</p>
-                                                <p className="text-sm">
-                                                    This will help us to contact you.
-                                                </p>
-                                            </div>
-                                            <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
-                                                <div className="col-span-full">
-                                                    <label htmlFor="bio" className="text-sm">
-                                                        Photo
-                                                    </label>
-                                                    <div className="flex items-center space-x-2">
-                                                        <div className="w-28 h-28 dark:bg-gray-500 dark:bg-gray-700">
-                                                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                                                            <img
-                                                                src={memberData.photoURL}
-                                                                alt=""
-                                                                className="object-cover w-full h-full"
-                                                            />
-                                                        </div>
-                                                        <input
-                                                            type="file"
-                                                            ref={inputRef}
-                                                            onChange={(e) => {
-                                                                updateProfileImage(e.target.files[0]);
-                                                            }}
-                                                            className="hidden"
-                                                        />
-                                                        <button
-                                                            type="button"
-                                                            onClick={handleFileClick}
-                                                            className="px-2 py-1 border text-sm rounded-md dark:border-gray-100 flex flex-row items-center space-x-1"
-                                                        >
-                                                            Change
-                                                            {uploading && (
-                                                                <svg
-                                                                    className="animate-spin ml-2 mr-1 h-5 w-5 text-white"
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    fill="none"
-                                                                    viewBox="0 0 24 24"
-                                                                >
-                                                                    <circle
-                                                                        className="opacity-25"
-                                                                        cx="12"
-                                                                        cy="12"
-                                                                        r="10"
-                                                                        stroke="currentColor"
-                                                                        strokeWidth="4"
-                                                                    ></circle>
-                                                                    <path
-                                                                        className="opacity-75"
-                                                                        fill="currentColor"
-                                                                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                                                                    ></path>
-                                                                </svg>
-                                                            )}
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <TextField
-                                                    spanClass="col-span-full"
-                                                    label="Name"
-                                                    name="displayName"
-                                                    id="displayName"
-                                                    type="text"
-                                                />
-                                                <div className="col-span-full">
-                                                    <label className="text-sm font-bold">Email</label>
-                                                    <div
-                                                        className="h-fit w-full cursor-not-allowed bg-gray-200 dark:bg-gray-700 px-3 py-2 rounded-md focus:ring focus:ring-opacity-75 focus:ring-green-400 dark:border-gray-700 dark:text-gray-100 outline-0 disabled:cursor-not-allowed">
-                                                        {memberData.email}
-                                                    </div>
-                                                </div>
-                                                <TextField
-                                                    spanClass="col-span-full"
-                                                    label="College Email"
-                                                    name="collegeEmail"
-                                                    id="collegeEmail"
-                                                    type="text"
-                                                />
-                                                <TextField
-                                                    spanClass="col-span-full"
-                                                    label="WhatsApp Number"
-                                                    name="whatsappNumber"
-                                                    id="whatsappNumber"
-                                                    type="tel"
-                                                />
-                                                <SelectField
-                                                    spanClass="col-span-3"
-                                                    options={yearOptionList}
-                                                    label="Year"
-                                                    name="year"
-                                                    id="year"
-                                                />
-                                                <SelectField
-                                                    spanClass="col-span-3"
-                                                    options={batchOptionList}
-                                                    label="Batch"
-                                                    name="batch"
-                                                    id="batch"
-                                                />
-                                            </div>
-                                        </fieldset>
-
-                                        <fieldset
-                                            className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm dark:bg-gray-900 bg-gray-100">
-                                            <div className="space-y-2 col-span-full lg:col-span-1">
-                                                <p className="font-medium">About You</p>
-                                                <p className="text-xs">Adipisci fuga autem eum!</p>
-                                            </div>
-                                            <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
-                                                <TextareaField
-                                                    spanClass="col-span-full"
-                                                    label="Bio"
-                                                    description="Write a short introduction about yourself"
-                                                    name="bio"
-                                                    id="bio"
-                                                />
-                                                <TagField
-                                                    spanClass="col-span-full"
-                                                    label="Currently Learning"
-                                                    description="What projects are currently occupying most of your time?"
-                                                    name="learning"
-                                                    id="learning"
-                                                    placeholder="Android, Machine Learning..."
-                                                />
-                                                <TagField
-                                                    spanClass="col-span-full"
-                                                    label="Skills/Languages"
-                                                    description="What projects are currently occupying most of your time?"
-                                                    name="skills"
-                                                    id="skills"
-                                                    placeholder="C, Python, Javascript..."
-                                                />
-                                            </div>
-                                        </fieldset>
-                                        <fieldset
-                                            className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm dark:bg-gray-900 bg-gray-100">
-                                            <div className="space-y-2 col-span-full lg:col-span-1">
-                                                <p className="font-medium">Profiles</p>
-                                                <p className="text-xs">Adipisci fuga autem eum!</p>
-                                            </div>
-                                            <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
-                                                <TextField
-                                                    spanClass="col-span-full"
-                                                    label="Github Profile URL"
-                                                    name="github"
-                                                    id="github"
-                                                    placeholder="https://github.com/...."
-                                                    type="text"
-                                                />
-                                                <TextField
-                                                    spanClass="col-span-full"
-                                                    label="Linked In Profile URL"
-                                                    name="linkedin"
-                                                    id="linkedin"
-                                                    placeholder="https://linkedin.com/in/...."
-                                                    type="text"
-                                                />
-                                                <TextField
-                                                    spanClass="col-span-full"
-                                                    label="Personal Website URL (if any)"
-                                                    name="website"
-                                                    id="website"
-                                                    placeholder="https://myportfolio.com/...."
-                                                    type="text"
-                                                />
-                                                <TextField
-                                                    spanClass="col-span-full"
-                                                    label="Instagram Profile URL"
-                                                    name="instagram"
-                                                    id="instagram"
-                                                    placeholder="https://instagram.com/...."
-                                                    type="text"
-                                                />
-                                            </div>
-                                        </fieldset>
-                                        <Button
-                                            type="submit"
-                                            className="bg-green-700 w-full focus:outline-green-600"
-                                            click={(e) => {
-                                                warnForm(errors);
-                                            }}
-                                        >
-                                            submit
-                                        </Button>
-                                    </Form>
+                                className="hidden"
+                              />
+                              <button
+                                type="button"
+                                onClick={handleFileClick}
+                                className="px-2 py-1 border text-sm rounded-md dark:border-gray-100 flex flex-row items-center space-x-1"
+                              >
+                                Change
+                                {uploading && (
+                                  <svg
+                                    className="animate-spin ml-2 mr-1 h-5 w-5 text-white"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <circle
+                                      className="opacity-25"
+                                      cx="12"
+                                      cy="12"
+                                      r="10"
+                                      stroke="currentColor"
+                                      strokeWidth="4"
+                                    ></circle>
+                                    <path
+                                      className="opacity-75"
+                                      fill="currentColor"
+                                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                    ></path>
+                                  </svg>
                                 )}
-                            </Formik>
-                        </section>
-                    </div>
-                </div>
+                              </button>
+                            </div>
+                          </div>
+                          <TextField
+                            spanClass="col-span-full"
+                            label="Name"
+                            name="displayName"
+                            id="displayName"
+                            type="text"
+                          />
+                          <div className="col-span-full">
+                            <label className="text-sm font-bold">Email</label>
+                            <div className="h-fit w-full cursor-not-allowed bg-gray-200 dark:bg-gray-700 px-3 py-2 rounded-md focus:ring focus:ring-opacity-75 focus:ring-green-400 dark:border-gray-700 dark:text-gray-100 outline-0 disabled:cursor-not-allowed">
+                              {memberData.email}
+                            </div>
+                          </div>
+                          <TextField
+                            spanClass="col-span-full"
+                            label="College Email"
+                            name="collegeEmail"
+                            id="collegeEmail"
+                            type="text"
+                          />
+                          <TextField
+                            spanClass="col-span-full"
+                            label="WhatsApp Number"
+                            name="whatsappNumber"
+                            id="whatsappNumber"
+                            type="tel"
+                          />
+                          <SelectField
+                            spanClass="col-span-3"
+                            options={yearOptionList}
+                            label="Year"
+                            name="year"
+                            id="year"
+                          />
+                          <SelectField
+                            spanClass="col-span-3"
+                            options={batchOptionList}
+                            label="Batch"
+                            name="batch"
+                            id="batch"
+                          />
+                        </div>
+                      </fieldset>
+
+                      <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm dark:bg-gray-900 bg-gray-100">
+                        <div className="space-y-2 col-span-full lg:col-span-1">
+                          <p className="font-medium">About You</p>
+                          <p className="text-xs">Adipisci fuga autem eum!</p>
+                        </div>
+                        <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
+                          <TextareaField
+                            spanClass="col-span-full"
+                            label="Bio"
+                            description="Write a short introduction about yourself"
+                            name="bio"
+                            id="bio"
+                          />
+                          <TagField
+                            spanClass="col-span-full"
+                            label="Currently Learning"
+                            description="What projects are currently occupying most of your time?"
+                            name="learning"
+                            id="learning"
+                            placeholder="Android, Machine Learning..."
+                          />
+                          <TagField
+                            spanClass="col-span-full"
+                            label="Skills/Languages"
+                            description="What projects are currently occupying most of your time?"
+                            name="skills"
+                            id="skills"
+                            placeholder="C, Python, Javascript..."
+                          />
+                        </div>
+                      </fieldset>
+                      <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm dark:bg-gray-900 bg-gray-100">
+                        <div className="space-y-2 col-span-full lg:col-span-1">
+                          <p className="font-medium">Profiles</p>
+                          <p className="text-xs">Adipisci fuga autem eum!</p>
+                        </div>
+                        <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
+                          <TextField
+                            spanClass="col-span-full"
+                            label="GFG Profile URL"
+                            name="gfg"
+                            id="gfg"
+                            placeholder="https://auth.geeksforgeeks.org/user/...."
+                            type="text"
+                          />
+                          <TextField
+                            spanClass="col-span-full"
+                            label="Github Profile URL"
+                            name="github"
+                            id="github"
+                            placeholder="https://github.com/...."
+                            type="text"
+                          />
+                          <TextField
+                            spanClass="col-span-full"
+                            label="Linked In Profile URL"
+                            name="linkedin"
+                            id="linkedin"
+                            placeholder="https://linkedin.com/in/...."
+                            type="text"
+                          />
+                          <TextField
+                            spanClass="col-span-full"
+                            label="Personal Website URL (if any)"
+                            name="website"
+                            id="website"
+                            placeholder="https://myportfolio.com/...."
+                            type="text"
+                          />
+                          <TextField
+                            spanClass="col-span-full"
+                            label="Instagram Profile URL"
+                            name="instagram"
+                            id="instagram"
+                            placeholder="https://instagram.com/...."
+                            type="text"
+                          />
+                        </div>
+                      </fieldset>
+                      <Button
+                        type="submit"
+                        className="bg-green-700 w-full focus:outline-green-600"
+                        click={(e) => {
+                          warnForm(errors);
+                        }}
+                      >
+                        submit
+                      </Button>
+                    </Form>
+                  )}
+                </Formik>
+              </section>
             </div>
-            <Footer/>
-        </>
+          </div>
+        </div>
+        <Footer />
+      </>
     );
 };
 

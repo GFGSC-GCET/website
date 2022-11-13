@@ -74,9 +74,8 @@ const TeamHome = () => {
           </h1>
 
           <p className="max-w-2xl mx-auto my-6 text-center text-gray-500 dark:text-gray-300">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo
-            incidunt ex placeat modi magni quia error alias, adipisci rem
-            similique, at omnis eligendi optio eos harum.
+            Our GFGSC-GCET team is dynamic with a passion for management and depth in their respective
+areas of expertise. Our dedicated team bring energy, fresh ideas and pride to their work.
           </p>
 
           <section className="relative w-full max-w-md px-5 py-4 mx-auto rounded-md">

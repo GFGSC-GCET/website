@@ -132,6 +132,7 @@ const Join = () => {
           Team
         </h1>
         <p className="max-w-2xl mx-auto my-6 text-center text-gray-500 dark:text-gray-300">
+          Join GFGSC-GCET team as a member to explore <br />new opportunities, technical events, webinars and mentorship.<br /><br/>
           Use your Google Account to continue registration
           <br />
           which is free of cost

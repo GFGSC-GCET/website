@@ -16,19 +16,18 @@ const MessageBox = () => {
                 <div class="hidden lg:block lg:w-1/2 ">
                     <div class="flex items-center justify-center h-full lg:rounded-lg overflow-hidden">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src="http://unsplash.it/1080/650" className="bg-cover object-cover" alt='message'/>
+                      <img src="/welcome.jpg" className="bg-cover object-cover" alt='message'/>
                     </div>
                 </div>
 
                 <div class="max-w-xl px-6 py-12 lg:max-w-5xl lg:w-1/2">
                     <h2 class="text-2xl font-bold text-gray-800 dark:text-white md:text-3xl">Welcome to <span class="text-green-700 dark:text-green-600">GFGSC-GCET</span></h2>
                     <p class="mt-4 text-gray-600 dark:text-gray-400">
-                      Website Still under development <br/>
-                      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem modi reprehenderit vitae exercitationem aliquid dolores ullam temporibus enim expedita aperiam mollitia iure consectetur dicta tenetur, porro consequuntur saepe accusantium consequatur.</p>
+                      Welcome to our team. We are happy to have you in our team. You will grow yourknowledge, peer-to-peer learning and many more opportunities. Your journey with us is going to be full of learning and interesting accomplishments.</p>
 
-                    <div class="mt-8">
+                    {/* <div class="mt-8">
                         <a href="#" class="px-5 py-2 font-semibold text-gray-100 transition-colors duration-300 transform bg-gray-900 rounded-md hover:bg-gray-700">Start Now</a>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </section>

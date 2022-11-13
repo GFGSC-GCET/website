@@ -55,7 +55,7 @@ const TeamCard = (props) => {
                         <h1 class="text-xl font-semibold text-gray-700 capitalize line-clamp-1 md:text-1xl dark:text-white">
                             {props.member.displayName}
                         </h1>
-                        <SocialPanel github={props.member.github} linkedin={props.member.linkedin} portfolio={props.member.website} instagram={props.member.instagram}/>
+                        <SocialPanel github={props.member.github} linkedin={props.member.linkedin} portfolio={props.member.website} instagram={props.member.instagram} gfg={props.member.gfg}/>
                         <MemberTag member_level={props.member.role}/>
                     </div>
                 </div>

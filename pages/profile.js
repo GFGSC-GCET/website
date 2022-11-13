@@ -56,10 +56,8 @@ const Join = () => {
       <Breadcrumbs />
       <ThemeChanger />
       <div className="container min-h-screen px-6 py-1 mx-auto">
-
-        <MessageBox/>
+        <MessageBox />
         <div className="flex flex-col xl:flex-row">
-
           <div class="w-full max-w-sm m-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -103,7 +101,7 @@ const Join = () => {
             </div>
           </div>
 
-          <div className='flex flex-col'>
+          <div className="flex flex-col">
             <div class="grid grid-cols-1 gap-5 mx-5 mt-5 xl:mt-0 xl:gap-5 lg:grid-cols-2 h-fit">
               <div class="p-6 border rounded-xl border-r-gray-200 dark:border-gray-700">
                 <div class="md:flex md:items-start md:-mx-4 ">
@@ -116,12 +114,12 @@ const Join = () => {
                       Whatsap Group
                     </h1>
                     <p class="mt-3 text-gray-500 dark:text-gray-300">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Provident ab nulla quod dignissimos vel non corrupti
-                      doloribus voluptatum eveniet
+                      If you want to stay up-to-date with the latest Geeks for
+                      Geeks content, join our WhatsApp group! join us to receive
+                      daily updates.
                     </p>
                   </div>
-                  <Button className="bg-green-700 hover:bg-green-600 mt-4 md:mx-4 md:mt-0">
+                  <Button className="bg-green-700 hover:bg-green-600 mt-4 md:mx-4 md:mt-0" click={()=>{window.open(`https://chat.whatsapp.com/L8b1NWYkAj8Kf7G8mI1xGM`,'__blank')}}>
                     Join
                   </Button>
                 </div>
@@ -138,12 +136,13 @@ const Join = () => {
                       Discord Server
                     </h1>
                     <p class="mt-3 text-gray-500 dark:text-gray-300">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Provident ab nulla quod dignissimos vel non corrupti
-                      doloribus voluptatum eveniet
+                      If you want to stay up-to-date on all the latest news and
+                      updates for Geeks for Geeks, It's the best place to chat
+                      with the team and other members of the community. See you
+                      there!
                     </p>
                   </div>
-                  <Button className="bg-green-700 hover:bg-green-600 mt-4 md:mx-4 md:mt-0">
+                  <Button className="bg-green-700 hover:bg-green-600 mt-4 md:mx-4 md:mt-0" click={()=>{alert("coming soo")}}>
                     Join
                   </Button>
                 </div>
@@ -160,17 +159,16 @@ const Join = () => {
                       Instagram Page
                     </h1>
                     <p class="mt-3 text-gray-500 dark:text-gray-300">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Provident ab nulla quod dignissimos vel non corrupti
-                      doloribus voluptatum eveniet
+                      Make sure to follow us on Instagram for all the latest
+                      updates, memes and behind-the-scenes stories!
                     </p>
                   </div>
-                  <Button className="bg-green-700 hover:bg-green-600 mt-4 md:mx-4 md:mt-0">
+                  <Button className="bg-green-700 hover:bg-green-600 mt-4 md:mx-4 md:mt-0" click={()=>{window.open(`https://www.instagram.com/gfgsc-gcet`,'__blank')}}>
                     Follow
                   </Button>
                 </div>
               </div>
-              
+
               <div class="p-6 border rounded-xl border-r-gray-200 dark:border-gray-700">
                 <div class="md:flex md:items-start md:-mx-4 ">
                   <span class="inline-block p-2 text-white bg-purple-400 rounded-xl md:mx-4 dark:text-white dark:bg-purple-500">
@@ -182,17 +180,16 @@ const Join = () => {
                       Our Events
                     </h1>
                     <p class="mt-3 text-gray-500 dark:text-gray-300">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Provident ab nulla quod dignissimos vel non corrupti
-                      doloribus voluptatum eveniet
+                      If you're looking for upcoming events related to
+                      technology and geek culture, be sure to check out the
+                      events section on Geeks for Geeks!
                     </p>
                   </div>
-                  <Button className="bg-green-700 hover:bg-green-600 mt-4 md:mx-4 md:mt-0">
+                  <Button className="bg-green-700 hover:bg-green-600 mt-4 md:mx-4 md:mt-0" click={()=>{router.push('/events')}}>
                     View
                   </Button>
                 </div>
               </div>
-
             </div>
           </div>
         </div>

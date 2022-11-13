@@ -259,6 +259,14 @@ const ProfileTab = (props) => {
                     <div className="grid grid-cols-6 gap-4 col-span-full">
                       <TextField
                         spanClass="col-span-full md:col-span-3"
+                        label="GFG Profile URL"
+                        name="gfg"
+                        id="gfg"
+                        placeholder="https://auth.geeksforgeeks.org/user/..."
+                        type="text"
+                      />
+                      <TextField
+                        spanClass="col-span-full md:col-span-3"
                         label="Github Profile URL"
                         name="github"
                         id="github"

@@ -47,12 +47,16 @@ const Single = (props) => {
 const Faq = () => {
     const FAQs = [
         {
-            question: "How to join ?",
-            answer: "Click the join button",
+            question: "What are the perks after joining?",
+            answer: "It will help you to grow , learn and explore. You will get a chance to win exciting prizes and goodies if hold a position in any competition. You may get an internship opportunity at GeeksforGeeks",
         },
         {
-            question: "What to do after joining?",
-            answer: "Do fun stuffs",
+            question: "What are some of the events we organise?",
+            answer: "You can have coding competition, events, webinars and rest is imagination with no limits.",
+        },
+        {
+            question: "How it is beneficial for me? ",
+            answer: "You will get an opportunity to compete on a PAN India level. It will help students to grow a network among 145+ colleges.You will stay updated regarding internships, placement and ongoing events.",
         },
     ];
 

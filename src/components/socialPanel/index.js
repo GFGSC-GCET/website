@@ -6,15 +6,26 @@ import {
   RiLinkedinFill,
 } from "react-icons/ri";
 
+import {SiGeeksforgeeks} from 'react-icons/si'
+
 const SocialPanel = (props) => {
   console.log(props);
-  const github = props.github;
-  const instagram = props.instagram;
-  const portfolio = props.portfolio;
-  const linkedin = props.linkedin;
+  const gfg = props?.gfg;
+  const github = props?.github;
+  const instagram = props?.instagram;
+  const portfolio = props?.portfolio;
+  const linkedin = props?.linkedin;
   return (
     <>
       <div class="flex space-x-3">
+        {gfg && (
+          <a href={github}>
+            <SiGeeksforgeeks
+              size={20}
+              class="ease-in-out transform transition duration-200 hover:scale-125 hover:text-green-500"
+            />
+          </a>
+        )}
         {github && (
           <a href={github}>
             <RiGithubFill
@@ -27,7 +38,7 @@ const SocialPanel = (props) => {
           <a href={linkedin}>
             <RiLinkedinFill
               size={20}
-              class="ease-in-out transform transition duration-200 hover:scale-125  hover:text-green-400"
+              class="ease-in-out transform transition duration-200 hover:scale-125  hover:text-blue-400"
             />
           </a>
         )}
@@ -35,7 +46,7 @@ const SocialPanel = (props) => {
           <a href={instagram}>
             <RiInstagramFill
               size={20}
-              class="ease-in-out transform transition duration-200 hover:scale-125  hover:text-green-400"
+              class="ease-in-out transform transition duration-200 hover:scale-125  hover:text-pink-400"
             />
           </a>
         )}{" "}
