@@ -15,7 +15,6 @@ import { GiGraduateCap, GiBrain } from "react-icons/gi";
 import { TbBooks } from "react-icons/tb";
 import { FiCalendar } from "react-icons/fi";
 
-import GitHubCalendar from "react-github-calendar";
 
 import { withProtected } from "../src/routes";
 
@@ -137,7 +136,7 @@ const Join = () => {
                     </h1>
                     <p class="mt-3 text-gray-500 dark:text-gray-300">
                       If you want to stay up-to-date on all the latest news and
-                      updates for Geeks for Geeks, It's the best place to chat
+                      updates for Geeks for Geeks, It&apos;s the best place to chat
                       with the team and other members of the community. See you
                       there!
                     </p>
@@ -180,7 +179,7 @@ const Join = () => {
                       Our Events
                     </h1>
                     <p class="mt-3 text-gray-500 dark:text-gray-300">
-                      If you're looking for upcoming events related to
+                      If you&apos;re looking for upcoming events related to
                       technology and geek culture, be sure to check out the
                       events section on Geeks for Geeks!
                     </p>
