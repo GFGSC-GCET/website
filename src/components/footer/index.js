@@ -12,6 +12,7 @@ const Footer = () => {
               In collaboration with,
             </h3>
             <div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/4/43/GeeksforGeeks.svg"
                 alt="GeeksForGeeks"
@@ -27,7 +28,7 @@ const Footer = () => {
               <div className="flex space-x-5 justify-self-center justify-center items-center md:justify-start">
                 <a
                   target="_blank"
-                  href="https://git.andronix.app"
+                  href="https://github.com/GFGSC-GCET"
                   rel="noreferrer"
                 >
                   <RiGithubFill
@@ -35,19 +36,10 @@ const Footer = () => {
                     size={22}
                   />
                 </a>
+
                 <a
                   target="_blank"
-                  href="https://patreon.com/andronixapp"
-                  rel="noreferrer"
-                >
-                  <RiAtFill
-                    className="text-current  transform transition duration-200 hover:scale-125 ease-in-out"
-                    size={22}
-                  />
-                </a>
-                <a
-                  target="_blank"
-                  href="https://forum.andronix.app"
+                  href="https://wa.me/+918178592355"
                   rel="noreferrer"
                 >
                   <RiWhatsappFill
@@ -89,7 +81,7 @@ const Footer = () => {
             </Link>
 
             <Link
-              href="/event"
+              href="/events"
               className="text-gray-600 dark:text-gray-200 hover:-translate-y-1 transform transition ease-in-out duration-200"
             >
               Events
@@ -107,6 +99,8 @@ const Footer = () => {
             Made with{" "}
             <a
               href="https://tailwindcss.com"
+              rel="noreferrer"
+              target="_blank"
               className="font-bold text-gray-600 dark:text-gray-200"
             >
               Tailwind
@@ -114,6 +108,8 @@ const Footer = () => {
             ,
             <a
               href="http://nextjs.org"
+              rel="noreferrer"
+              target="_blank"
               className="font-bold text-gray-600 dark:text-gray-200"
             >
               NextJS
@@ -121,19 +117,13 @@ const Footer = () => {
             <br />
             by{" "}
             <a
-              href="https://github.com/areeburrub"
+              href="https://github.com/GFGSC-GCET"
+              rel="noreferrer"
+              target="_blank"
               className="font-bold text-gray-600 dark:text-gray-200 underline"
             >
-              Areeb ur Rub
+              GFGSC-GCET Team
             </a>
-            {" & "}
-            <a
-              href="https://github.com/imprakharshukla"
-              className="font-bold text-gray-600 dark:text-gray-200 underline"
-            >
-              imprakharshukla
-            </a>{" "}
-            in 🇮🇳
           </p>{" "}
           <p className="mt-2">
             This website is open-sourced ❤.
