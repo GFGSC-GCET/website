@@ -6,7 +6,7 @@ import {
   RiLinkedinFill,
 } from "react-icons/ri";
 
-import {SiGeeksforgeeks} from 'react-icons/si'
+import { SiGeeksforgeeks } from "react-icons/si";
 
 const SocialPanel = (props) => {
   console.log(props);
@@ -17,44 +17,44 @@ const SocialPanel = (props) => {
   const linkedin = props?.linkedin;
   return (
     <>
-      <div class="flex space-x-3">
+      <div className="flex space-x-3">
         {gfg && (
-          <a href={github}>
+          <a href={gfg} target="__blank">
             <SiGeeksforgeeks
               size={20}
-              class="ease-in-out transform transition duration-200 hover:scale-125 hover:text-green-500"
+              className="ease-in-out transform transition duration-200 hover:scale-125 hover:text-green-500"
             />
           </a>
         )}
         {github && (
-          <a href={github}>
+          <a href={github} target="__blank">
             <RiGithubFill
               size={20}
-              class="ease-in-out transform transition duration-200 hover:scale-125 hover:text-purple-400"
+              className="ease-in-out transform transition duration-200 hover:scale-125 hover:text-purple-400"
             />
           </a>
         )}
         {linkedin && (
-          <a href={linkedin}>
+          <a href={linkedin} target="__blank">
             <RiLinkedinFill
               size={20}
-              class="ease-in-out transform transition duration-200 hover:scale-125  hover:text-blue-400"
+              className="ease-in-out transform transition duration-200 hover:scale-125  hover:text-blue-400"
             />
           </a>
         )}
         {instagram && (
-          <a href={instagram}>
+          <a href={instagram} target="__blank">
             <RiInstagramFill
               size={20}
-              class="ease-in-out transform transition duration-200 hover:scale-125  hover:text-pink-400"
+              className="ease-in-out transform transition duration-200 hover:scale-125  hover:text-pink-400"
             />
           </a>
         )}{" "}
         {portfolio && (
-          <a href={portfolio}>
+          <a href={portfolio} target="__blank">
             <RiGlobalFill
               size={20}
-              class="ease-in-out transform transition duration-200 hover:scale-125  hover:text-green-400"
+              className="ease-in-out transform transition duration-200 hover:scale-125  hover:text-green-400"
             />
           </a>
         )}

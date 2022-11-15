@@ -12,3 +12,4 @@ export { default as FormComponents } from "./miscs/Form"
 export { default as MessageBox } from "./messageBox"
 export { default as LeadSection } from "./leadSection"
 export { default as AdminProfileForm } from "./adminProfileForm";
+export { default as SocialPanel } from "./socialPanel";
