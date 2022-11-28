@@ -18,7 +18,7 @@ const Single = (props) => {
                     toggleFAQ();
                 }}
             >
-                <h3 className="my-4">
+                <h3 className="my-4 text-left">
                     {props.FAQ.question}
                 </h3>
 
