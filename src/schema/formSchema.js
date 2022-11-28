@@ -159,3 +159,15 @@ export const eventFormSchema = yup.object().shape({
     )
     .trim(),
 });
+
+
+export const contactFormSchema = yup.object().shape({
+  name: yup.string().required("Please Enter Your Name"),
+  email:  yup.string().email()
+    .required("Please enter your email")
+    .matches(
+      /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+      "Enter a valid email"
+    ),
+  message: yup.string().required()
+});
