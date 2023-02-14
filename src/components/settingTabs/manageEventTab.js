@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import Head from "next/head";
 
 import {
   Nav,
@@ -70,6 +71,11 @@ const Events = () => {
 
   return (
     <>
+      <Head>
+        <title>Events</title>
+        <meta name="description" content="Event Page for GFGSC_GCET" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className="min-h-screen container px-2 mx-auto">
         {/* Past Events */}
         <div className="flex justify-between flex-col px-6">

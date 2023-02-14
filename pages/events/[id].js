@@ -1,7 +1,7 @@
 import React from "react";
 import { withPublic } from "../../src/routes";
 import { useState, useEffect } from "react";
-
+import Head from "next/head";
 import { useRouter } from "next/router";
 
 import {
@@ -33,6 +33,42 @@ const Event = () => {
 
   return (
     <div>
+      <Head>
+        <title>{event?.title}</title>
+        <meta name="description" content={event?.description} />
+        <link rel="icon" href="/favicon.ico" />
+
+        {/*// Open Graph*/}
+        <meta property="og:title" content={event?.title} />
+        <meta property="og:description" content={event?.description} />
+        <meta property="og:image" content={event?.image} />
+        <meta property="og:url" content={`https://gfgsc-gcet.vercel.app/events${event?.id}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="GFGSC-GCET" />
+
+        {/*// Twitter*/}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@gfgsc_gcet" />
+        <meta name="twitter:creator" content="@gfgsc_gcet" />
+        <meta name="twitter:title" content={event?.title} />
+        <meta name="twitter:description" content={event?.description} />
+        <meta name="twitter:image" content={event?.image} />
+
+
+        {/*// Google*/}
+        <meta itemprop="name" content={event?.title} />
+        <meta itemprop="description" content={event?.description} />
+        <meta itemprop="image" content={event?.image} />
+
+        {/*// Facebook*/}
+        <meta property="fb:app_id" content="GFGSC-GCET" />
+        <meta property="og:url" content={`https://gfgsc-gcet.vercel.app/events${event?.id}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={event?.title} />
+        <meta property="og:description" content={event?.description} />
+        <meta property="og:image" content={event?.image} />
+
+      </Head>
       <Nav />
       <Breadcrumbs />
       <ThemeChanger />
