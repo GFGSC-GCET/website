@@ -11,7 +11,7 @@ import { setEvent } from "../../firebase/eventData";
 
 import { RiClipboardFill, RiUpload2Fill } from "react-icons/ri";
 
-const EventTab = () => {
+const EventTab = ({loadEvent}) => {
   const { TextField, SelectField, TextareaField, DateField } = FormComponents; //Form Components
 
   //  Make ID function, I use this to create random ID
@@ -27,6 +27,8 @@ const EventTab = () => {
     return result;
   };
 
+
+
   //  Create state for event name
   const [eventData, setEventData] = useState({
     id: makeid(10),
@@ -39,6 +41,11 @@ const EventTab = () => {
     where: "",
     createdAt: new Date().toISOString(),
   });
+
+  useEffect(()=>{
+    console.log(loadEvent);
+    setEventData({...eventData,...loadEvent});
+  },[loadEvent]);
 
   const inputRef = useRef(null);
   const handleFileClick = () => {
@@ -230,6 +237,17 @@ const EventTab = () => {
                     id="when"
                     type="date"
                     setFieldValue={setFieldValue}
+                  />
+                  <SelectField
+                    spanClass="col-span-full"
+                    label="Online or Offline"
+                    name="online"
+                    options={[
+                      { value: "online", label: "Online" },
+                      { value: "offline", label: "Offline" },
+                    ]}
+                    id="category"
+                    type="text"
                   />
                   <TextField
                     spanClass="col-span-full"

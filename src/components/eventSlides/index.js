@@ -96,25 +96,25 @@ const Slides = () => {
         <div className="lg:-mx-6 lg:flex lg:items-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            className="object-cover object-center lg:w-1/2 lg:mx-6 w-full h-96 rounded-lg lg:h-[36rem]"
+            className="object-cover object-center lg:w-1/2 lg:mx-6 w-full h-96 rounded-lg lg:h-[25rem]"
             src={Events[current]?.image}
             alt="Event Image"
           />
 
           <div className="mt-8 lg:w-1/2 lg:px-6 lg:mt-0">
-            <p className="text-5xl font-semibold text-green-600 ">
-              {
-                //format date
-                Events[current] &&
-                  format(new Date(Events[current].when), "dd MMM")
-              }
-            </p>
-            <h1 className="text-2xl font-semibold text-gray-800 dark:text-white xl:text-4xl">
-              {Events[current]?.title}
-            </h1>
             <h3 className="mt-2 text-lg font-medium text-green-600">
               {Events[current]?.category}
             </h3>
+            <h1 className="text-2xl font-semibold text-gray-800 dark:text-white xl:text-4xl">
+              {Events[current]?.title}
+            </h1>
+            <p className="text-lg font-semibold uppercase text-green-600 ">
+              {
+                //format date
+                Events[current] &&
+                  format(new Date(Events[current].when), "eeee, dd MMM")
+              }
+            </p>
 
             <p className="max-w-lg mt-4 text-gray-500 dark:text-gray-400 truncate">
               {Events[current]?.description}

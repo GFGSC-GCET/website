@@ -151,10 +151,11 @@ export const eventFormSchema = yup.object().shape({
     .min(2, "When must be at least 2 characters")
     .trim(),
   where: yup.string().trim(),
+  online: yup.string().trim(),
   link: yup
     .string()
     .matches(
-      /^(https?\:\/\/)([\da-z\.-]+)\.([a-z\.]{2,6})(\/[\w]*)*$/,
+      /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/,
       "Invalid Link"
     )
     .trim(),

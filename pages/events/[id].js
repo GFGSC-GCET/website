@@ -40,17 +40,30 @@ const Event = () => {
         <div className="grid grid-cols-6 gap-4">
           <div className="col-span-full md:col-span-1">
             <div className="md:m-2 p-2 dark:bg-gray-800 bg-gray-200 rounded-lg">
-              <h1 className="text-2xl font-bold text-center">Event Details</h1>
               <h2 className="text-xl font-semibold text-green-600 mx-auto text-center">
                 {event.when && format(new Date(event.when), "eeee, dd MMM")}
               </h2>
-              <span className="m-1 flex flex-wrap justify-center items-center text-sm bg-gray-300 dark:bg-gray-700 rounded-lg px-3  py-0.5  leading-loose dark:text-gray-300 mx-auto">
-                {event.category}
-              </span>
+              <div className="flex flex-wrap justify-center capitalize">
+                <span className="m-1 flex flex-wrap justify-center items-center text-xs bg-gray-300 dark:bg-gray-700 rounded-lg px-3  py-0.5  leading-loose dark:text-gray-300 w-fit">
+                  {event.category}
+                </span>
+
+                {
+                  event.online &&
+                  <span className="m-1 flex flex-wrap justify-center items-center text-xs bg-gray-300 dark:bg-gray-700 rounded-lg px-3  py-0.5  leading-loose dark:text-gray-300 w-fit ">
+                    {event.online}
+                  </span>
+                }
+              </div>
               <Button
-                className="bg-green-600 w-full hover:bg-green-700"
+                className="bg-green-600  hover:bg-green-700 mt-5  w-full"
                 click={() => {
-                  alert("currently in development");
+                  if(event.link){
+                    window.open(event.link, "_blank");
+                  }
+                  else {
+                    alert("Currently in development");
+                  }
                 }}
               >
                 Register Now
@@ -71,7 +84,7 @@ const Event = () => {
                 alt="Event Image"
               />
             </div>
-            <p className="mt-4 text-gray-600 dark:text-gray-400">
+            <p className="mt-4 text-gray-900 dark:text-white whitespace-pre-wrap">
               {event?.description}
             </p>
           </div>

@@ -15,10 +15,12 @@ import {
   EventTab,
   ProfileTab,
   TeamTab,
+  ManageEventTab,
 } from "../../src/components/settingTabs";
 
 import { FaUserEdit, FaCalendar } from "react-icons/fa";
 import { RiTeamFill } from "react-icons/ri";
+import { MdOutlineEditCalendar } from "react-icons/md";
 
 import { useUserContext } from "../../src/firebase/authContext";
 
@@ -50,6 +52,14 @@ const Settings = () => {
       name: "Add Event",
       icon: <FaCalendar />,
       component: <EventTab />,
+      allowTo: ["admin"],
+    },
+    {
+      id: 3,
+      tabId: "manageEvent",
+      name: "Manage Event",
+      icon: <MdOutlineEditCalendar />,
+      component: <ManageEventTab />,
       allowTo: ["admin"],
     },
   ];
