@@ -32,7 +32,7 @@ const TagField = ({ label, disabled, spanClass, placeholder, id, ...props }) => 
         component="div"
         className="text-red-500 text-xs"
       />
-      <div class="mt-1 h-fit flex flex-wrap -m-1">
+      <div className="mt-1 h-fit flex flex-wrap -m-1">
         {tags.map((tag, index) => {
           return (
             <span

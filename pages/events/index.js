@@ -18,6 +18,7 @@ import { getEventList } from "../../src/firebase/eventData";
 import format from 'date-fns/format'
 
 import MiniSearch from "minisearch";
+import Head from "next/head";
 
 const Events = () => {
   const [eventList, setEventList] = useState([]);
@@ -73,6 +74,11 @@ const Events = () => {
 
   return (
     <>
+      <Head>
+        <title>Events</title>
+        <meta name="description" content="Event Page for GFGSC_GCET" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Nav />
       <Breadcrumbs />
       <ThemeChanger />

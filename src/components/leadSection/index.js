@@ -39,10 +39,10 @@ const LeadSection = () => {
                 Our Leads
               </h2>
 
-              <div className="grid gap-8 mt-8 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 mx-auto">
+              <div className="grid gap-8 mt-8 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-auto place-items-center">
                 {teamData.map((member, index) => {
                   return (
-                    <div className="w-full max-w-xs text-center" key={index}>
+                    <div className="w-full max-w-xs text-center mx-auto" key={index}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         className="object-cover object-center w-full h-48 mx-auto rounded-lg"

@@ -13,12 +13,12 @@ const MemberTag = (props) => {
   return (
     <>
       <div
-        class={
+        className={
           levelColorObj.bg +
           " -ml-2 w-auto inline-block items-center justify-center  bg-opacity-20 rounded-full py-0.5 px-3"
         }
       >
-        <p class={levelColorObj.text + " text-center text-sm font-semibold"}>
+        <p className={levelColorObj.text + " text-center text-sm font-semibold"}>
           {level}
         </p>
       </div>

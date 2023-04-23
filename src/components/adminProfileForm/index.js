@@ -229,7 +229,7 @@ const AdminProfileForm = (props) => {
             </div>
           </fieldset>
 
-          <hr class="border-gray-200 dark:border-gray-700 " />
+          <hr className="border-gray-200 dark:border-gray-700 " />
 
           <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm dark:bg-gray-800 bg-gray-100">
             <div className="grid grid-cols-6 gap-4 col-span-full">
@@ -258,7 +258,7 @@ const AdminProfileForm = (props) => {
               />
             </div>
           </fieldset>
-          <hr class="border-gray-200 dark:border-gray-700 " />
+          <hr className="border-gray-200 dark:border-gray-700 " />
           <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm dark:bg-gray-800 bg-gray-100">
             <div className="grid grid-cols-6 gap-4 col-span-full">
               <TextField
@@ -295,7 +295,7 @@ const AdminProfileForm = (props) => {
               />
             </div>
           </fieldset>
-          <hr class="border-gray-200 dark:border-gray-700 " />
+          <hr className="border-gray-200 dark:border-gray-700 " />
           <span className="text-red-500 text-lg font-bold uppercase">
             Admin only fileds
           </span>
@@ -326,7 +326,7 @@ const AdminProfileForm = (props) => {
               />
             </div>
           </fieldset>
-          <hr class="border-gray-200 dark:border-gray-700 " />
+          <hr className="border-gray-200 dark:border-gray-700 " />
           <Button
             type="submit"
             className="flex flex-row justify-center items-center bg-green-700 w-full max-w-lg focus:outline-green-600 col-span-full mx-auto"

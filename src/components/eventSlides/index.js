@@ -24,8 +24,12 @@ const Slides = () => {
           pastEvents.push(value);
         }
       }
-      setUpcomingEventList(upcomingEvents);
-      console.log(events, upcomingEvents, pastEvents);
+      if (upcomingEvents.length == 0){
+        setUpcomingEventList(pastEvents);
+      }else{
+        setUpcomingEventList(upcomingEvents);
+      }
+      // console.log(events, upcomingEvents, pastEvents);
     };
     getEvents();
   }, []);

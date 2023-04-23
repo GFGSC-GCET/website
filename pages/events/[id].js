@@ -42,7 +42,8 @@ const Event = () => {
         <meta property="og:title" content={event?.title} />
         <meta property="og:description" content={event?.description} />
         <meta property="og:image" content={event?.image} />
-        <meta property="og:url" content={`https://gfgsc-gcet.vercel.app/events${event?.id}`} />
+
+        <meta property="og:url" content={`https://gfgsc-gcet.vercel.app/events/${event?.id}`} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="GFGSC-GCET" />
 

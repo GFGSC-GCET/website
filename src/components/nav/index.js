@@ -21,6 +21,7 @@ const Nav = (props) => {
     { href: "/about", label: "About" },
     { href: "/team", label: "Team" },
     { href: "/events", label: "Events" },
+    { href: "/blogs", label: "Blogs" },
   ];
 
   const router = useRouter();

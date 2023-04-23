@@ -68,7 +68,7 @@ const UserDropdown = (props) => {
         </button>
 
         <div
-          class={`absolute right-0 z-20 w-56 py-2 mt-14 -mr-2 overflow-hidden bg-white rounded-md shadow-xl dark:bg-gray-700 ${
+          className={`absolute right-0 z-20 w-56 py-2 mt-14 -mr-2 overflow-hidden bg-white rounded-md shadow-xl dark:bg-gray-700 ${
             isOpen ? "block" : "hidden"
           }`}
         >

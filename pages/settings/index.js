@@ -103,7 +103,7 @@ const Settings = () => {
                           setSelectedTab(index);
                         }}
                         key={index}
-                        class={`flex items-center px-3 py-3 text-lg text-gray-900 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white cursor-pointer border-l-[5px] border-transparent ${
+                        className={`flex items-center px-3 py-3 text-lg text-gray-900 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white cursor-pointer border-l-[5px] border-transparent ${
                           tab.id == selectedTab
                             ? "border-green-500 dark:bg-gray-800 bg-green-50"
                             : null
