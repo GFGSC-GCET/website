@@ -1,5 +1,6 @@
 import React from "react";
-import { withPublic } from "../../../src/routes";
+import { AdminProtected } from "../../../src/routes";
+
 import { useState, useEffect } from "react";
 
 import { useRouter } from "next/router";
@@ -55,4 +56,4 @@ const Event = () => {
   );
 };
 
-export default Event;
+export default AdminProtected (Event);

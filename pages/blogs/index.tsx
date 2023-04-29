@@ -2,8 +2,9 @@ import Head from "next/head";
 import React from "react";
 import {Breadcrumbs, Footer, Nav, ThemeChanger,} from "../../src/components";
 import {BlogPost, Categories, Pagination, PostFilter, RecentPost, UserList} from "../../src/components/blogs";
-
+import {useRouter} from "next/router";
 const BlogPage = () => {
+    const router = useRouter();
 
     const posts = [
         {
@@ -69,7 +70,7 @@ const BlogPage = () => {
                         <div className="flex flex-col items-center justify-between gap-5">
                             <div className={'flex flex-row justify-between w-full'}>
                                 <h1 className="text-xl font-bold text-green-500 md:text-4xl">Posts</h1>
-                                <span className={'px-5 py-2 bg-green-500 hover:bg-green-600 cursor-pointer text-lg font-semibold rounded-lg'}>
+                                <span className={'px-5 py-2 bg-green-500 hover:bg-green-600 cursor-pointer text-lg font-semibold rounded-lg'} onClick={()=>{router.push('/blogs/new')}}>
                                     Create Post
                                 </span>
                             </div>

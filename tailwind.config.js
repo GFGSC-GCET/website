@@ -5,7 +5,16 @@ module.exports = {
         "./src/components/**/*.{js,ts,jsx,tsx}",
     ],
     theme: {
-        extend: {},
+        extend: {
+            typography: {
+                DEFAULT: {
+                    css: {
+                        maxWidth: '100ch',
+
+                    }
+                }
+            }
+        },
     },
     safelist: [
         'bg-green-600',
