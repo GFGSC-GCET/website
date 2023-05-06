@@ -408,7 +408,8 @@ const CreateNewPost = () => {
                                                 {
                                                     errors.map((error,index)=>{
                                                         return(
-                                                            <div className={'flex flex-row items-center py-2 px-2 gap-2 bg-red-500 bg-opacity-30'}>
+                                                            <div className={'flex flex-row items-center py-2 px-2 gap-2 bg-red-500 bg-opacity-30'}
+                                                            key={index}>
                                                                 <FaExclamationTriangle/>
                                                                 <p>
                                                                     { error }
