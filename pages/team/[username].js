@@ -56,7 +56,7 @@ const Join = () => {
 
   const { username } = router.query;
 
-  const [userData, setUserData] = useState({});
+  const [authorData, setUserData] = useState({});
 
   useEffect(() => {
     const getTeam = async () => {
@@ -82,54 +82,54 @@ const Join = () => {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               className="object-cover object-center w-full h-56"
-              src={userData.photoURL}
+              src={authorData.photoURL}
               alt="avatar"
             />
 
             <div className="flex items-center px-6 py-3 bg-gray-900 dark:bg-gray-700">
-              <h1 className="text-lg font-bold text-white">{userData.role}</h1>
+              <h1 className="text-lg font-bold text-white">{authorData.role}</h1>
             </div>
 
             <div className="px-6 py-4">
               <h1 className="text-xl font-semibold text-gray-800 dark:text-white">
-                {userData.displayName}
+                {authorData.displayName}
               </h1>
 
               <p className="py-2 text-gray-700 dark:text-gray-400 mb-2">
-                {userData.bio}
+                {authorData.bio}
               </p>
 
               <SocialPanel
-                github={userData.github}
-                linkedin={userData.linkedin}
-                portfolio={userData.website}
-                instagram={userData.instagram}
-                gfg={userData.gfg}
+                github={authorData.github}
+                linkedin={authorData.linkedin}
+                portfolio={authorData.website}
+                instagram={authorData.instagram}
+                gfg={authorData.gfg}
               />
 
               <div className="flex items-center mt-4 text-gray-700 dark:text-gray-200">
                 <GiGraduateCap className="text-xl" />
                 <h1 className="px-2 text-sm capitalize">
-                  {userData.year} year
+                  {authorData.year} year
                 </h1>
               </div>
 
               <div className="flex items-center mt-4 text-gray-700 dark:text-gray-200">
                 <TbBooks className="text-xl" />
-                <h1 className="px-2 text-sm">{userData.batch}</h1>
+                <h1 className="px-2 text-sm">{authorData.batch}</h1>
               </div>
 
               <div className="flex items-center mt-4 text-gray-700 dark:text-gray-200">
                 <FaHammer className="text-xl" />
                 <h1 className="px-2 text-sm">Skills</h1>
               </div>
-              <Tags tags={userData.skills || " "} />
+              <Tags tags={authorData.skills || " "} />
 
               <div className="flex items-center mt-4 text-gray-700 dark:text-gray-200">
                 <GiBrain className="text-xl" />
                 <h1 className="px-2 text-sm">Learning</h1>
               </div>
-              <Tags tags={userData.learning || " "} />
+              <Tags tags={authorData.learning || " "} />
             </div>
           </div>
 
@@ -149,7 +149,7 @@ const Join = () => {
                   className="bg-green-700 hover:bg-green-600 mt-4 md:mx-4 md:mt-0"
                   click={() => {
                     window.open(
-                      userData.gfg,
+                      authorData.gfg,
                       "__blank"
                     );
                   }}

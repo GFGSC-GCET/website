@@ -3,20 +3,30 @@ import React, {useEffect} from "react";
 import {Breadcrumbs, Footer, Nav, ThemeChanger,} from "../../src/components";
 import TextareaAutosize from 'react-textarea-autosize';
 import { useState} from "react";
-import {FaImage, FaPaperPlane, FaQuestion, FaSave, FaSpinner} from "react-icons/fa";
+import {
+    FaExclamation,
+    FaExclamationTriangle,
+    FaImage,
+    FaPaperPlane,
+    FaQuestion,
+    FaSave,
+    FaSpinner
+} from "react-icons/fa";
 import { withProtected } from "../../src/routes";
 
 import ReactMarkdown from 'react-markdown'
 
 import { useUserContext } from "../../src/firebase/authContext";
 
+import { saveBlog } from "../../src/firebase/blogData";
 
+import * as Yup from 'yup';
 
 const CreateNewPost = () => {
     // @ts-ignore
-    const { user, loginWithGoogle, logout, loggingIn } = useUserContext();
+    const { user } = useUserContext();
 
-    const [showPreview, setShowPreview] = useState(true);
+    const [showPreview, setShowPreview] = useState(false);
 
     const [coverImageInput, setCoverImageInput] = useState('');
     const [coverImage, setCoverImage] = useState('');
@@ -63,36 +73,138 @@ const CreateNewPost = () => {
             //changes
             console.log('changes');
             setUnsavedChanges(true);
-            savePost();
+            autoSavePost();
         }
 
-    }, [coverImageInput, title, body]);
+    }, [coverImage, title, body]);
 
     const [saving, setSaving] = useState(false);
 
+    //  Make ID function, I use this to create random ID
+    // credit : https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
+    const makeid = (length) => {
+        var result = "";
+        var characters =
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        var charactersLength = characters.length;
+        for (var i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+    };
+
+    const autoSavePost = () => {
+        if (saving) return;
+        if (!user) return;
+        if (!title || !body) return;
+        if (!unsavedChanges) return;
+        if (savedPost?.lastSaveTime) {
+            const savedDate = new Date(savedPost.date);
+            const currentDate = new Date();
+            const diff = currentDate.getTime() - savedDate.getTime();
+            const seconds = diff / 1000;
+            if (seconds < 10) {
+                return;
+            }
+        }
+        savePost();
+    }
 
     const savePost = () => {
+        let id = '';
+        if(savedPost?.blogId){
+            id = savedPost.blogId;
+        }else {
+            id = makeid(10);
+        }
         const post = {
+            blogId: id,
             title: title,
             body: body,
             coverImage: coverImage,
-            date: new Date().toISOString(),
-            author: {
-                name: user.displayName,
-                email: user.email,
-                photoURL: user.photoURL,
-                uid: user.uid
-            }
+            lastSaveTime: new Date().toISOString(),
+            authorUID: user.uid,
+            view:0,
+            published: false,
         }
-        setSavedPost(post)
-        setSaving(true);
-        console.log(post);
-        setTimeout(()=>{
-            setSaving(false);
-            setUnsavedChanges(false);
-        }, 2000);
-        //save post to firestore
+
+
+        postSchema.validate(post, { abortEarly: false })
+            .then((validatedPost) => {
+                setErrors([])
+                setSavedPost(post)
+                setSaving(true);
+
+                saveBlog(id,post).then(()=> {
+                    setSaving(false);
+                    setUnsavedChanges(false);
+                }).catch((e)=>{
+                    console.log(e);
+                });
+            })
+            .catch((error) => {
+                const errors = error.inner.map((e) => e.message);
+                setErrors(errors)
+                return true;
+            });
     }
+
+    const [publishing,setPublishing] = useState(false);
+
+    const publishPost = () => {
+
+        if(!savedPost?.lastSaveTime){
+            setErrors(['Save before publishing'])
+            return;
+        }
+
+        const post = {
+            ...savedPost,
+            publishTime:new Date().toISOString(),
+            published:true
+        }
+
+
+        postSchema.validate(post, { abortEarly: false })
+            .then((validatedPost) => {
+                setErrors([])
+                setSavedPost(post)
+                setPublishing(true);
+
+                saveBlog(post.blogId,post).then(()=> {
+                    setPublishing(false);
+                }).catch((e)=>{
+                    console.log(e);
+                });
+            })
+            .catch((error) => {
+                const errors = error.inner.map((e) => e.message);
+                setErrors(errors)
+                return true;
+            });
+
+    }
+
+    const [errors,setErrors] = useState([]);
+
+
+    const postSchema = Yup.object().shape({
+        blogId: Yup.string()
+            .required('Blog ID is required')
+            .matches(/^[A-Za-z0-9]{10}$/, 'Internal Blog ID Error'),
+        title: Yup.string()
+            .required('Title is required')
+            .max(120, 'Title cannot be longer than 120 characters')
+            .matches(/^[^\n]*$/, 'Title cannot contain newlines'),
+        body: Yup.string()
+            .required('Body is required'),
+        coverImage: Yup.string()
+            .url('Cover image must be a valid URL'),
+        lastSaveTime: Yup.string().required(),
+        authorUID: Yup.string()
+            .required('Author UID is required'),
+    });
+
 
     return (
         <>
@@ -150,7 +262,7 @@ const CreateNewPost = () => {
 
                                 <div className={'flex flex-col gap-2'}>
                                     <h1 className={'text-2xl font-bold'}>Cover Image</h1>
-                                    <input type={"text"} className={'border-2 w-full px-4 py-2 bg-gray-200 dark:bg-gray-700 dark:border-gray-700 rounded-md border-gray-200'}  placeholder={'insert your image url (use imgbb.com)'} onChange={(e)=>{setCoverImageInput(e.target.value)}} value={coverImageInput}/>
+                                    <input type={"text"} className={'border-2 w-full px-4 py-2 bg-gray-200 dark:bg-gray-700 dark:border-gray-700 rounded-md border-gray-200'}  placeholder={'insert your image url (use imgbb.com)'} onChange={(e)=>{setCoverImage(e.target.value)}} value={coverImage}/>
                                     <p className={''}>
                                         Use <a className={'text-green-500 underline'} target={'__blank'} href={"https://imgbb.com/upload"}>ImageBB.com</a> to upload your image and paste the image url, <i>check url before pasting</i>
                                     </p>
@@ -167,31 +279,81 @@ const CreateNewPost = () => {
                         </div>
                         <div className="col-span-full lg:col-span-2 flex flex-col gap-5 container mx-auto ">
                             <div className="w-full p-4 flex flex-col gap-5 border-2 dark:border-gray-800 rounded-lg dark:bg-gray-800 bg-gray-100 border-gray-200">
-                                <>
+                                <div className={'flex flex-row justify-between items-center'}>
                                     {
-                                        unsavedChanges &&
+                                        unsavedChanges ?
                                         <h1 className={'text-md font-regular w-fit rounded-lg'}>
                                             Unsaved Changes
                                         </h1>
+                                            :
+                                        <h1 className={'text-md font-regular w-fit rounded-lg'}>
+                                            All Changes Saved
+                                        </h1>
                                     }
-                                </>
-
-                                <div className={'w-full flex flex-row justify-between items-center'}>
                                     <span className={'text-md p-2 flex flex-row gap-3 justify-center items-center rounded-lg hover:bg-green-500 bg-gray-100 dark:bg-gray-700 dark:hover:bg-green-500 cursor-pointer'}>
                                         {
                                             saving ?
-                                                <span onClick={()=>{savePost()}} className={'flex flex-row items-center gap-2'}><FaSpinner className={'animate-spin'}/> Saving</span>
+                                                <span className={'flex flex-row items-center gap-2'}><FaSpinner className={'animate-spin'}/> Saving</span>
                                                 :
                                                 <span onClick={()=>{savePost()}} className={'flex flex-row items-center gap-2'}><FaSave/> Save Draft</span>
                                         }
                                     </span>
+                                </div>
+                                <div className={'flex flex-row justify-between items-center'}>
+
+                                    <h1 className={'text-md font-regular w-fit rounded-lg'}>
+                                        {
+                                            savedPost?.published ?
+                                                <>
+                                                    { savedPost?.publishedTime }
+                                                </>
+                                                :
+                                                <>
+                                                    {
+                                                        savedPost?.publishRequestTime ?
+                                                            <>
+                                                               Under Review
+                                                            </>
+                                                            :
+                                                            <>
+                                                                Not Published yet
+                                                            </>
+                                                    }
+                                                </>
+                                        }
+                                    </h1>
+
                                     <span className={'text-md p-2 flex flex-row gap-3 justify-center items-center rounded-lg hover:bg-green-500 bg-gray-100 dark:bg-gray-700 dark:hover:bg-green-500 cursor-pointer'}>
-                                        <FaPaperPlane/> Publish
-                                    </span>
-                                    <span className={'text-md p-2 flex flex-row gap-3 justify-center items-center rounded-lg hover:bg-green-500 bg-gray-100 dark:bg-gray-700 dark:hover:bg-green-500 cursor-pointer'}>
-                                        <FaQuestion/> Help
+                                        {
+                                            publishing ?
+                                                <span className={'flex flex-row items-center gap-2'}><FaSpinner className={'animate-spin'}/> Publishing</span>
+                                                :
+                                                <span onClick={()=>{publishPost()}} className={'flex flex-row items-center gap-2'}><FaPaperPlane/> Publish</span>
+                                        }
                                     </span>
                                 </div>
+                                {
+                                    errors.length > 0 &&
+                                    <div className={'w-full py-3 px-2 border-2 border-red-500 rounded-lg'}>
+                                        <h1 className={'text-lg font-bold mb-2'}>
+                                            Resolve Error
+                                        </h1>
+                                        <div className={'flex flex-col w-full gap-2'}>
+                                            {
+                                                errors.map((error,index)=>{
+                                                    return(
+                                                        <div className={'flex flex-row items-center py-2 px-2 gap-2 bg-red-500 bg-opacity-30'}>
+                                                            <FaExclamationTriangle/>
+                                                            <p>
+                                                                { error }
+                                                            </p>
+                                                        </div>
+                                                        )
+                                                })
+                                            }
+                                        </div>
+                                    </div>
+                                }
                             </div>
 
                             <div className="w-full p-4 flex flex-col gap-5 border-2 dark:border-gray-800 rounded-lg dark:bg-gray-800 bg-gray-100 border-gray-200">

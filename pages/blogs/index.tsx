@@ -1,58 +1,105 @@
 import Head from "next/head";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Breadcrumbs, Footer, Nav, ThemeChanger,} from "../../src/components";
 import {BlogPost, Categories, Pagination, PostFilter, RecentPost, UserList} from "../../src/components/blogs";
 import {useRouter} from "next/router";
+
+import { getBlogList } from "../../src/firebase/blogData";
+import post from "../../src/components/blogs/post";
+import {userByUIDPublicData} from "../../src/firebase/fetchData";
+import MiniSearch from "minisearch";
+import {getTime} from "date-fns";
+
 const BlogPage = () => {
     const router = useRouter();
 
-    const posts = [
-        {
-            id: 1,
-            date: "Jun 1, 2020",
-            tag: "Laravel",
-            title: "Build Your New Idea with Laravel Freamwork.",
-            body: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora expedita dicta totam aspernatur doloremque. Excepturi iste iusto eos enim reprehenderit nisi, accusamus delectus nihil quis facere in modi ratione libero!",
-            image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=731&q=80",
-            userName: "Alex John"
+    const [blogList, setBlogList] = React.useState([]);
+    const [posts, setPosts] = React.useState([]);
+    const [loading, setLoading] = React.useState(true);
+    const [error, setError] = React.useState(null);
+
+    const fetchBlogList = async () => {
+        setLoading(true);
+        try {
+            const blogList = await getBlogList();
+            setBlogList(blogList);
+            setPosts(blogList);
+
+        } catch (error) {
+            setError(error);
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    }
+    React.useEffect(() => {
+        fetchBlogList();
+    }, []);
+
+
+    const [authors, setAuthors] = React.useState([]);
+
+    React.useEffect(() => {
+        // make an array of authours Uids with post count
+        let authors = [];
+        for (const [key, blog] of Object.entries(blogList)) {
+            if (!blog?.published) continue;
+            let author = authors.find(author => author.uid === blog.authorUID);
+            if (author) {
+                author.count++;
+            } else {
+                authors.push({
+                    uid: blog.authorUID,
+                    count: 1
+                })
+            }
+        }
+        setAuthors(authors);
+    }, [blogList]);
+
+    const getUnixTime = (date) => {
+        const dateObj = new Date(date);
+        return getTime(dateObj);
+    }
+
+    const [searchBar, setSearchBar] = useState("");
+
+    let miniSearch = new MiniSearch({
+        fields: [
+            "title",
+            "body",
+            "displayName",
+        ], // fields to index for full-text search
+        storeFields: [
+            "title",
+            "body",
+            "displayName",
+            "photoURL",
+            "authorUID",
+        ], // fields to return with search results
+        searchOptions: {
+            boost: {body: 2},
+            fuzzy: 0.2,
+            prefix: true
         },
-        {
-            id: 2,
-            date: "mar 4, 2019",
-            tag: "Design",
-            title: "Accessibility tools for designers and developers",
-            body: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora expedita dicta totam aspernatur doloremque. Excepturi iste iusto eos enim reprehenderit nisi, accusamus delectus nihil quis facere in modi ratione libero!",
-            image: "https://images.unsplash.com/photo-1464863979621-258859e62245?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=333&q=80",
-            userName: "Jane Doe"
-        },
-        {
-            id: 3,
-            date: "Feb 14, 2019",
-            tag: "PHP",
-            title: "PHP: Array to Map",
-            body: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora expedita dicta totam aspernatur doloremque. Excepturi iste iusto eos enim reprehenderit nisi, accusamus delectus nihil quis facere in modi ratione libero!",
-            image: "https://images.unsplash.com/photo-1531251445707-1f000e1e87d0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=281&q=80",
-            userName: "Lisa Way"
-        },
-        {
-            id: 4,
-            date: "Dec 23, 2018",
-            tag: "Django",
-            title: "Django Dashboard - Learn by Coding",
-            body: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora expedita dicta totam aspernatur doloremque. Excepturi iste iusto eos enim reprehenderit nisi, accusamus delectus nihil quis facere in modi ratione libero!",
-            image: "https://images.unsplash.com/photo-1500757810556-5d600d9b737d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=735&q=80",
-            userName: "Steve Matt"
-        },
-        {
-            id: 5,
-            date: "Mar 10, 2018",
-            tag: "Testing",
-            title: "TDD Frist",
-            body: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora expedita dicta totam aspernatur doloremque. Excepturi iste iusto eos enim reprehenderit nisi, accusamus delectus nihil quis facere in modi ratione libero!",
-            image: "https://images.unsplash.com/photo-1502980426475-b83966705988?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=373&q=80",
-            userName: "Khatab Wedaa"
-        },
-    ]
+    });
+
+    useEffect(() => {
+        if (searchBar == '') {
+            const Sorted = blogList.sort((a, b) => {
+                return getUnixTime(b.lastSaveTime) - getUnixTime(a.lastSaveTime);
+            })
+            setPosts(Sorted);
+        } else {
+            miniSearch.addAll(blogList);
+            let filteredPosts = miniSearch.search(searchBar)
+            const Sorted = filteredPosts.sort((a, b) => {
+                return getUnixTime(b.lastSaveTime) - getUnixTime(a.lastSaveTime);
+            })
+            console.log(Sorted)
+            setPosts(Sorted);
+        }
+    }, [searchBar]);
 
     return (
         <>
@@ -79,11 +126,13 @@ const BlogPage = () => {
                                     type="text"
                                     className="w-full py-3 pl-10 pr-4 text-xl text-gray-700 bg-white border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none"
                                     placeholder="Search Topics, Tags, Titles, Authors"
+                                    value={searchBar}
+                                    onChange={(e) => setSearchBar(e.target.value)}
                                 />
                             </div>
                             <div className={'flex flex-col gap-5 w-full'}>
                                 {
-                                    posts.map(post => <BlogPost key={post.id} data={post}/>)
+                                    posts.map(post => <BlogPost key={post.blogId} data={post}/>)
                                 }
                             </div>
                         </div>
@@ -93,11 +142,7 @@ const BlogPage = () => {
                 <div className="col-span-2 hidden lg:block">
                     <div className="px-8">
                         <h1 className="mb-4 text-xl font-bold text-gray-700 dark:text-gray-100">Authors</h1>
-                        <UserList/>
-                    </div>
-                    <div className="mt-10 px-8">
-                        <h1 className="mb-4 text-xl font-bold text-gray-700 dark:text-gray-100">Categories</h1>
-                        <Categories/>
+                        <UserList authors={authors}/>
                     </div>
                 </div>
             </div>

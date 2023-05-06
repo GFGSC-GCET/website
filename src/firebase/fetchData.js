@@ -19,3 +19,9 @@ export const teamDatabase = {
     return teamArray;
   }
 };
+
+export const userByUIDPublicData = async (uid) => {
+  const dbRef = ref(database, `team/${uid}`);
+  const snapshot = await get(dbRef);
+  return snapshot.val();
+}
