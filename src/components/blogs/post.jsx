@@ -44,7 +44,7 @@ const BlogPost = ({ data }) => {
             <div className="flex justify-between items-center mt-4">
                 <a className="text-green-500 hover:underline" href={`/blogs/${author?.gfg.split("/")[4]}/${data.blogId}`}>Read more</a>
                 <div>
-                    <a className="flex items-center" href="#">
+                    <a className="flex items-center" href={`/blogs/${author?.gfg.split("/")[4]}`}>
                         <img className="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block" src={data?.photoURL}
                         alt="avatar"/>
                         <h1 className="text-gray-700 dark:text-gray-100 font-bold hover:underline">{data?.displayName}</h1>

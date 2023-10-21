@@ -38,13 +38,13 @@ export const formSchema = yup.object().shape({
   gfg: yup
     .string()
     .matches(
-      /^http(s?):\/\/auth.geeksforgeeks.org\/user\/[a-zA-Z0-9]+\/?$/i,
+        /^http(s?):\/\/auth.geeksforgeeks.org\/user\/[a-zA-Z0-9._-]+\/?$/i,
       "Invalid Github Profile URL"
     ).required("Geeks For Geeks Profile URL is required"),
   github: yup
     .string()
     .matches(
-      /^(http(s?):\/\/)(www\.)?github\.([a-z])+\/([A-Za-z0-9-]{1,})+\/?$/i,
+      /^(http(s?):\/\/)(www\.)?github\.([a-z])+\/([A-Za-z0-9._-]{1,})+\/?$/i,
       "Invalid Github Profile URL"
     ),
 
